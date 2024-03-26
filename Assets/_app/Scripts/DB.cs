@@ -6,7 +6,7 @@ using System.IO;
 #endif
 using System.Collections.Generic;
 
-public class DB  {
+public class DB {
 
 	private SQLiteConnection _connection;
 
