@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DBScene : MonoBehaviour
 {
-    ContactService contactService;
+    CardService cardService;
     // Start is called before the first frame update
     void Start()
     {
-        contactService = new ContactService();
+        cardService = new CardService();
     }
 
     // Update is called once per frame
@@ -17,7 +17,18 @@ public class DBScene : MonoBehaviour
         
     }
 
-    public void onCreateContactTableButtonClick(){
-        contactService.CreateContactTableDB();
+    public void onCreateCardTableButtonClick(){
+        Debug.Log("-------------------onCreateCardTableButtonClick-------------------------");
+
+        cardService.CreateCardTableDB();
     }
+
+    public void onAddCardButtonClick(){
+        Debug.Log("-------------------onAddCardButtonClick-------------------------");
+        
+        int ck = cardService.AddCard(cardService.CreateCard());
+
+        Debug.Log("Primary Key = " + ck);
+    }
+    
 }

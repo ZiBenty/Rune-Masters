@@ -8,9 +8,10 @@ using System.Collections.Generic;
 
 public class DB {
 
-	private SQLiteConnection _connection;
+    private SQLiteConnection _connection;
 
-	public DB(){
+
+    public DB(){
 
 		string DatabaseName = "Cards.db";
 
@@ -66,8 +67,8 @@ public class DB {
 
 	}
 
-public SQLiteConnection GetConnection(){
-	return _connection;
-}
+    public SQLiteConnection GetConnection(){
+        return _connection;
+    }
 	
 }

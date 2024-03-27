@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using SQLite4Unity3d;
 using Unity.Collections;
 
+public enum Rune 
+{
+    None = 0,
+    Fire = 1,
+    Earth = 2,
+    Air = 4,
+    Water = 8,
+    Ancestral = 16
+}
+
+public enum Type
+{
+    Creature = 1,
+    Structure = 2,
+    Enchantment = 4
+}
 
 public class Card {
 
@@ -24,32 +40,16 @@ public class Card {
     pos 4 = bottom
     pos 5 = bottom-right*/
 
-    public enum Rune 
-    {
-        None = 0,
-        Fire = 1,
-        Earth = 2,
-        Air = 4,
-        Water = 8,
-        Ancestral = 16
-    }
-
-    public enum Type
-    {
-        Creature = 1,
-        Structure = 2,
-        Enchantment = 4
-    }
-
     public List<Rune> decodeCost()
     {
         List<Rune> l = new List<Rune>();
         return l;
     }
 
-    public void encodeCost(List<Rune> l)
+    public int encodeCost(List<Rune> l)
     {
-
+        var cost = 0;
+        return cost;
     }
 
 	public override string ToString ()
