@@ -19,10 +19,10 @@ public class CardService
       return db.GetConnection().Insert(card);
     }
 
-    public Card CreateCard(){
+    public Card CreateCard(string name = "", string effect = ""){
       var c = new Card{
-          Name = "Salamander",
-          Effect = "",
+          Name = name,
+          Effect = effect,
           CardRune = Rune.Fire,
           CardType = Type.Creature,
           Atk = 2,
