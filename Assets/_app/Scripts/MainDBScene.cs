@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class DBScene : MonoBehaviour
 {
     CardService cardService;
-    public TMPro.TMP_Text nameInput;
-    public TMPro.TMP_Text effectInput;
-    public 
+    public TMP_InputField nameInput;
+    public TMP_InputField effectInput;
+    public TMP_Text runeDropdown;
 
     // Start is called before the first frame update
     void Start()
     {
-        var cardService = new CardService();
+        cardService = new CardService();
     }
 
     // Update is called once per frame
@@ -33,8 +34,9 @@ public class DBScene : MonoBehaviour
         
         string cardName = nameInput.text.ToString();
         string cardEffect = effectInput.text.ToString();
+        string rune = runeDropdown.text.ToString();
 
-        int ck = cardService.AddCard(cardService.CreateCard(cardName, cardEffect));
+        int ck = cardService.AddCard(cardService.CreateCard(cardName, cardEffect, rune));
 
         Debug.Log("Primary Key = " + ck);
     }

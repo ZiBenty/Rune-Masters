@@ -968,8 +968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f9206b308bfe640aca69df45225a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: {fileID: 0}
-  cardEffect: {fileID: 0}
+  nameInput: {fileID: 887165929}
+  effectInput: {fileID: 623024563}
+  runeDropdown: {fileID: 962581711}
 --- !u!1 &535158660
 GameObject:
   m_ObjectHideFlags: 0
@@ -3967,11 +3968,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffd02c3c0ed89b459f4401a669a58f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 0}
+  dropdown: {fileID: 264569585}
   runes:
   - {fileID: 21300000, guid: e26970167f2024a43bea9bee601b67a3, type: 3}
-  - {fileID: 21300000, guid: 7230254e389fe834f841d023f5594b2f, type: 3}
   - {fileID: 21300000, guid: 1490499f38cb5364b97ed6a22e8213f8, type: 3}
+  - {fileID: 21300000, guid: 7230254e389fe834f841d023f5594b2f, type: 3}
   - {fileID: 21300000, guid: bcef95b7b79f25f45af2460d1419d9be, type: 3}
 --- !u!1 &1910968359
 GameObject:
