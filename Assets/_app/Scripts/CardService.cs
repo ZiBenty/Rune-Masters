@@ -26,6 +26,20 @@ public class CardService
         }
     }
 
+    public CardType decodeCardTypeString(string r)
+    {
+        switch (r){
+            case "Creature":
+                return CardType.Creature;
+            case "Structure":
+                return CardType.Structure;
+            case "Enchantment":
+                return CardType.Enchantment;
+            default:
+                return CardType.None;
+        }
+    }
+
     public void CreateCardTableDB(){
       db.GetConnection().DropTable<Card> ();
       db.GetConnection().CreateTable<Card> ();
@@ -35,15 +49,21 @@ public class CardService
       return db.GetConnection().Insert(card);
     }
 
-    public Card CreateCard(string name = "", string effect = "", string rune = ""){
+    public Card CreateCard(string name = "", 
+                          string effect = "", 
+                          string rune = "", 
+                          string type = "",
+                          int atk = 0,
+                          int hp = 0,
+                          int stars = 1){
       var c = new Card{
           Name = name,
           Effect = effect,
           CardRune = decodeRuneString(rune),
-          CardType = Type.Creature,
-          Atk = 2,
-          Hp = 1,
-          Stars = 3,
+          CardType = decodeCardTypeString(type),
+          Atk = atk,
+          Hp = hp,
+          Stars = stars,
       };
       List<Rune> l = new List<Rune>(){Rune.None, Rune.None, Rune.None, Rune.None, Rune.Fire, Rune.None};
       c.Cost = c.encodeCost(l);

@@ -13,8 +13,9 @@ public enum Rune
     Ancestral = 16
 }
 
-public enum Type
+public enum CardType
 {
+    None = 0,
     Creature = 1,
     Structure = 2,
     Enchantment = 4
@@ -27,7 +28,7 @@ public class Card {
 	public string Name { get; set; }
     public string Effect {get; set;}
 	public Rune CardRune {get; set; }
-	public Type CardType { get; set; }
+	public CardType CardType { get; set; }
     public int Atk { get; set; }
     public int Hp { get; set; }
     public int Stars { get; set; }
