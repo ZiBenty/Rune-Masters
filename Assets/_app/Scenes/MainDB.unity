@@ -1639,7 +1639,7 @@ GameObject:
   - component: {fileID: 297453421}
   - component: {fileID: 297453420}
   m_Layer: 5
-  m_Name: Top-Right
+  m_Name: Btn-Top-Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1709,13 +1709,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 297453418}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323294418}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -2093,7 +2093,7 @@ GameObject:
   - component: {fileID: 434043146}
   - component: {fileID: 434043145}
   m_Layer: 5
-  m_Name: Bottom-Right
+  m_Name: Btn-Bottom-Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2163,13 +2163,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 434043143}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2226,7 +2226,7 @@ GameObject:
   - component: {fileID: 473015182}
   - component: {fileID: 473015181}
   m_Layer: 5
-  m_Name: Bottom
+  m_Name: Btn-Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2296,13 +2296,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 473015179}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2380,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117.3, y: -25.1}
+  m_AnchoredPosition: {x: 116.7, y: -25.1}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &475290561
@@ -2741,6 +2741,7 @@ MonoBehaviour:
   atkInput: {fileID: 521958779}
   hpInput: {fileID: 324701348}
   starsInput: {fileID: 121667456}
+  costHelper: {fileID: 1772201120}
 --- !u!1 &521958777
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,7 +4809,7 @@ GameObject:
   - component: {fileID: 822112907}
   - component: {fileID: 822112906}
   m_Layer: 5
-  m_Name: Grid
+  m_Name: GridButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5665,7 +5666,7 @@ GameObject:
   - component: {fileID: 961775202}
   - component: {fileID: 961775201}
   m_Layer: 5
-  m_Name: Top
+  m_Name: Btn-Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5735,13 +5736,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 961775199}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7007,7 +7008,7 @@ GameObject:
   - component: {fileID: 1319852417}
   - component: {fileID: 1319852416}
   m_Layer: 5
-  m_Name: Top-Left
+  m_Name: Btn-Top-Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7077,13 +7078,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 1319852414}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9598,7 +9599,7 @@ GameObject:
   - component: {fileID: 1770468557}
   - component: {fileID: 1770468556}
   m_Layer: 5
-  m_Name: Bottom-Left
+  m_Name: Btn-Bottom-Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9668,13 +9669,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1772201120}
+        m_TargetAssemblyTypeName: CostHelper, Assembly-CSharp
+        m_MethodName: changeRune
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgument: {fileID: 1770468554}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9766,6 +9767,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd0e19fe930024468250a148967ead1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CostImage:
+  - {fileID: 475290561}
+  - {fileID: 1709059799}
+  - {fileID: 523252013}
+  - {fileID: 1355545271}
+  - {fileID: 1399145165}
+  - {fileID: 1582598162}
+  sprites:
+  - {fileID: 21300000, guid: 6020fcca891aed54286ae064466a6150, type: 3}
+  - {fileID: 21300000, guid: 1490499f38cb5364b97ed6a22e8213f8, type: 3}
+  - {fileID: 21300000, guid: 7230254e389fe834f841d023f5594b2f, type: 3}
+  - {fileID: 21300000, guid: bcef95b7b79f25f45af2460d1419d9be, type: 3}
+  - {fileID: 21300000, guid: e26970167f2024a43bea9bee601b67a3, type: 3}
+  CostCodeIndex: 000000000000000000000000000000000000000000000000
 --- !u!1 &1772277445
 GameObject:
   m_ObjectHideFlags: 0

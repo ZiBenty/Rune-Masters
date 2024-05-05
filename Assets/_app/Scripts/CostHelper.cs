@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class CostHelper : MonoBehaviour
@@ -15,11 +16,15 @@ public class CostHelper : MonoBehaviour
     pos 4 = bottom
     pos 5 = bottom-right*/
 
-    public List<string> CostCode = new List<string>
+    [Tooltip("The sprites of the runes to show")]
+    public List<Sprite> sprites;
+
+    [Tooltip("list that keeps memorized what sprite is shown for each")]
+    public List<int> CostCodeIndex = new List<int>(6)
     {
-        "None", "Fire", "Earth", "Air", "Water"
+        0, 0, 0, 0, 0, 0
     };
-    /*
+        /*
     0 = None
     1 = Fire
     2 = Earth
@@ -27,14 +32,41 @@ public class CostHelper : MonoBehaviour
     4 = Water
     */
 
-    public List<int> CostCodeIndex = new List<int>(6)
-    {
-        0, 0, 0, 0, 0, 0
-    };
+    public void changeRuneImage(int index){
+        if (CostCodeIndex[index] != 4)
+        {
+            CostCodeIndex[index] += 1;
+        }else
+        {
+            CostCodeIndex[index] = 0;
+        }
+        
+        CostImage[index].sprite = sprites[CostCodeIndex[index]];
+    }
 
-    public void changeRune()
+    public void changeRune(GameObject button)
     {
-
+        string image_name = button.name.ToString().Remove(0, "Btn-".Length);
+        switch (image_name){
+            case "Top-Left":
+                changeRuneImage(0);
+                break;
+            case "Top":
+                changeRuneImage(1);
+                break;
+            case "Top-Right":
+                changeRuneImage(2);
+                break;
+            case "Bottom-Left":
+                changeRuneImage(3);
+                break;
+            case "Bottom":
+                changeRuneImage(4);
+                break;
+            case "Bottom-Right":
+                changeRuneImage(5);
+                break;
+        }
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SQLite4Unity3d;
@@ -10,7 +11,7 @@ public enum Rune
     Earth = 2,
     Air = 4,
     Water = 8,
-    Ancestral = 16
+    Ancestral = 15
 }
 
 public enum CardType
@@ -44,12 +45,35 @@ public class Card {
     public List<Rune> decodeCost()
     {
         List<Rune> l = new List<Rune>();
+        string binary = Convert.ToString(Cost, 2);
+        string substring = "";
+        for (var i = 0; i < binary.Length; i += 4)
+            substring = binary.Substring(i, Math.Min(4, binary.Length - i));
+            int number = Convert.ToInt32(substring, 2);
+            switch (number){
+                case 0:
+                    l.Add(Rune.None);
+                    break;
+                case 1:
+                    l.Add(Rune.Fire);
+                    break;
+                case 2:
+                    l.Add(Rune.Earth);
+                    break;
+                case 4:
+                    l.Add(Rune.Air);
+                    break;
+                case 8:
+                    l.Add(Rune.Water);
+                    break;
+            }
         return l;
     }
 
     public int encodeCost(List<Rune> l)
     {
         var cost = 0;
+        cost = cost | (int)l[0] << 20 | (int)l[1] << 16 | (int)l[2] << 12  | (int)l[3] << 8 | (int)l[4] << 4 | (int)l[5];
         return cost;
     }
 

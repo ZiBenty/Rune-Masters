@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 public class DBScene : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class DBScene : MonoBehaviour
     public TMP_InputField atkInput;
     public TMP_InputField hpInput;
     public TMP_InputField starsInput;
+    public CostHelper costHelper;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +55,7 @@ public class DBScene : MonoBehaviour
             stars = 1;
         }
 
-        int ck = cardService.AddCard(cardService.CreateCard(cardName, cardEffect, rune, type, atk, hp, stars));
+        int ck = cardService.AddCard(cardService.CreateCard(costHelper.CostCodeIndex, cardName, cardEffect, rune, type, atk, hp, stars));
         Debug.Log("Primary Key = " + ck);
     }
     

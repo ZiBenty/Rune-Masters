@@ -40,33 +40,56 @@ public class CardService
         }
     }
 
+    public Rune decodeIntCost(int n)
+    {
+        switch(n){
+            case 0:
+                return Rune.None;
+            case 1:
+                return Rune.Fire;
+            case 2:
+                return Rune.Earth;
+            case 3:
+                return Rune.Air;
+            case 4:
+                return Rune.Fire;
+            default:
+                return Rune.None;
+        }
+    }
+
     public void CreateCardTableDB(){
-      db.GetConnection().DropTable<Card> ();
-      db.GetConnection().CreateTable<Card> ();
+        db.GetConnection().DropTable<Card> ();
+        db.GetConnection().CreateTable<Card> ();
     }
 
     public int AddCard(Card card){
-      return db.GetConnection().Insert(card);
+        return db.GetConnection().Insert(card);
     }
 
-    public Card CreateCard(string name = "", 
+    public Card CreateCard(List<int> cost,
+                          string name = "", 
                           string effect = "", 
                           string rune = "", 
                           string type = "",
                           int atk = 0,
                           int hp = 0,
-                          int stars = 1){
-      var c = new Card{
-          Name = name,
-          Effect = effect,
-          CardRune = decodeRuneString(rune),
-          CardType = decodeCardTypeString(type),
-          Atk = atk,
-          Hp = hp,
-          Stars = stars,
-      };
-      List<Rune> l = new List<Rune>(){Rune.None, Rune.None, Rune.None, Rune.None, Rune.Fire, Rune.None};
-      c.Cost = c.encodeCost(l);
-      return c;
+                          int stars = 1)
+    {
+        var c = new Card{
+            Name = name,
+            Effect = effect,
+            CardRune = decodeRuneString(rune),
+            CardType = decodeCardTypeString(type),
+            Atk = atk,
+            Hp = hp,
+            Stars = stars,
+        };
+        List<Rune> l = new List<Rune>();
+        foreach (int symb in cost){
+            l.Add(decodeIntCost(symb));
+        }
+        c.Cost = c.encodeCost(l);
+        return c;
     }
 }
