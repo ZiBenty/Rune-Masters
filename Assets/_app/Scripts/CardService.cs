@@ -21,6 +21,8 @@ public class CardService
                 return Rune.Earth;
             case "Air":
                 return Rune.Air;
+            case "Ancestral":
+                return Rune.Ancestral;
             default:
                 return Rune.None;
         }
@@ -52,7 +54,7 @@ public class CardService
             case 3:
                 return Rune.Air;
             case 4:
-                return Rune.Fire;
+                return Rune.Water;
             default:
                 return Rune.None;
         }
