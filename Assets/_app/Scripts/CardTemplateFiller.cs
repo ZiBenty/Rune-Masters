@@ -42,8 +42,8 @@ public class CardTemplateFiller : MonoBehaviour
     3=Enchantment
     */
     void Start(){
-        Rune.sprite = RuneSprites[0];
-        Type.sprite = TypeSprites[0];
+        Rune.sprite = RuneSprites[1];
+        Type.sprite = TypeSprites[1];
     }
 
     public void changeName(TMP_InputField Input){
