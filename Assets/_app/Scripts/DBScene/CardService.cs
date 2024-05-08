@@ -65,6 +65,14 @@ public class CardService
         db.GetConnection().CreateTable<Card> ();
     }
 
+    public IEnumerable<Card> GetCards(){
+		return db.GetConnection().Table<Card>();
+	}
+
+	public IEnumerable<Card> GetCardsFromName(string name){
+		return db.GetConnection().Table<Card>().Where(c => c.Name == name);
+	}
+
     public int AddCard(Card card){
         return db.GetConnection().Insert(card);
     }
