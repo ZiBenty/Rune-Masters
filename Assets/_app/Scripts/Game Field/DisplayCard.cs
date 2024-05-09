@@ -42,6 +42,9 @@ public class DisplayCard : MonoBehaviour
     3=Enchantment
     */
 
+    public bool CardBack;
+    public static bool staticCardBack;
+
     public void ChangeName(string name){
         NameText.text = name;
     }
@@ -146,6 +149,10 @@ public class DisplayCard : MonoBehaviour
 
     public void Start(){
 
+    }
+
+    public void Update(){
+        staticCardBack = CardBack;
     }
 
 }
