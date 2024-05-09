@@ -69,6 +69,10 @@ public class CardService
 		return db.GetConnection().Table<Card>();
 	}
 
+    public IEnumerable<Card> GetCardsFromId(int id){
+		return db.GetConnection().Table<Card>().Where(c => c.Id == id);
+	}
+
 	public IEnumerable<Card> GetCardsFromName(string name){
 		return db.GetConnection().Table<Card>().Where(c => c.Name == name);
 	}

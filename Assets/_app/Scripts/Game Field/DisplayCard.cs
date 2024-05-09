@@ -41,11 +41,12 @@ public class DisplayCard : MonoBehaviour
     2=Structure
     3=Enchantment
     */
-    public void changeName(string name){
+
+    public void ChangeName(string name){
         NameText.text = name;
     }
 
-    public void changeRune(Image image, Rune rune){
+    public void ChangeRune(Image image, Rune rune){
         switch(rune){
             case Rune.Fire:
                 image.sprite = RuneSprites[1];
@@ -68,7 +69,7 @@ public class DisplayCard : MonoBehaviour
         }
     }
 
-    public void changeType(CardType type){
+    public void ChangeType(CardType type){
         switch(type){
             case CardType.Creature:
                 TypeImage.sprite = TypeSprites[1];
@@ -85,7 +86,7 @@ public class DisplayCard : MonoBehaviour
         }
     }
 
-    public void changeStars(int stars){
+    public void ChangeStars(int stars){
         if(stars > 0 && stars <=3){
             switch(stars){
                 case 1:
@@ -105,37 +106,42 @@ public class DisplayCard : MonoBehaviour
         }
     }
 
-    public void changeEffect(string effect){
+    public void ChangeEffect(string effect){
         EffectText.text = effect;
     }
 
-    public void changeAttack(int attack){
+    public void ChangeAttack(int attack){
         AttackText.text = attack.ToString();
     }
 
-    public void changeLife(int life){
+    public void ChangeLife(int life){
         LifeText.text = life.ToString();
     }
 
-    public void changeCost(List<Rune> cost){
-        changeRune(CostImages[0], cost[0]);
-        changeRune(CostImages[1], cost[1]);
-        changeRune(CostImages[2], cost[2]);
-        changeRune(CostImages[3], cost[3]);
-        changeRune(CostImages[4], cost[4]);
-        changeRune(CostImages[5], cost[5]);
+    public void ChangeCost(List<Rune> cost){
+        ChangeRune(CostImages[0], cost[0]);
+        ChangeRune(CostImages[1], cost[1]);
+        ChangeRune(CostImages[2], cost[2]);
+        ChangeRune(CostImages[3], cost[3]);
+        ChangeRune(CostImages[4], cost[4]);
+        ChangeRune(CostImages[5], cost[5]);
+    }
+
+    public void ChangeArt(int id){
+        Art.sprite = Resources.Load<Sprite>("Sprites/Art/"+id.ToString());
     }
 
     public void LoadCard (Card c){
         Card = c;
-        changeName(c.Name);
-        changeRune(RuneImage, c.CardRune);
-        changeType(c.CardType);
-        changeStars(c.Stars);
-        changeEffect(c.Effect);
-        changeAttack(c.Atk);
-        changeLife(c.Hp);
-        changeCost(c.decodeCost());
+        ChangeName(c.Name);
+        ChangeRune(RuneImage, c.CardRune);
+        ChangeType(c.CardType);
+        ChangeStars(c.Stars);
+        ChangeEffect(c.Effect);
+        ChangeAttack(c.Atk);
+        ChangeLife(c.Hp);
+        ChangeCost(c.decodeCost());
+        ChangeArt(c.Id);
     }
 
     public void Start(){
