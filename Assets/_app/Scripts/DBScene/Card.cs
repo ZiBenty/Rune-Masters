@@ -48,8 +48,25 @@ public class Card {
         List<Rune> l = new List<Rune>();
         string binary = Convert.ToString(Cost, 2);
         string substring = "";
-        for (var i = 0; i < binary.Length; i += 4)
-            substring = binary.Substring(i, Math.Min(4, binary.Length - i));
+
+        //every Rune is 4 bit
+        int jump;
+        if (binary.Length % 4 == 0)
+            jump = 4;
+        else
+            jump = binary.Length % 4;
+        
+        //if binary is less than 24 it could mean a bunch of None Runes int the top rows
+        for (int i = 20; i > binary.Length; i -= 4)
+        {
+            l.Add(Rune.None);
+        }
+
+        for (int i = 0; i < binary.Length; i += jump)
+        {
+            if (i != 0 && jump != 4)
+                jump = 4;
+            substring = binary.Substring(i, Math.Min(jump, binary.Length - i));
             int number = Convert.ToInt32(substring, 2);
             switch (number){
                 case 0:
@@ -68,6 +85,7 @@ public class Card {
                     l.Add(Rune.Water);
                     break;
             }
+        }
         return l;
     }
 

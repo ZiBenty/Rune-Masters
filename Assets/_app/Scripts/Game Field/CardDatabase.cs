@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class CardDatabase : MonoBehaviour
 {
-    public IEnumerable<Card> cards;
+    public List<Card> Cards {get; set;}
+
+    void Start(){
+        Cards = new List<Card>();
+    }
+
 }

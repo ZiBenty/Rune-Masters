@@ -45,25 +45,25 @@ public class DisplayCard : MonoBehaviour
         NameText.text = name;
     }
 
-    public void changeRune(Sprite sprite, Rune rune){
+    public void changeRune(Image image, Rune rune){
         switch(rune){
             case Rune.Fire:
-                sprite = RuneSprites[1];
+                image.sprite = RuneSprites[1];
                 break;
             case Rune.Earth:
-                sprite = RuneSprites[2];
+                image.sprite = RuneSprites[2];
                 break;
             case Rune.Air:
-                sprite = RuneSprites[3];
+                image.sprite = RuneSprites[3];
                 break;
             case Rune.Water:
-                sprite = RuneSprites[4];
+                image.sprite = RuneSprites[4];
                 break;
             case Rune.Ancestral:
-                sprite = RuneSprites[5];
+                image.sprite = RuneSprites[5];
                 break;
             default:
-                sprite = RuneSprites[0];
+                image.sprite = RuneSprites[0];
                 break;
         }
     }
@@ -118,18 +118,18 @@ public class DisplayCard : MonoBehaviour
     }
 
     public void changeCost(List<Rune> cost){
-        changeRune(CostImages[0].sprite, cost[0]);
-        changeRune(CostImages[1].sprite, cost[1]);
-        changeRune(CostImages[2].sprite, cost[2]);
-        changeRune(CostImages[3].sprite, cost[3]);
-        changeRune(CostImages[4].sprite, cost[4]);
-        changeRune(CostImages[5].sprite, cost[5]);
+        changeRune(CostImages[0], cost[0]);
+        changeRune(CostImages[1], cost[1]);
+        changeRune(CostImages[2], cost[2]);
+        changeRune(CostImages[3], cost[3]);
+        changeRune(CostImages[4], cost[4]);
+        changeRune(CostImages[5], cost[5]);
     }
 
     public void LoadCard (Card c){
         Card = c;
         changeName(c.Name);
-        changeRune(RuneImage.sprite, c.CardRune);
+        changeRune(RuneImage, c.CardRune);
         changeType(c.CardType);
         changeStars(c.Stars);
         changeEffect(c.Effect);

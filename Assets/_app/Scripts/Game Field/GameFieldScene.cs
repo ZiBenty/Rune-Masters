@@ -16,7 +16,11 @@ public class GameFieldScene : MonoBehaviour
     }
 
     public void getAllCards(){
-        cardDatabase.cards = cardService.GetCardsFromName("Salamandra");
+        var cards = cardService.GetCards();
+        foreach (var card in cards){
+            cardDatabase.Cards.Add(card);
+            Debug.Log(card.ToString());
+        }
     }
 
 

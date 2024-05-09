@@ -11,16 +11,16 @@ public class Hand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int i = 0;
-        foreach(Transform child in transform){
-            child.gameObject.GetComponent<DisplayCard>().LoadCard(db.cards.ElementAt<Card>(i));
-            i++;
-        }
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        int i = 0;
+        foreach(Transform child in transform){
+            child.gameObject.GetComponent<DisplayCard>().LoadCard(db.Cards[i]);
+            i++;
+        }
     }
 }
