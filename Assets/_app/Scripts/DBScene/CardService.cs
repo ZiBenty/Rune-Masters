@@ -69,16 +69,40 @@ public class CardService
 		return db.GetConnection().Table<Card>();
 	}
 
-    public IEnumerable<Card> GetCardsFromId(int id){
-		return db.GetConnection().Table<Card>().Where(c => c.Id == id);
+    public IEnumerable<Card> GetCardsFromName(string name){
+		return db.GetConnection().Table<Card>().Where(c => c.Name.Contains(name));
 	}
 
-	public IEnumerable<Card> GetCardsFromName(string name){
-		return db.GetConnection().Table<Card>().Where(c => c.Name == name);
+    public IEnumerable<Card> GetCardsFromRune(Rune rune){
+        return db.GetConnection().Table<Card>().Where(c => c.CardRune == rune);
+    }
+
+    public IEnumerable<Card> GetCardsFromRune(CardType type){
+        return db.GetConnection().Table<Card>().Where(c => c.CardType == type);
+    }
+
+    public IEnumerable<Card> GetCardsFromAttack(int atk){
+        return db.GetConnection().Table<Card>().Where(c => c.Atk == atk);
+    }
+
+    public IEnumerable<Card> GetCardsFromLife(int hp){
+        return db.GetConnection().Table<Card>().Where(c => c.Hp == hp);
+    }
+
+    public IEnumerable<Card> GetCardsFromStars(int stars){
+        return db.GetConnection().Table<Card>().Where(c => c.Stars == stars);
+    }
+
+    public Card GetCardFromId(int id){
+		return db.GetConnection().Table<Card>().Where(c => c.Id == id).FirstOrDefault();
 	}
 
     public int AddCard(Card card){
         return db.GetConnection().Insert(card);
+    }
+
+    public int UpdateCard(Card card){
+        return db.GetConnection().Update(card);
     }
 
     public Card CreateCard(List<int> cost,

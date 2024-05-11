@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DisplayCard : MonoBehaviour
 {
+    //reference to a card object
     public Card Card;
+    //reference to its prefab
+    public GameObject cardPrefab;
+
+    // references to UI elements
     public TMP_Text NameText;
     public TMP_Text EffectText;
     public Image RuneImage;
@@ -25,6 +31,7 @@ public class DisplayCard : MonoBehaviour
     5=bottom-right
     */
 
+    //sprites used for runes
     public List<Sprite> RuneSprites;
     /*
     0=None
@@ -34,6 +41,8 @@ public class DisplayCard : MonoBehaviour
     4=Water
     5=Ancestral
     */
+
+    //sprites used for card types
     public List<Sprite> TypeSprites;
     /*
     0=None
@@ -42,9 +51,11 @@ public class DisplayCard : MonoBehaviour
     3=Enchantment
     */
 
+    //variables used for showing/hiding Card Back
     public bool CardBack;
     public static bool staticCardBack;
 
+    //Change methods, these change the corresponding UI element
     public void ChangeName(string name){
         NameText.text = name;
     }
@@ -134,6 +145,8 @@ public class DisplayCard : MonoBehaviour
         Art.sprite = Resources.Load<Sprite>("Sprites/Art/"+id.ToString());
     }
 
+
+    //saves new Card reference and invokes Change methods
     public void LoadCard (Card c){
         Card = c;
         ChangeName(c.Name);
@@ -147,8 +160,14 @@ public class DisplayCard : MonoBehaviour
         ChangeArt(c.Id);
     }
 
-    public void Start(){
-
+    //methods invoked with the new Input System
+    public void onHoldTouch(InputAction.CallbackContext context){
+    GameObject CardInspectionBox = GameObject.Find("CardInspectionBox");
+        if (CardInspectionBox != null){
+            var newCard = Instantiate(cardPrefab, CardInspectionBox.transform);
+            newCard.GetComponent<DisplayCard>().LoadCard(this.Card);
+            newCard.transform.localScale = new Vector3(2, 2, 2);
+        }
     }
 
     public void Update(){
