@@ -9,8 +9,9 @@ public class Hand : MonoBehaviour
 {
     public GameObject cardPrefab;
 
-    public List<GameObject> hand;
-    //public CardDatabase db;
+    public List<Card> hand;
+    
+    public List<GameObject> handVisual;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class Hand : MonoBehaviour
         */
     }
 
-    public void AddCard(GameObject card){
+    public void AddCard(Card card){
         hand.Add(card);
     }
 }
