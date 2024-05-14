@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ public class CardDatabase : MonoBehaviour
 {
     public CardService cardService {get; set;}
 
-    void Start(){
+    void Awake(){
         cardService = new CardService();
     }
 

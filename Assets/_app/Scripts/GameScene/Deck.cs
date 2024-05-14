@@ -1,12 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    public GameObject cardPrefab;
     public CardDatabase db;
 
     public Hand hand;
@@ -18,10 +16,11 @@ public class Deck : MonoBehaviour
     {
         var cards = db.cardService.GetCards();
         deck = db.GetComponent<CardDatabase>().toList(cards);
+        Shuffle();
     }
 
     public void Shuffle(){
-        
+        deck = deck.OrderBy(_ => Guid.NewGuid()).ToList();
     }
 
     public void Draw(int count){

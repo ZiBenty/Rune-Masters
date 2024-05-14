@@ -42,7 +42,8 @@ public class DragDrop : MonoBehaviour
         iDragComponent?.onStartDrag(); //? states: "is that null? If not, run it"
         while (touchPress.ReadValue<float>() != 0) //button is clicked
         {
-            clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, Touchscreen.current.primaryTouch.position.ReadValue(), ref velocity, dragSpeed);
+            Vector3 target = Touchscreen.current.primaryTouch.position.ReadValue();
+            clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, target, ref velocity, dragSpeed);
             yield return null;
         }
         iDragComponent?.onEndDrag();
