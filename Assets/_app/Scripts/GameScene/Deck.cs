@@ -24,7 +24,7 @@ public class Deck : MonoBehaviour
     }
 
     public void Draw(int count){
-        if(count >= 1){
+        if(count >= 1 && deck.Count >= count){
             for (int i=0; i<count; i++){
                 hand.AddCard(deck[0]);
                 deck.RemoveAt(0);

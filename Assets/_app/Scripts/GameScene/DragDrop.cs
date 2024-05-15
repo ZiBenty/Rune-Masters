@@ -29,11 +29,11 @@ public class DragDrop : MonoBehaviour
     }
 
     private void OnTouchPress(InputAction.CallbackContext context){
-        //Ray ray = mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
-        //RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        Collider2D collider = Physics2D.OverlapPoint(Touchscreen.current.primaryTouch.position.ReadValue());
-        if (collider != null && (collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || collider.gameObject.GetComponent<IDrag>() != null)){
-            StartCoroutine(DragUpdate(collider.gameObject));
+        Ray ray = mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+        RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
+        //Collider2D collider = Physics2D.OverlapPoint(Touchscreen.current.primaryTouch.position.ReadValue());
+        if (hit2d.collider != null && (hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || hit2d.collider.gameObject.GetComponent<IDrag>() != null)){
+            StartCoroutine(DragUpdate(hit2d.collider.gameObject));
         }
     }
 

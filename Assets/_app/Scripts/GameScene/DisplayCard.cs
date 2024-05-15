@@ -161,22 +161,6 @@ public class DisplayCard : MonoBehaviour
         ChangeArt(c.Id);
     }
 
-    //methods invoked with the new Input System
-    public void onHoldTouch(InputAction.CallbackContext context){
-        GameObject CardInspectionBox = GameObject.Find("CardInspectionBox");
-        var touchState = context.ReadValue<TouchState>();
-        if (CardInspectionBox != null && this.isColliding(touchState.position)){
-            var newCard = Instantiate(this, CardInspectionBox.transform);
-            newCard.GetComponent<DisplayCard>().LoadCard(this.Card);
-            newCard.transform.localScale = new Vector3(2, 2, 2);
-        }
-    }
-
-    public bool isColliding(Vector2 point){
-        Vector2 closest = this.GetComponentInChildren<BoxCollider2D>().ClosestPoint(point);
-        return closest == point;
-    }
-
     public void Update(){
         staticCardBack = CardBack;
     }
