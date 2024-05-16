@@ -1,9 +1,8 @@
 
 using UnityEngine;
 
-public class CardController : MonoBehaviour, IDrag
+public class CardController : MonoBehaviour, IDrag, IInspect
 {
-    [SerializeField]
     public RectTransform rectTransform;
     private Vector3 defaultScale;
 
@@ -23,6 +22,10 @@ public class CardController : MonoBehaviour, IDrag
         Debug.Log("Releasing");
     }
 
-
+    public void onInspect()
+    {
+        GameObject box = GameObject.Find("CardInspectionBox");
+        box?.GetComponent<CardInspectionBox>().ShowInfo(GetComponent<DisplayCard>().Card);
+    }
 
 }

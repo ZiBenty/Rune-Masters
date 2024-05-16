@@ -153,11 +153,16 @@ public class DisplayCard : MonoBehaviour
         ChangeName(c.Name);
         ChangeRune(RuneImage, c.CardRune);
         ChangeType(c.CardType);
-        ChangeStars(c.Stars);
-        ChangeEffect(c.Effect);
-        ChangeAttack(c.Atk);
-        ChangeLife(c.Hp);
-        ChangeCost(c.decodeCost());
+        if (StarsText != null)
+            ChangeStars(c.Stars);
+        if (EffectText != null)
+            ChangeEffect(c.Effect);
+        if (AttackText != null)
+            ChangeAttack(c.Atk);
+        if (LifeText != null)
+            ChangeLife(c.Hp);
+        if (CostImages.Count != 0)
+            ChangeCost(c.decodeCost());
         ChangeArt(c.Id);
     }
 
