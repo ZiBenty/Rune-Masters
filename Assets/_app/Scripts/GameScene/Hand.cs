@@ -51,6 +51,7 @@ public class Hand : MonoBehaviour
             //instantiate object and places it in the new CardContainer
             GameObject cv = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
             cv.transform.SetParent(container.transform, false);
+            cv.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
 
             cv.GetComponent<DisplayCard>().LoadCard(card);
             handVisual.Add(cv); 
