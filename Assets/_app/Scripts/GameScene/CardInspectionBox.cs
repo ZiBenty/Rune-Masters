@@ -9,10 +9,7 @@ public class CardInspectionBox : MonoBehaviour
     [SerializeField]
     private GameObject CardVisualFull;
     public void ShowInfo(Card card){
-        try{
-            if (transform.GetChild(0) != null)
-            HideInfo();
-        }catch(Exception ex){}
+        HideInfo();
         var visual = Instantiate(CardVisualFull, Vector3.zero, Quaternion.identity);
         visual.transform.SetParent(transform);
         visual.TryGetComponent<DisplayCard>(out var display);
@@ -22,7 +19,12 @@ public class CardInspectionBox : MonoBehaviour
     }
 
     public void HideInfo(){
-        Destroy(transform.GetChild(0).GameObject());
+        try{
+            if (transform.GetChild(0) != null)
+                Destroy(transform.GetChild(0).GameObject());
+        }catch{
+        }
+        
     }
 
 }

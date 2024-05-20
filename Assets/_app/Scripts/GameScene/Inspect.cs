@@ -7,10 +7,10 @@ public class Inspect : MonoBehaviour
 {
     [SerializeField]
     private InputAction tap;
-
     private Camera mainCamera;
     [SerializeField]
     private Plane hoverPlane;
+    public GameObject inspected;
 
     private void Awake(){
         mainCamera = Camera.main;
@@ -43,8 +43,13 @@ public class Inspect : MonoBehaviour
     }
 
      private IEnumerator InspectObj(GameObject clickedObject){
+        if (inspected != null){
+            inspected.TryGetComponent<CardController>(out var inspComponent);
+            inspComponent?.Highlight(new Vector3(0, 0, 0));
+        }
         clickedObject.TryGetComponent<IInspect>(out var iInspectComponent);
         iInspectComponent?.onInspect();
+        inspected = clickedObject;
         yield return null;
      }
 

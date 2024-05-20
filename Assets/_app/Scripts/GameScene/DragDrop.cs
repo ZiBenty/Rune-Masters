@@ -38,12 +38,23 @@ public class DragDrop : MonoBehaviour
     }
 
     private IEnumerator DragUpdate(GameObject clickedObject){
+        var defaultPos = clickedObject.transform.position;
         clickedObject.TryGetComponent<IDrag>(out var iDragComponent);
         iDragComponent?.onStartDrag(); //? states: "is that null? If not, run it"
+        Vector3 lastTouch;
         while (touchPress.ReadValue<float>() != 0) //button is clicked
         {
-            Vector3 target = Touchscreen.current.primaryTouch.position.ReadValue();
-            clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, target, ref velocity, dragSpeed);
+            lastTouch = Touchscreen.current.primaryTouch.position.ReadValue();
+            Ray ray = mainCamera.ScreenPointToRay(lastTouch);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+            Vector3 target = hit.point;
+            clickedObject.transform.eulerAngles = hit.transform.eulerAngles;
+            iDragComponent?.onDragging();
+            if (clickedObject.transform.position != defaultPos)
+                clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, target, ref velocity, dragSpeed);
+            else
+                clickedObject.transform.position = hit.point;
             yield return null;
         }
         iDragComponent?.onEndDrag();
