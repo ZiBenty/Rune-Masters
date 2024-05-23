@@ -11,11 +11,11 @@ public class DragDrop : MonoBehaviour
     [SerializeField]
     private float dragSpeed = .1f;
 
-    private Camera mainCamera;
+    private Camera MainCamera;
     private Vector3 velocity = Vector3.zero;
 
     private void Awake(){
-        mainCamera = Camera.main;
+        MainCamera = Camera.main;
     }
 
     private void OnEnable(){
@@ -29,7 +29,7 @@ public class DragDrop : MonoBehaviour
     }
 
     private void OnTouchPress(InputAction.CallbackContext context){
-        Ray ray = mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+        Ray ray = MainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
         //Collider2D collider = Physics2D.OverlapPoint(Touchscreen.current.primaryTouch.position.ReadValue());
         if (hit2d.collider != null && (hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || hit2d.collider.gameObject.GetComponent<IDrag>() != null)){
@@ -41,13 +41,9 @@ public class DragDrop : MonoBehaviour
         var defaultPos = clickedObject.transform.position;
         clickedObject.TryGetComponent<IDrag>(out var iDragComponent);
         iDragComponent?.onStartDrag(); //? states: "is that null? If not, run it"
-        Vector3 lastTouch;
         while (touchPress.ReadValue<float>() != 0) //button is clicked
         {
-            lastTouch = Touchscreen.current.primaryTouch.position.ReadValue();
-            Ray ray = mainCamera.ScreenPointToRay(lastTouch);
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit);
+            var hit = transform.GetComponent<TouchManager>().getHitCollider();
             Vector3 target = hit.point;
             clickedObject.transform.eulerAngles = hit.transform.eulerAngles;
             iDragComponent?.onDragging();

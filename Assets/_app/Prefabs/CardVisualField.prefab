@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 7050213750354458410}
   - component: {fileID: 1780386716496322481}
   - component: {fileID: 4782640286394181286}
-  - component: {fileID: 621502955512883730}
   m_Layer: 3
   m_Name: CardVisualField
   m_TagString: Untagged
@@ -217,18 +216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardBack: {fileID: 2525557157790006152}
---- !u!114 &621502955512883730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021979311843353754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3052db7088be4d048aca69fdfe95d6c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1601351841479762248
 GameObject:
   m_ObjectHideFlags: 0

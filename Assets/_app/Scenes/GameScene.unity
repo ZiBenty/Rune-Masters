@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 10648678}
   - component: {fileID: 10648679}
-  - component: {fileID: 10648680}
   - component: {fileID: 10648681}
+  - component: {fileID: 10648682}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1718, y: -1269}
+  m_AnchoredPosition: {x: -1718, y: -1471.96}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10648679
@@ -175,32 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   handVisual: []
-  defaultSpacing: 221.8
+  defaultSpacing: 350
   offsetSpacing: 20
---- !u!114 &10648680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10648677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 200, y: 200}
-  m_Spacing: {x: 221.8, y: 0}
-  m_Constraint: 2
-  m_ConstraintCount: 1
 --- !u!65 &10648681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -222,6 +198,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4500, y: 500, z: 100}
   m_Center: {x: 2000, y: 0, z: 0}
+--- !u!114 &10648682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10648677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 350
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &37340163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,8 +2542,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1015907093}
   - component: {fileID: 1015907095}
-  - component: {fileID: 1015907094}
   - component: {fileID: 1015907096}
+  - component: {fileID: 1015907097}
   m_Layer: 0
   m_Name: EnemyHand
   m_TagString: Untagged
@@ -2565,33 +2567,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1353, y: 1434}
+  m_AnchoredPosition: {x: -1353, y: 1414.03}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1015907094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015907092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 221.8, y: 0}
-  m_Constraint: 2
-  m_ConstraintCount: 1
 --- !u!114 &1015907095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2606,7 +2584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   handVisual: []
-  defaultSpacing: 221.8
+  defaultSpacing: 350
   offsetSpacing: 20
 --- !u!65 &1015907096
 BoxCollider:
@@ -2629,6 +2607,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4500, y: 700, z: 100}
   m_Center: {x: 2000, y: 0, z: 0}
+--- !u!114 &1015907097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015907092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 350
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1023058392
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,6 +4021,7 @@ GameObject:
   - component: {fileID: 1781550493}
   - component: {fileID: 1781550492}
   - component: {fileID: 1781550494}
+  - component: {fileID: 1781550496}
   m_Layer: 0
   m_Name: CardSlot
   m_TagString: Untagged
@@ -4127,6 +4132,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1781550496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781550490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1833912831
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,7 +4182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 147.21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1850090652

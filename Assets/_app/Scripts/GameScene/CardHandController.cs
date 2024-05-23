@@ -1,14 +1,17 @@
 
 using UnityEngine;
 
-public class CardController : MonoBehaviour, IDrag, IInspect
+public class CardHandController : MonoBehaviour, IDrag, IInspect
 {
+    private TouchManager tm;
     private Vector3 defaultScale;
-
+    private bool isOnHoverPlane;
     //private Vector3 highlightVelocity = Vector3.zero;
 
     void Awake(){
         defaultScale = transform.localScale;
+        isOnHoverPlane = false;
+        tm = GameObject.Find("TouchManager").GetComponent<TouchManager>();
     }
 
     public void onStartDrag()
@@ -18,8 +21,19 @@ public class CardController : MonoBehaviour, IDrag, IInspect
 
     public void onDragging()
     {
-        
-        Debug.Log("Dragging...");
+        RaycastHit hit = tm.getHitCollider();
+        if (hit.transform.name.Contains("Hand"))
+        {
+            transform.localScale = defaultScale * 1.6f;
+            isOnHoverPlane = false;
+        }
+        else if (hit.transform.name == "HoverPlane")
+        {
+            if (!isOnHoverPlane)
+                transform.localScale = defaultScale * 2.2f;
+            isOnHoverPlane = true;
+        }
+        //Debug.Log("Dragging...");
     }
 
     public void onEndDrag()

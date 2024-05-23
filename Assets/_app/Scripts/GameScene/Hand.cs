@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Hand : MonoBehaviour
 {
     public GameObject cardPrefab;
-    private GridLayoutGroup gridLayoutGroup;
+    private HorizontalLayoutGroup horizLayoutGroup;
     public List<Card> hand;
     public List<GameObject> handVisual;
     private int lastHandSize = 0;
@@ -21,7 +21,7 @@ public class Hand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gridLayoutGroup = transform.GetComponent<GridLayoutGroup>();
+        horizLayoutGroup = transform.GetComponent<HorizontalLayoutGroup>();
         hand = new List<Card>();
         handVisual = new List<GameObject>();
     }
@@ -58,12 +58,12 @@ public class Hand : MonoBehaviour
             //cv.transform.localPosition = new Vector3(0,0,10);
             //cv.transform.eulerAngles = new Vector3(20, 0, 0);
             if (handVisual.Count > 5 && handVisual.Count > lastHandSize){
-                gridLayoutGroup.spacing = new Vector2(gridLayoutGroup.spacing.x - offsetSpacing*(handVisual.Count-lastHandSize), 0);
+                horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
             }else if (handVisual.Count > 5 && handVisual.Count > lastHandSize){
-                gridLayoutGroup.spacing = new Vector2(gridLayoutGroup.spacing.x + offsetSpacing*(lastHandSize-handVisual.Count), 0);
+                horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
             }
             else{
-                gridLayoutGroup.spacing = new Vector2(defaultSpacing, 0);
+                horizLayoutGroup.spacing = defaultSpacing;
             }
             
         }

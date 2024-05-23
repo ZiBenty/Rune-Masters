@@ -44,7 +44,7 @@ public class Inspect : MonoBehaviour
 
      private IEnumerator InspectObj(GameObject clickedObject){
         if (inspected != null){
-            inspected.TryGetComponent<CardController>(out var inspComponent);
+            inspected.TryGetComponent<CardHandController>(out var inspComponent);
             inspComponent?.Highlight(new Vector3(0, 0, 0));
         }
         clickedObject.TryGetComponent<IInspect>(out var iInspectComponent);
