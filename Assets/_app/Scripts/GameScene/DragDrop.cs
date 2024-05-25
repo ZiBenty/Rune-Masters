@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,9 +10,10 @@ public class DragDrop : MonoBehaviour
     [SerializeField]
     private InputAction touchPress;
     [SerializeField]
-    private float dragSpeed = .1f;
+    private float dragSpeed = .1f, dragPhysicsSpeed = 10;
 
     private Camera MainCamera;
+    private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
     private Vector3 velocity = Vector3.zero;
 
     private void Awake(){
@@ -31,27 +33,32 @@ public class DragDrop : MonoBehaviour
     private void OnTouchPress(InputAction.CallbackContext context){
         Ray ray = MainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        //Collider2D collider = Physics2D.OverlapPoint(Touchscreen.current.primaryTouch.position.ReadValue());
         if (hit2d.collider != null && (hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || hit2d.collider.gameObject.GetComponent<IDrag>() != null)){
             StartCoroutine(DragUpdate(hit2d.collider.gameObject));
         }
     }
 
     private IEnumerator DragUpdate(GameObject clickedObject){
-        var defaultPos = clickedObject.transform.position;
+        float initialDistance = Vector3.Distance(clickedObject.transform.position, MainCamera.transform.position);
         clickedObject.TryGetComponent<IDrag>(out var iDragComponent);
+        clickedObject.TryGetComponent<Rigidbody2D>(out var rb);
         iDragComponent?.onStartDrag(); //? states: "is that null? If not, run it"
         while (touchPress.ReadValue<float>() != 0) //button is clicked
         {
-            var hit = transform.GetComponent<TouchManager>().getHitCollider();
-            Vector3 target = hit.point;
-            clickedObject.transform.eulerAngles = hit.transform.eulerAngles;
-            iDragComponent?.onDragging();
-            if (clickedObject.transform.position != defaultPos)
-                clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, target, ref velocity, dragSpeed);
-            else
-                clickedObject.transform.position = hit.point;
-            yield return null;
+            Ray ray = MainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+                if (rb != null){
+                    Vector3 direction = ray.GetPoint(initialDistance) - clickedObject.transform.position;
+                    rb.velocity = direction * dragPhysicsSpeed;
+                    iDragComponent?.onDragging(); 
+                    yield return waitForFixedUpdate;
+                }else{
+                    clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, ray.GetPoint(initialDistance), ref velocity, dragSpeed);
+                    iDragComponent?.onDragging(); 
+                    yield return null;
+                }
+        }
+        if (rb != null){
+            rb.velocity = Vector3.zero;
         }
         iDragComponent?.onEndDrag();
     }

@@ -57,9 +57,9 @@ public class Hand : MonoBehaviour
             handVisual.Add(cv); 
             //cv.transform.localPosition = new Vector3(0,0,10);
             //cv.transform.eulerAngles = new Vector3(20, 0, 0);
-            if (handVisual.Count > 5 && handVisual.Count > lastHandSize){
+            if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
                 horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
-            }else if (handVisual.Count > 5 && handVisual.Count > lastHandSize){
+            }else if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
                 horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
             }
             else{

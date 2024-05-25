@@ -13,14 +13,6 @@ public class TouchManager : MonoBehaviour
         MainCamera = Camera.main;
     }
 
-    public RaycastHit getHitCollider()
-    {
-        Ray ray = MainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        return hit;
-    }
-
     // Update is called once per frame
     void Update()
     {
