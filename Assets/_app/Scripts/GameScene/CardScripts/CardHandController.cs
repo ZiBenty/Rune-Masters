@@ -23,9 +23,14 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
 
         isDragging = true;
 
+        //saves position and scale to return to if needed
         defaultLocalScale = transform.localScale;
         defaultLocalPosition = transform.localPosition;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+        //change collider size
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        col.size = new Vector2(col.size.x/10, col.size.y/10);
 
         Debug.Log("Grabbing");
     }
@@ -61,13 +66,16 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
         if(isCardSlot){
             if (cardSlot != null){
                 cardSlot?.PlaceCard(GetComponent<DisplayCard>().Card);
-                Object.Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
         else
         {
             transform.localPosition = defaultLocalPosition;
             transform.localScale = defaultLocalScale;
+            //change collider size
+            BoxCollider2D col = GetComponent<BoxCollider2D>();
+            col.size = new Vector2(col.size.x*10, col.size.y*10);
         }
         
     }
