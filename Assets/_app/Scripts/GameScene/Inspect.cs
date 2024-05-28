@@ -37,18 +37,18 @@ public class Inspect : MonoBehaviour
         }
         //2d colliders
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        if (hit2d.collider != null && (hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || hit2d.collider.gameObject.GetComponent<IDrag>() != null)){
+        if (hit2d.collider != null && (hit2d.collider.gameObject.GetComponent<IInspect>() != null)){
             StartCoroutine(InspectObj(hit2d.collider.gameObject));
         }
     }
 
      private IEnumerator InspectObj(GameObject clickedObject){
         if (inspected != null){
-            inspected.TryGetComponent<CardHandController>(out var inspComponent);
-            inspComponent?.Highlight(new Vector3(0, 0, 0));
+            inspected.TryGetComponent<IInspect>(out var inspComponent);
+            inspComponent?.onStopInspect();
         }
         clickedObject.TryGetComponent<IInspect>(out var iInspectComponent);
-        iInspectComponent?.onInspect();
+        iInspectComponent?.onStartInspect();
         inspected = clickedObject;
         yield return null;
      }

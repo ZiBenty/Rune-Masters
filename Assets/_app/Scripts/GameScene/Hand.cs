@@ -30,9 +30,9 @@ public class Hand : MonoBehaviour
     void Update()
     {
         lastHandSize = hand.Count;
-        /*if (lastHandSize != handVisual.Count){
+        if (lastHandSize != handVisual.Count){
             ArrangeHand();
-        }*/
+        }
     }
 
     public void AddCard(Card card){
@@ -49,23 +49,19 @@ public class Hand : MonoBehaviour
             container.transform.SetParent(transform, false);
 
             //instantiate object and places it in the new CardContainer
-            GameObject cv = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
-            cv.transform.SetParent(container.transform, false);
+            GameObject cv = Instantiate(cardPrefab, container.transform);
             cv.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
 
             cv.GetComponent<DisplayCard>().LoadCard(card);
-            handVisual.Add(cv); 
-            //cv.transform.localPosition = new Vector3(0,0,10);
-            //cv.transform.eulerAngles = new Vector3(20, 0, 0);
-            if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
-                horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
-            }else if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
-                horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
-            }
-            else{
-                horizLayoutGroup.spacing = defaultSpacing;
-            }
-            
+            handVisual.Add(cv);  
+        }
+        if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
+            horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
+        }else if (handVisual.Count > 7 && handVisual.Count < lastHandSize){
+            horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
+        }
+        else{
+            horizLayoutGroup.spacing = defaultSpacing;
         }
     }
 }

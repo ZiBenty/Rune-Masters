@@ -90,8 +90,9 @@ GameObject:
   - component: {fileID: 7050213750354458410}
   - component: {fileID: 1780386716496322481}
   - component: {fileID: 4782640286394181286}
-  m_Layer: 3
-  m_Name: CardVisualField
+  - component: {fileID: 7348749255768929153}
+  m_Layer: 0
+  m_Name: CardVisualArena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,15 +182,9 @@ MonoBehaviour:
   TypeImage: {fileID: 2107665830696325592}
   Art: {fileID: 5496587518834084101}
   StarsText: {fileID: 0}
-  AttackText: {fileID: 0}
-  LifeText: {fileID: 0}
-  CostImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  AttackText: {fileID: 171260897955667810}
+  LifeText: {fileID: 1539619829521123109}
+  CostImages: []
   RuneSprites:
   - {fileID: 21300000, guid: 6020fcca891aed54286ae064466a6150, type: 3}
   - {fileID: 21300000, guid: 1490499f38cb5364b97ed6a22e8213f8, type: 3}
@@ -216,6 +211,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardBack: {fileID: 2525557157790006152}
+--- !u!114 &7348749255768929153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021979311843353754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d82f921d022b24594e5b62376dfc05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1601351841479762248
 GameObject:
   m_ObjectHideFlags: 0

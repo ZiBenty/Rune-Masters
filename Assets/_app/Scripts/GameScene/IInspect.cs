@@ -1,3 +1,4 @@
 public interface IInspect{
-    void onInspect();
+    void onStartInspect();
+    void onStopInspect();
 }

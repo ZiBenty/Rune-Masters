@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlaneController : MonoBehaviour, IInspect
 {
-    public void onInspect()
+    public void onStartInspect()
     {
         GameObject box = GameObject.Find("CardInspectionBox");
         box?.GetComponent<CardInspectionBox>().HideInfo();
+    }
+
+    public void onStopInspect()
+    {
+        //throw new System.NotImplementedException();
     }
 }
