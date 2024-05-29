@@ -16,7 +16,7 @@ public class TurnSystem : MonoBehaviour
         isPlayerTurn = true;
         playerTurn = 1;
         enemyTurn = 0;
-        TurnText.text = "Player's Turn";
+        TurnText.text = "Player's Turn 1";
     }
 
     // Update is called once per frame
@@ -28,12 +28,12 @@ public class TurnSystem : MonoBehaviour
     public void onEndTurn(){
         if(isPlayerTurn){
             isPlayerTurn = false;
-            enemyTurn += 1;
-            TurnText.text = "Enemy's Turn";
+            enemyTurn ++;
+            TurnText.text = "Enemy's Turn " + enemyTurn.ToString();
         }else{
             isPlayerTurn = true;
-            playerTurn += 1;
-            TurnText.text = "Player's Turn";
+            playerTurn ++;
+            TurnText.text = "Player's Turn " + playerTurn.ToString();
         }
     }
 
