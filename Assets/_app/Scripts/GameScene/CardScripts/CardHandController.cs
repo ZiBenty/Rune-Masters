@@ -7,12 +7,12 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
     [Header("Drag and Drop")]
     public bool canDrag = true;
     public bool isDragging = false;
-    private Vector3 defaultLocalScale;
-    private Vector3 defaultLocalPosition;
+    private Vector3 _defaultLocalScale;
+    private Vector3 _defaultLocalPosition;
 
     [Header("Inspect")]
     public bool isInspected = false;
-    private float lastMovement = 0;
+    private float _lastMovement = 0;
 
     void Awake(){
     }
@@ -24,8 +24,8 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
         isDragging = true;
 
         //saves position and scale to return to if needed
-        defaultLocalScale = transform.localScale;
-        defaultLocalPosition = transform.localPosition;
+        _defaultLocalScale = transform.localScale;
+        _defaultLocalPosition = transform.localPosition;
         transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
         //change collider size
@@ -71,8 +71,8 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
         }
         else
         {
-            transform.localPosition = defaultLocalPosition;
-            transform.localScale = defaultLocalScale;
+            transform.localPosition = _defaultLocalPosition;
+            transform.localScale = _defaultLocalScale;
             //change collider size
             BoxCollider2D col = GetComponent<BoxCollider2D>();
             col.size = new Vector2(col.size.x*10, col.size.y*10);
@@ -86,8 +86,8 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
         if(isInspected)
             moveBy = target.y;
         else
-            moveBy = lastMovement;
-        lastMovement = moveBy;
+            moveBy = _lastMovement;
+        _lastMovement = moveBy;
 
         if (transform.parent.parent.transform.name == "PlayerHand")
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, moveBy);

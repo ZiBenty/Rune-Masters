@@ -7,17 +7,29 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject Deck;
+    private Deck _deck;
     public GameObject Hand;
+    private Hand _hand;
     public GameObject SummonLine;
     private int Life {get; set;}
 
-    public void Draw(int count){
-        var deck = Deck.GetComponent<Deck>();
-        var hand = Hand.GetComponent<Hand>();
-        if(count >= 1 && deck.DeckList.Count >= count){
+    void Start()
+    {
+        _deck = Deck.GetComponent<Deck>();
+        _hand = Hand.GetComponent<Hand>();
+    }
+
+    void Update()
+    {
+        
+    }
+
+    public IEnumerator Draw(int count){
+        if(count >= 1 && _deck.DeckList.Count >= count){
             for (int i=0; i<count; i++){
-                hand.AddCard(deck.DeckList[0]);
-                deck.DeckList.RemoveAt(0);
+                _hand.AddCard(_deck.DeckList[0]);
+                _deck.DeckList.RemoveAt(0);
+                yield return new WaitForSeconds(0.3f);
             }     
         }
     }

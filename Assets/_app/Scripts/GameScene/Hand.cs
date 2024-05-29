@@ -10,18 +10,18 @@ using UnityEngine.UI;
 public class Hand : MonoBehaviour
 {
     public GameObject cardPrefab;
-    private HorizontalLayoutGroup horizLayoutGroup;
+    private HorizontalLayoutGroup _horizLayoutGroup;
     public List<Card> hand;
     public List<GameObject> handVisual;
-    private int lastHandSize = 0;
+    private int _lastHandSize = 0;
     [SerializeField]
-    public float defaultSpacing = 129, offsetSpacing = 20;
+    private float DefaultSpacing = 129, OffsetSpacing = 20;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        horizLayoutGroup = transform.GetComponent<HorizontalLayoutGroup>();
+        _horizLayoutGroup = transform.GetComponent<HorizontalLayoutGroup>();
         hand = new List<Card>();
         handVisual = new List<GameObject>();
     }
@@ -29,8 +29,8 @@ public class Hand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lastHandSize = hand.Count;
-        if (lastHandSize != handVisual.Count){
+        _lastHandSize = hand.Count;
+        if (_lastHandSize != handVisual.Count){
             ArrangeHand();
         }
     }
@@ -54,14 +54,20 @@ public class Hand : MonoBehaviour
 
             cv.GetComponent<DisplayCard>().LoadCard(card);
             handVisual.Add(cv);  
+        }else{
+            for(int i = 0; i < transform.childCount; i++){
+                if(transform.GetChild(i).childCount == 0)
+                    Destroy(transform.GetChild(i));
+                    break;
+            }
         }
-        if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
-            horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
+        if (handVisual.Count > 7 && handVisual.Count > _lastHandSize){
+            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing - OffsetSpacing*(handVisual.Count-_lastHandSize);
         }else if (handVisual.Count > 7 && handVisual.Count < 15){
-            horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
+            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing + OffsetSpacing*(_lastHandSize-handVisual.Count);
         }
         else{
-            horizLayoutGroup.spacing = defaultSpacing;
+            _horizLayoutGroup.spacing = DefaultSpacing;
         }
     }
 }

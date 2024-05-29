@@ -10,6 +10,9 @@ public class TurnSystem : MonoBehaviour
     public int enemyTurn;
     [SerializeField]
     private TMP_Text TurnText;
+
+    public static bool startGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +20,28 @@ public class TurnSystem : MonoBehaviour
         playerTurn = 1;
         enemyTurn = 0;
         TurnText.text = "Player's Turn 1";
+        startGame = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(startGame){
+            StartCoroutine(GameManager.Instance.player.Draw(5));
+            StartCoroutine(GameManager.Instance.enemy.Draw(5));
+            startGame = false;
+        }
+
+        //Fase Pescata
+        //Fase Movimento
+        //Fase Attacco
+        //Fine Turno
+    }
+
+    public void onStartTurn(){
+        if(isPlayerTurn){
+
+        }
     }
 
     public void onEndTurn(){
@@ -39,8 +58,8 @@ public class TurnSystem : MonoBehaviour
 
     public void onDraw(){
         if(isPlayerTurn)
-            GameController.Instance.player.Draw(1);
+            StartCoroutine(GameManager.Instance.player.Draw(1));
         else
-            GameController.Instance.enemy.Draw(1);
+            StartCoroutine(GameManager.Instance.enemy.Draw(1));
     }
 }

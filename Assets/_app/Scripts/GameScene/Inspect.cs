@@ -6,28 +6,26 @@ using UnityEngine.InputSystem;
 public class Inspect : MonoBehaviour
 {
     [SerializeField]
-    private InputAction tap;
-    private Camera mainCamera;
-    [SerializeField]
-    private Plane hoverPlane;
+    private InputAction Tap;
+    private Camera _mainCamera;
     public GameObject inspected;
 
     private void Awake(){
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     private void OnEnable(){
-        tap.Enable();
-        tap.performed += OnTap;
+        Tap.Enable();
+        Tap.performed += OnTap;
     }
 
     private void OnDisable(){
-        tap.performed -= OnTap;
-        tap.Disable();
+        Tap.performed -= OnTap;
+        Tap.Disable();
     }
 
     private void OnTap(InputAction.CallbackContext context){
-        Ray ray = mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+        Ray ray = _mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         //3d colliders
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)){

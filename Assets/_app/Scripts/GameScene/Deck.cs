@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
-    private Image Visual;
+    private Image _visual;
     public List<Card> DeckList;
 
     // Start is called before the first frame update
     void Start()
     {
-        Visual = GetComponent<Image>();
+        _visual = GetComponent<Image>();
         DeckList = new List<Card>();
         // TODO: implement import from decklist
         LoadDecklist("StarterFireAir");
@@ -22,10 +22,10 @@ public class Deck : MonoBehaviour
 
     void Update()
     {
-        /*if (DeckList.Count == 0)
+        if (DeckList.Count == 0)
         {
-            Visual.enabled = false;
-        }*/
+            _visual.enabled = false;
+        }
     }
 
     public void LoadDecklist(string name){
