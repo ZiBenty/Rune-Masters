@@ -57,7 +57,7 @@ public class Card {
             jump = binary.Length % 4;
         
         //if binary is less than 24 it could mean a bunch of None Runes int the top rows
-        for (int i = 20; i > binary.Length; i -= 4)
+        for (int i = 20; i >= binary.Length; i -= 4)
         {
             l.Add(Rune.None);
         }

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.VFX;
 
 public class DisplayCard : MonoBehaviour
 {
@@ -150,19 +151,46 @@ public class DisplayCard : MonoBehaviour
     //saves new Card reference and invokes Change methods
     public void LoadCard (Card c){
         Card = c;
+
+        
+
         ChangeName(c.Name);
         ChangeRune(RuneImage, c.CardRune);
-        ChangeType(c.CardType);
-        if (StarsText != null)
-            ChangeStars(c.Stars);
+        if (TypeImage != null){
+            if (c.Id == 0){ //cristallo
+                TypeImage.transform.parent.GetComponent<Behaviour>().enabled = false;
+            }else{
+                ChangeType(c.CardType);
+            }
+        }
+        if (StarsText != null){
+            if (c.Id == 0){ //cristallo
+                StarsText.transform.GetComponent<Behaviour>().enabled = false;
+            }else{
+                ChangeStars(c.Stars);
+            }
+        }
         if (EffectText != null)
             ChangeEffect(c.Effect);
-        if (AttackText != null)
-            ChangeAttack(c.Atk);
-        if (LifeText != null)
-            ChangeLife(c.Hp);
-        if (CostImages.Count != 0)
-            ChangeCost(c.decodeCost());
+        if (AttackText != null && LifeText != null){
+            if (c.CardType == CardType.Enchantment){
+                AttackText.transform.parent.GetComponent<Behaviour>().enabled = false;
+                LifeText.transform.parent.GetComponent<Behaviour>().enabled = false;
+            }else if (c.Id == 0){ //cristallo
+                AttackText.transform.parent.GetComponent<Behaviour>().enabled = false;
+                ChangeLife(c.Hp);
+            }else{
+                ChangeAttack(c.Atk);
+                ChangeLife(c.Hp);
+            }
+        }
+        if (CostImages.Count != 0){
+            if (c.Id == 0){ //cristallo
+                CostImages[0].transform.parent.GetComponent<Behaviour>().enabled = false;
+            }else{
+                ChangeCost(c.decodeCost());
+            }
+        }
         ChangeArt(c.Id);
     }
 

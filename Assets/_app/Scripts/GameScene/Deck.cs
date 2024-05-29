@@ -2,34 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
-    public CardDatabase db;
-
-    public Hand hand;
-
-    public List<Card> deck;
+    private Image Visual;
+    public List<Card> DeckList;
 
     // Start is called before the first frame update
     void Start()
     {
-        var cards = db.cardService.GetCards();
-        deck = db.GetComponent<CardDatabase>().toList(cards);
+        Visual = GetComponent<Image>();
+        DeckList = CardDatabase.Instance.toList(CardDatabase.Instance.cardService.GetCards());
         Shuffle();
     }
 
-    public void Shuffle(){
-        deck = deck.OrderBy(_ => Guid.NewGuid()).ToList();
-    }
-
-    public void Draw(int count){
-        if(count >= 1 && deck.Count >= count){
-            for (int i=0; i<count; i++){
-                hand.AddCard(deck[0]);
-                deck.RemoveAt(0);
-            }
-            
+    void Update()
+    {
+        if (DeckList.Count == 0)
+        {
+            Visual.enabled = false;
         }
     }
+
+    public void Shuffle(){
+        DeckList = DeckList.OrderBy(_ => Guid.NewGuid()).ToList();
+    }
+
 }

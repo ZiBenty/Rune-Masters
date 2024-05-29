@@ -6,23 +6,29 @@ using UnityEngine.UI;
 
 public class CardSlot : MonoBehaviour
 {
-    private Outline outline;
+    private Outline _outline;
     public GameObject cardPrefab;
+    public bool isCrystalSlot = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        outline = GetComponent<Outline>();
+        _outline = GetComponent<Outline>();
+        if (isCrystalSlot){
+            PlaceCard(CardDatabase.Instance.cardService.GetCardFromId(0));
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.transform.name.Contains("CardVisualHand")){
             if (other.transform.GetComponent<CardHandController>().isDragging)
-                outline.enabled = true;
+                _outline.enabled = true;
         } 
     }
 
     void OnTriggerExit2D(Collider2D other){
-        outline.enabled = false;
+        _outline.enabled = false;
     }
 
     public void PlaceCard(Card card){

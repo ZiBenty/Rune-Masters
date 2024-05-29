@@ -57,7 +57,7 @@ public class Hand : MonoBehaviour
         }
         if (handVisual.Count > 7 && handVisual.Count > lastHandSize){
             horizLayoutGroup.spacing = horizLayoutGroup.spacing - offsetSpacing*(handVisual.Count-lastHandSize);
-        }else if (handVisual.Count > 7 && handVisual.Count < lastHandSize){
+        }else if (handVisual.Count > 7 && handVisual.Count < 15){
             horizLayoutGroup.spacing = horizLayoutGroup.spacing + offsetSpacing*(lastHandSize-handVisual.Count);
         }
         else{

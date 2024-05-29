@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class CardDatabase : MonoBehaviour
 {
+    public static CardDatabase Instance;
     public CardService cardService {get; set;}
 
     void Awake(){
+        Instance = this;
         cardService = new CardService();
     }
 
