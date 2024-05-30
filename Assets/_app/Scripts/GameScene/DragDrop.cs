@@ -33,7 +33,7 @@ public class DragDrop : MonoBehaviour
     private void OnTouchPress(InputAction.CallbackContext context){
         Ray ray = _mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        if (hit2d.collider != null && (hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || hit2d.collider.gameObject.GetComponent<IDrag>() != null)){
+        if (hit2d.collider != null && hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") && hit2d.collider.gameObject.GetComponent<IDrag>() != null && hit2d.collider.gameObject.GetComponent<IDrag>().GetcanDrag()){
             StartCoroutine(DragUpdate(hit2d.collider.gameObject));
         }
     }

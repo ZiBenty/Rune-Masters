@@ -22,7 +22,7 @@ public class CardSlot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.transform.name.Contains("CardVisualHand")){
-            if (other.transform.GetComponent<CardHandController>().isDragging)
+            if (other.transform.GetComponent<CardHandController>().GetisDragging())
                 _outline.enabled = true;
         } 
     }

@@ -17,4 +17,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // Game Actions, general actions like Draw, Destroy, Remove, Discard, ecc
+    public IEnumerator Draw(Player player, int count){
+        Deck deck = player.deckScript;
+        Hand hand = player.handScript;
+        if(count >= 1 && deck.DeckList.Count >= count){
+            for (int i=0; i<count; i++){
+                hand.AddCard(deck.DeckList[0]);
+                deck.DeckList.RemoveAt(0);
+                yield return new WaitForSeconds(0.2f);
+            }    
+        }
+    }
 }

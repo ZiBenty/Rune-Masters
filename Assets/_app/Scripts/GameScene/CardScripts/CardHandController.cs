@@ -5,16 +5,33 @@ using UnityEngine.InputSystem;
 public class CardHandController : MonoBehaviour, IDrag, IInspect
 {
     [Header("Drag and Drop")]
-    public bool canDrag = true;
-    public bool isDragging = false;
-    private Vector3 _defaultLocalScale;
-    private Vector3 _defaultLocalPosition;
+    [SerializeField]
+    private bool canDrag, isDragging;
+    private Vector3 _defaultLocalScale, _defaultLocalPosition;
 
     [Header("Inspect")]
     public bool isInspected = false;
     private float _lastMovement = 0;
 
     void Awake(){
+        SetcanDrag(true);
+        SetisDragging(false);
+    }
+
+    public void SetcanDrag(bool b){
+        canDrag = b;
+    }
+
+    public void SetisDragging(bool b){
+        isDragging = b;
+    }
+    
+    public bool GetcanDrag(){
+        return canDrag;
+    }
+
+    public bool GetisDragging(){
+        return isDragging;
     }
 
     public void onStartDrag()

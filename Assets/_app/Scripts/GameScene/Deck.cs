@@ -46,4 +46,5 @@ public class Deck : MonoBehaviour
         DeckList = DeckList.OrderBy(_ => Guid.NewGuid()).ToList();
     }
 
+
 }

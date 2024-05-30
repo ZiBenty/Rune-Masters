@@ -70,4 +70,10 @@ public class Hand : MonoBehaviour
             _horizLayoutGroup.spacing = DefaultSpacing;
         }
     }
+
+    public void setDraggable(bool draggable){
+        for(int i = 0; i < handVisual.Count; i++){
+                handVisual[i].GetComponent<CardHandController>().SetcanDrag(draggable);
+            }
+    }
 }
