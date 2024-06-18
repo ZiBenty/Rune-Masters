@@ -129,4 +129,8 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
         box?.GetComponent<CardInspectionBox>().HideInfo();
     }
 
+    void OnDestroy(){
+        Destroy(transform.parent.gameObject);
+    }
+
 }
