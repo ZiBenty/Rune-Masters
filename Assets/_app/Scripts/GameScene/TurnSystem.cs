@@ -15,6 +15,12 @@ public class TurnSystem : MonoBehaviour
     public static bool startGame;
     private bool _initialSetup; //used to launch initial couroutines
 
+    //used for switching between phases
+    public bool isDrawPhase = false;
+    public bool isMovePhase = false;
+    public bool isCombatPhase = false;
+    public bool isEndPhase = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,18 +45,48 @@ public class TurnSystem : MonoBehaviour
         if(startGame && _gm.enemy.handScript.handVisual.Count == 5){
             _gm.enemy.handScript.setDraggable(false);
             startGame = false;
+            isDrawPhase = true;
         }
 
 
         //Fase Pescata
+        if (isDrawPhase){
+            if(isPlayerTurn)
+                StartCoroutine(_gm.Draw(_gm.player, 1));
+            else
+                StartCoroutine(_gm.Draw(_gm.enemy, 1));
+            movePhase();
+        }
         //Fase Movimento
+        if (isMovePhase){
+
+        }
         //Fase Attacco
+        if (isCombatPhase){
+
+        }
         //Fine Turno
+        if(isEndPhase){
+            
+        }
     }
 
-    public void onStartTurn(){
-        if(isPlayerTurn){
-
+    public void movePhase(){
+        if(isDrawPhase){
+            isDrawPhase = false;
+            isMovePhase = true;
+        }
+        else if(isMovePhase){
+            isMovePhase = false;
+            isCombatPhase = true;
+        }
+        else if(isCombatPhase){
+            isCombatPhase = false;
+            isEndPhase = true;
+        }
+        else if(isEndPhase){
+            isEndPhase = false;
+            onEndTurn();
         }
     }
 
