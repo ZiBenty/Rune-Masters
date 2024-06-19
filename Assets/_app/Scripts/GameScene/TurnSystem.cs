@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class TurnSystem : MonoBehaviour
     public bool isMovePhase = false;
     public bool isCombatPhase = false;
     public bool isEndPhase = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,7 @@ public class TurnSystem : MonoBehaviour
                 StartCoroutine(_gm.Draw(_gm.player, 1));
             else
                 StartCoroutine(_gm.Draw(_gm.enemy, 1));
+            //attiva effetti forgia
             movePhase();
         }
         //Fase Movimento
@@ -67,7 +70,7 @@ public class TurnSystem : MonoBehaviour
         }
         //Fine Turno
         if(isEndPhase){
-            
+            movePhase();
         }
     }
 
@@ -104,6 +107,7 @@ public class TurnSystem : MonoBehaviour
             _gm.enemy.handScript.setDraggable(false);
             _gm.player.handScript.setDraggable(true);
         }
+        isDrawPhase = true;
     }
 
     public void onDraw(){
