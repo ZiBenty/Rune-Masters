@@ -2278,7 +2278,7 @@ MonoBehaviour:
   isPlayerTurn: 0
   playerTurn: 0
   enemyTurn: 0
-  TurnText: {fileID: 532638565}
+  _turnText: {fileID: 532638565}
   isDrawPhase: 0
   isMovePhase: 0
   isCombatPhase: 0
@@ -4254,7 +4254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ts: {fileID: 698863385}
+  _ts: {fileID: 698863385}
 --- !u!1 &1106727251
 GameObject:
   m_ObjectHideFlags: 0
@@ -6015,7 +6015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ts: {fileID: 698863385}
+  _ts: {fileID: 698863385}
 --- !u!1 &1417390038
 GameObject:
   m_ObjectHideFlags: 0
@@ -6632,7 +6632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ts: {fileID: 698863385}
+  _ts: {fileID: 698863385}
 --- !u!1 &1547845279
 GameObject:
   m_ObjectHideFlags: 0
@@ -6900,7 +6900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ts: {fileID: 698863385}
+  _ts: {fileID: 698863385}
 --- !u!1 &1566936512
 GameObject:
   m_ObjectHideFlags: 0

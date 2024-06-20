@@ -11,7 +11,7 @@ public class Hand : MonoBehaviour
 {
     public GameObject cardPrefab;
     private HorizontalLayoutGroup _horizLayoutGroup;
-    public List<Card> hand;
+    //public List<Card> hand;
     public List<GameObject> handVisual;
     private int _lastHandSize = 0;
     [SerializeField]
@@ -22,21 +22,21 @@ public class Hand : MonoBehaviour
     void Start()
     {
         _horizLayoutGroup = transform.GetComponent<HorizontalLayoutGroup>();
-        hand = new List<Card>();
+        //hand = new List<Card>();
         handVisual = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _lastHandSize = hand.Count;
+        //_lastHandSize = hand.Count;
         if (_lastHandSize != handVisual.Count){
             ArrangeHand();
         }
     }
 
     public void AddCard(Card card){
-        hand.Add(card);
+        //hand.Add(card);
         ArrangeHand(card);
     }
 

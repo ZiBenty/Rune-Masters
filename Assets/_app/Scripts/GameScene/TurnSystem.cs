@@ -6,21 +6,31 @@ using UnityEngine.UI;
 
 public class TurnSystem : MonoBehaviour
 {
+    public static TurnSystem Instance {get; private set;}
     public bool isPlayerTurn;
     public int playerTurn;
     public int enemyTurn;
     [SerializeField]
-    private TMP_Text TurnText;
+    private TMP_Text _turnText;
     private GameManager _gm;
 
-    public static bool startGame;
     private bool _initialSetup; //used to launch initial couroutines
+    public static bool startGame;
 
     //used for switching between phases
     public bool isDrawPhase = false;
     public bool isMovePhase = false;
     public bool isCombatPhase = false;
     public bool isEndPhase = false;
+
+    void Awake(){
+        if (Instance == null){
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else if (Instance != this){
+            Destroy(gameObject);
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -30,7 +40,7 @@ public class TurnSystem : MonoBehaviour
         isPlayerTurn = true;
         playerTurn = 1;
         enemyTurn = 0;
-        TurnText.text = "Player's Turn 1";
+        _turnText.text = "Player's Turn 1";
         startGame = true;
         _initialSetup = true;
     }
@@ -97,13 +107,13 @@ public class TurnSystem : MonoBehaviour
         if(isPlayerTurn){
             isPlayerTurn = false;
             enemyTurn ++;
-            TurnText.text = "Enemy's Turn " + enemyTurn.ToString();
+            _turnText.text = "Enemy's Turn " + enemyTurn.ToString();
             _gm.player.handScript.setDraggable(false);
             _gm.enemy.handScript.setDraggable(true);
         }else{
             isPlayerTurn = true;
             playerTurn ++;
-            TurnText.text = "Player's Turn " + playerTurn.ToString();
+            _turnText.text = "Player's Turn " + playerTurn.ToString();
             _gm.enemy.handScript.setDraggable(false);
             _gm.player.handScript.setDraggable(true);
         }

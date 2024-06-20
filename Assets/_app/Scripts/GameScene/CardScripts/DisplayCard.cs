@@ -11,8 +11,6 @@ public class DisplayCard : MonoBehaviour
 {
     //reference to a card object
     public Card Card;
-    //reference to its prefab
-    public GameObject cardPrefab;
 
     // references to UI elements
     public TMP_Text NameText;
@@ -151,8 +149,6 @@ public class DisplayCard : MonoBehaviour
     //saves new Card reference and invokes Change methods
     public void LoadCard (Card c){
         Card = c;
-
-        
 
         ChangeName(c.Name);
         ChangeRune(RuneImage, c.CardRune);
