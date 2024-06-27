@@ -4,24 +4,7 @@ using System.Collections.Generic;
 using SQLite4Unity3d;
 using Unity.Collections;
 using UnityEngine;
-
-public enum Rune 
-{
-    None = 0,
-    Fire = 1,
-    Earth = 2,
-    Air = 4,
-    Water = 8,
-    Ancestral = 15
-}
-
-public enum CardType
-{
-    None = 0,
-    Creature = 1,
-    Structure = 2,
-    Enchantment = 4
-}
+using static Constants;
 
 public class Card {
 
@@ -43,7 +26,7 @@ public class Card {
     pos 4 = bottom
     pos 5 = bottom-right*/
 
-    public List<Rune> decodeCost()
+    public List<Rune> DecodeCost()
     {
         List<Rune> l = new List<Rune>();
         string binary = Convert.ToString(Cost, 2);
@@ -89,7 +72,7 @@ public class Card {
         return l;
     }
 
-    public int encodeCost(List<Rune> l)
+    public int EncodeCost(List<Rune> l)
     {
         var cost = 0;
         cost = cost | (int)l[0] << 20 | (int)l[1] << 16 | (int)l[2] << 12  | (int)l[3] << 8 | (int)l[4] << 4 | (int)l[5];
@@ -100,7 +83,7 @@ public class Card {
 	{
         var str1 = string.Format ("Id={0},\n Name={1},\n  Rune={2},\n Type={3},\n Atk={4},\n Hp={5},\n Stars={6}\n",
                                  Id, Name, CardRune, CardType, Atk, Hp, Stars);
-        var CostList = decodeCost();
+        var CostList = DecodeCost();
         var str2 = string.Format("Cost:\n {0} | {1} | {2} \n {3} | {4} | {5} \n", CostList[0], CostList[1], CostList[2], CostList[3], CostList[4], CostList[5]);
 		return str1+str2;
 	}

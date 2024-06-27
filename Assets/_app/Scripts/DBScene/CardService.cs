@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;
 
 public class CardService
 {
@@ -127,7 +128,7 @@ public class CardService
         foreach (int symb in cost){
             l.Add(decodeIntCost(symb));
         }
-        c.Cost = c.encodeCost(l);
+        c.Cost = c.EncodeCost(l);
         return c;
     }
 }

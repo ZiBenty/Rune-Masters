@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.VFX;
+using static Constants;
 
 public class DisplayCard : MonoBehaviour
 {
@@ -184,7 +185,7 @@ public class DisplayCard : MonoBehaviour
             if (c.Id == 0){ //cristallo
                 CostImages[0].transform.parent.GetComponent<Behaviour>().enabled = false;
             }else{
-                ChangeCost(c.decodeCost());
+                ChangeCost(c.DecodeCost());
             }
         }
         ChangeArt(c.Id);
