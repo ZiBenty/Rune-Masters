@@ -148,7 +148,8 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     }
 
     void OnDestroy(){
-        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand ||
+        transform.GetComponentInChildren<CardState>().Location == Constants.Location.Field)
             Destroy(transform.parent.gameObject);
     }
 }

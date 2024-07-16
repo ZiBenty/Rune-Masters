@@ -74,6 +74,7 @@ public class ArenaCardSlot : MonoBehaviour
         //enables colliders and size it to the visual size
         copy.GetComponent<BoxCollider2D>().enabled = true;
         copy.GetComponent<BoxCollider2D>().size = copy.transform.GetChild(1).GetComponentInChildren<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
+        copy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         if(changePlay){
             copy.GetComponent<PlayScript>().SetcanDrag(true);
             copy.GetComponent<PlayScript>().SetcanInspect(true);
