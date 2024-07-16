@@ -29,13 +29,13 @@ public class Inspect : MonoBehaviour
         //3d colliders
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)){
-            if(hit.collider != null && hit.collider.gameObject.GetComponent<IInspect>() != null){
+            if(hit.collider != null && hit.collider.gameObject.GetComponent<IInspect>() != null && hit.collider.gameObject.GetComponent<IInspect>().GetcanInspect()){
                 StartCoroutine(InspectObj(hit.collider.gameObject));
             }
         }
         //2d colliders
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        if (hit2d.collider != null && (hit2d.collider.gameObject.GetComponent<IInspect>() != null)){
+        if (hit2d.collider != null && hit2d.collider.gameObject.GetComponent<IInspect>() != null && hit2d.collider.gameObject.GetComponent<IInspect>().GetcanInspect()){
             StartCoroutine(InspectObj(hit2d.collider.gameObject));
         }
     }

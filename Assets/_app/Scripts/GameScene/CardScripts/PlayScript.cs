@@ -1,49 +1,65 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CardHandController : MonoBehaviour, IDrag, IInspect
+//handles how the card responds to direct player input
+public class PlayScript : MonoBehaviour, IDrag, IInspect
 {
     [Header("Drag and Drop")]
     [SerializeField]
-    private bool canDrag, isDragging;
+    private bool _canDrag, _isDragging;
     private Vector3 _defaultLocalScale, _defaultLocalPosition;
 
     [Header("Inspect")]
+    private bool _canInspect;
     public bool isInspected = false;
     private float _lastMovement = 0;
+
+    private TurnSystem _ts;
 
     void Awake(){
         SetcanDrag(true);
         SetisDragging(false);
     }
 
+    void Start(){
+        _ts = TurnSystem.Instance;
+    }
+
     public void SetcanDrag(bool b){
-        canDrag = b;
+        _canDrag = b;
+    }
+    public void SetcanInspect(bool b){
+        _canInspect = b;
     }
 
     public void SetisDragging(bool b){
-        isDragging = b;
+        _isDragging = b;
     }
     
     public bool GetcanDrag(){
-        return canDrag;
+        return _canDrag;
+    }
+
+    public bool GetcanInspect(){
+        return _canInspect;
     }
 
     public bool GetisDragging(){
-        return isDragging;
+        return _isDragging;
     }
 
     public void onStartDrag()
     {
-        if(!canDrag) return;
+        if(!_canDrag) return;
 
-        isDragging = true;
+        _isDragging = true;
 
         //saves position and scale to return to if needed
         _defaultLocalScale = transform.localScale;
         _defaultLocalPosition = transform.localPosition;
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        //transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
         //change collider size
         BoxCollider2D col = GetComponent<BoxCollider2D>();
@@ -54,19 +70,19 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
 
     public void onDragging()
     {
-        if(!canDrag) return;
+        if(!_canDrag) return;
         //Debug.Log("Dragging...");
     }
 
     public void onEndDrag()
     {
-        if(!canDrag) return;
+        if(!_canDrag) return;
 
-        isDragging = false;
+        _isDragging = false;
         Debug.Log("Releasing");
 
         bool isCardSlot = false;
-        CardSlot cardSlot = null;
+        ArenaCardSlot cardSlot = null;
 
         //controllo luogo dove finisce
         Ray ray = Camera.main.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
@@ -75,14 +91,14 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
             if(hit.transform.name.Contains("CardSlot")){
                 if(hit.transform.childCount == 0){
                     isCardSlot = true;
-                    cardSlot = hit.transform.gameObject.GetComponent<CardSlot>();
+                    cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
                 }
             }
         }
         //azione differente a seconda di dove finisce
         if(isCardSlot){
             if (cardSlot != null){
-                cardSlot?.PlaceCard(GetComponent<DisplayCard>().Card);
+                cardSlot?.PlaceCard(transform.gameObject);
                 Destroy(gameObject);
             }
         }
@@ -116,21 +132,23 @@ public class CardHandController : MonoBehaviour, IDrag, IInspect
     public void onStartInspect()
     {
         isInspected = true;
-        Highlight(new Vector3(0, 100, 0));
+        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+            Highlight(new Vector3(0, 100, 0));
         GameObject box = GameObject.Find("CardInspectionBox");
-        box?.GetComponent<CardInspectionBox>().ShowInfo(GetComponent<DisplayCard>().Card);
+        box?.GetComponent<CardInspectionBox>().ShowInfo(transform.gameObject);
     }
 
     public void onStopInspect()
     {
         isInspected = false;
-        Highlight(new Vector3(0, 0, 0));
+        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+            Highlight(new Vector3(0, 0, 0));
         GameObject box = GameObject.Find("CardInspectionBox");
         box?.GetComponent<CardInspectionBox>().HideInfo();
     }
 
     void OnDestroy(){
-        Destroy(transform.parent.gameObject);
+        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+            Destroy(transform.parent.gameObject);
     }
-
 }

@@ -10,7 +10,7 @@ public class DragDrop : MonoBehaviour
     [SerializeField]
     private InputAction TouchPress;
     [SerializeField]
-    private float DragSpeed = .1f, DragPhysicsSpeed = 10;
+    private float DragSpeed, DragPhysicsSpeed;
 
     private Camera _mainCamera;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
@@ -30,10 +30,12 @@ public class DragDrop : MonoBehaviour
         TouchPress.Disable();
     }
 
+//hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable")
+
     private void OnTouchPress(InputAction.CallbackContext context){
         Ray ray = _mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         RaycastHit2D hit2d = Physics2D.GetRayIntersection(ray);
-        if (hit2d.collider != null && hit2d.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") && hit2d.collider.gameObject.GetComponent<IDrag>() != null && hit2d.collider.gameObject.GetComponent<IDrag>().GetcanDrag()){
+        if (hit2d.collider != null && hit2d.collider.gameObject.GetComponent<IDrag>() != null && hit2d.collider.gameObject.GetComponent<IDrag>().GetcanDrag()){
             StartCoroutine(DragUpdate(hit2d.collider.gameObject));
         }
     }

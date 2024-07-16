@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Logic handling the behaviour of the boxes that indicate the current turn phase
 public class PhaseBox : MonoBehaviour
 {
     private TurnSystem _ts;

@@ -9,7 +9,7 @@ public class CardBack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DisplayCard.staticCardBack){
+        if(CardDisplay.staticCardBack){
             cardBack.SetActive(true);
         }
         else{

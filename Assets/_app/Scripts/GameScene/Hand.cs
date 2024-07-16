@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class Hand : MonoBehaviour
 {
-    public GameObject cardPrefab;
+    public GameObject visualPrefab;
     private HorizontalLayoutGroup _horizLayoutGroup;
     //public List<Card> hand;
     public List<GameObject> handVisual;
@@ -35,12 +35,12 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void AddCard(Card card){
+    public void AddCard(GameObject card){
         //hand.Add(card);
         ArrangeHand(card);
     }
 
-    public void ArrangeHand(Card card = null){
+    public void ArrangeHand(GameObject card = null){
         //Vector3 position;
         if (card != null){
             //creates CardContainer object
@@ -49,11 +49,17 @@ public class Hand : MonoBehaviour
             container.transform.SetParent(transform, false);
 
             //instantiate object and places it in the new CardContainer
-            GameObject cv = Instantiate(cardPrefab, container.transform);
+            GameObject cv = Instantiate(visualPrefab, card.transform.GetChild(1).transform);
             cv.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
+            cv.GetComponent<CardDisplay>().LoadCard();
 
-            cv.GetComponent<DisplayCard>().LoadCard(card);
-            handVisual.Add(cv);  
+            card.transform.SetParent(container.transform, false);
+            card.GetComponent<PlayScript>().SetcanDrag(true);
+            card.GetComponent<PlayScript>().SetcanInspect(true);
+            //enables colliders and size it to the visual size
+            card.GetComponent<BoxCollider2D>().enabled = true;
+            card.GetComponent<BoxCollider2D>().size = card.transform.GetChild(1).GetComponentInChildren<RectTransform>().sizeDelta*card.transform.GetChild(1).transform.GetChild(0).GetComponent<RectTransform>().localScale;
+            handVisual.Add(card);
         }else{
             for(int i = 0; i < transform.childCount; i++){
                 if(transform.GetChild(i).childCount == 0)
@@ -69,11 +75,12 @@ public class Hand : MonoBehaviour
         else{
             _horizLayoutGroup.spacing = DefaultSpacing;
         }
+        _lastHandSize = handVisual.Count;
     }
 
     public void setDraggable(bool draggable){
         for(int i = 0; i < handVisual.Count; i++){
-                handVisual[i].GetComponent<CardHandController>().SetcanDrag(draggable);
+                handVisual[i].GetComponent<PlayScript>().SetcanDrag(draggable);
             }
     }
 }

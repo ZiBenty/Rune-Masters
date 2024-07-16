@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a89eed9cbeefd498edd5b0f45c78cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   handVisual: []
   DefaultSpacing: 450
   OffsetSpacing: 20
@@ -475,8 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &72331726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,34 +612,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Column0:
   - {fileID: 1781550490}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1280502323}
+  - {fileID: 943139509}
+  - {fileID: 1499260393}
+  - {fileID: 726649678}
   Column1:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1327986374}
+  - {fileID: 1035699769}
+  - {fileID: 1496672900}
+  - {fileID: 349046852}
+  - {fileID: 1927287249}
   Column2:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1896000774}
+  - {fileID: 1547845279}
+  - {fileID: 1169457030}
+  - {fileID: 1694294964}
+  - {fileID: 524703076}
   Column3:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1184628377}
+  - {fileID: 1059309892}
+  - {fileID: 1742963804}
+  - {fileID: 511242121}
+  - {fileID: 72331720}
   Column4:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1360081213}
+  - {fileID: 1236667024}
+  - {fileID: 527477691}
+  - {fileID: 2089099718}
+  - {fileID: 634891526}
 --- !u!1 &247530007
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +704,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   DragSpeed: 0.1
-  DragPhysicsSpeed: 10
+  DragPhysicsSpeed: 50
 --- !u!114 &247530011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,8 +1001,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &349046858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,8 +1382,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &511242127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,8 +1563,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &524703082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,8 +1744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 1
+  Owner: {fileID: 1629344810}
 --- !u!114 &527477697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,8 +2215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 1629344810}
 --- !u!114 &634891532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2451,8 +2463,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 2088668009}
 --- !u!114 &726649684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,6 +2689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b3e6cd8611d3b45b27799017ed5f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  DeckList: []
+  Owner: {fileID: 0}
 --- !u!114 &754092879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3448,7 +3465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -830, y: -20}
+  m_AnchoredPosition: {x: -776, y: 82}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &917643117
@@ -3611,8 +3628,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 1
+  Owner: {fileID: 2088668009}
 --- !u!114 &943139515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3778,7 +3797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a89eed9cbeefd498edd5b0f45c78cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   handVisual: []
   DefaultSpacing: 450
   OffsetSpacing: 20
@@ -3799,7 +3818,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 450
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -3947,8 +3966,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1035699775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4126,8 +4147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1059309898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4254,7 +4277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ts: {fileID: 698863385}
 --- !u!1 &1106727251
 GameObject:
   m_ObjectHideFlags: 0
@@ -4565,8 +4587,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1169457036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4878,8 +4902,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1184628383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5057,8 +5083,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 1629344810}
 --- !u!114 &1236667030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,8 +5450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 2088668009}
 --- !u!114 &1280502329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5708,8 +5738,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1327986380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5887,8 +5919,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 1629344810}
 --- !u!114 &1360081219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6015,7 +6049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ts: {fileID: 698863385}
 --- !u!1 &1417390038
 GameObject:
   m_ObjectHideFlags: 0
@@ -6192,8 +6225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1496672906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6371,8 +6406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 2088668009}
 --- !u!114 &1499260399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6632,7 +6669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ts: {fileID: 698863385}
 --- !u!1 &1547845279
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,8 +6808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1547845285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6900,7 +6938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895e0bc3e84e194b8d1fc0d72b6d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ts: {fileID: 698863385}
 --- !u!1 &1566936512
 GameObject:
   m_ObjectHideFlags: 0
@@ -7053,6 +7090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b3e6cd8611d3b45b27799017ed5f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  DeckList: []
+  Owner: {fileID: 0}
 --- !u!114 &1606800445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7280,8 +7320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1694294970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7835,8 +7877,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1742963810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7966,8 +8010,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 2088668009}
 --- !u!114 &1781550497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8235,8 +8281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1896000780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8463,8 +8511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 0}
 --- !u!114 &1927287255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8770,8 +8820,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58c48f565b34394eb46e113d4109a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
+  cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
+  visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
+  Owner: {fileID: 1629344810}
 --- !u!114 &2089099724
 MonoBehaviour:
   m_ObjectHideFlags: 0

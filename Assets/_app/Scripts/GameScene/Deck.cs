@@ -7,14 +7,21 @@ using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _cardPrefab;
     private Image _visual;
-    public List<Card> DeckList;
+    public List<GameObject> DeckList;
+    public Player Owner;
 
     // Start is called before the first frame update
     void Start()
     {
         _visual = GetComponent<Image>();
-        DeckList = new List<Card>();
+        DeckList = new List<GameObject>();
+        if(transform.name == "PlayerDeck")
+            Owner = GameManager.Instance.player;
+        else
+            Owner = GameManager.Instance.enemy;
         // TODO: implement import from decklist
         LoadDecklist("StarterFireAir");
         Shuffle();
@@ -34,9 +41,16 @@ public class Deck : MonoBehaviour
         do{
             line = reader.ReadLine();
             if(line != null){
-                string[] words = line.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 for(int i = 0; i < int.Parse(words[1]); i++){
-                    DeckList.Add(CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0])));
+                    Card c = CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0]));
+                    GameObject card = Instantiate(_cardPrefab, transform);
+                    card.GetComponentInChildren<CardInfo>().LoadInfo(c);
+                    card.GetComponentInChildren<CardState>().SetPlayer(Owner);
+                    card.GetComponentInChildren<CardState>().Location = Constants.Location.Deck;
+                    card.GetComponent<PlayScript>().SetcanDrag(false);
+                    card.GetComponent<PlayScript>().SetcanInspect(false);
+                    DeckList.Add(card);
                 }
             }
         }while(line !=null);

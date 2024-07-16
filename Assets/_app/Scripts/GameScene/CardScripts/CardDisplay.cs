@@ -8,11 +8,8 @@ using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.VFX;
 using static Constants;
 
-public class DisplayCard : MonoBehaviour
+public class CardDisplay : MonoBehaviour
 {
-    //reference to a card object
-    public Card Card;
-
     // references to UI elements
     public TMP_Text NameText;
     public TMP_Text EffectText;
@@ -148,8 +145,8 @@ public class DisplayCard : MonoBehaviour
 
 
     //saves new Card reference and invokes Change methods
-    public void LoadCard (Card c){
-        Card = c;
+    public void LoadCard (){
+        Card c = transform.parent.parent.GetComponentInChildren<CardInfo>().TempInfo;
 
         ChangeName(c.Name);
         ChangeRune(RuneImage, c.CardRune);
