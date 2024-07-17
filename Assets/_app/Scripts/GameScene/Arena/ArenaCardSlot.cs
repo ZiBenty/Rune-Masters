@@ -11,6 +11,7 @@ public class ArenaCardSlot : MonoBehaviour
     public GameObject visualPrefab;
     public bool isCrystalSlot = false;
     public Player Owner;
+    public Vector2 ContainerSize = new Vector2(50, 60);
 
 
     // Start is called before the first frame update
@@ -20,13 +21,9 @@ public class ArenaCardSlot : MonoBehaviour
         if (isCrystalSlot){
             Card c = CardDatabase.Instance.cardService.GetCardFromId(0);
             GameObject card = Instantiate(cardPrefab);
-            card.GetComponentInChildren<CardInfo>().LoadInfo(c);
-            card.GetComponentInChildren<CardState>().SetPlayer(Owner);
-            card.GetComponentInChildren<CardState>().Location = Constants.Location.Field;
-            card.GetComponent<PlayScript>().SetcanDrag(false);
-            card.GetComponent<BoxCollider2D>().enabled = true;
-            PlaceCard(card, false, false);
-            card.GetComponent<PlayScript>().SetcanInspect(true);
+            card.GetComponent<CardInfo>().LoadInfo(c);
+            card.GetComponent<CardState>().SetPlayer(Owner);
+            PlaceCard(card, false);
         }
     }
 
@@ -41,13 +38,12 @@ public class ArenaCardSlot : MonoBehaviour
         _outline.enabled = false;
     }
 
-    public void PlaceCard(GameObject card, bool changePlay = true, bool cardWasMoved = true){
+    public void PlaceCard(GameObject card, bool cardWasMoved = true){
         //creates CardContainer object
         GameObject container = new GameObject("CardContainer");
         container.AddComponent<RectTransform>();
         container.transform.SetParent(transform, false);
-        //container.transform.localPosition = Vector3.zero;
-        container.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 60);
+        container.GetComponent<RectTransform>().sizeDelta = ContainerSize;
         HorizontalLayoutGroup hzl = container.AddComponent<HorizontalLayoutGroup>();
         hzl.childControlHeight = true;
         hzl.childControlWidth = true;
@@ -55,30 +51,23 @@ public class ArenaCardSlot : MonoBehaviour
         GameObject copy;
         if(cardWasMoved){
             copy = Instantiate(card);
-            copy.GetComponentInChildren<CardInfo>().LoadInfo(card.GetComponentInChildren<CardInfo>().BaseInfo);
+            copy.GetComponent<CardInfo>().LoadInfo(card.GetComponent<CardInfo>().BaseInfo);
         }else{
             copy = card;
         }
-        if (copy.transform.GetChild(1).transform.childCount != 0)
-            Destroy(copy.transform.GetChild(1).transform.GetChild(0).gameObject); // removes visual from copy object
+        if (copy.transform.childCount != 0)
+            Destroy(copy.transform.GetChild(0).gameObject); // removes visual from copy object
         copy.transform.SetParent(container.transform, false);
         
 
         //instantiate object and places it in the new CardContainer
-        GameObject cv = Instantiate(visualPrefab, copy.transform.GetChild(1).transform);
+        GameObject cv = Instantiate(visualPrefab, copy.transform);
         cv.transform.localScale = new Vector3(0.16f, 0.16f);
         container.transform.localPosition = Vector3.back;
         cv.GetComponent<CardDisplay>().LoadCard();
 
-        copy.GetComponentInChildren<CardState>().Location = Constants.Location.Field;
-        //enables colliders and size it to the visual size
-        copy.GetComponent<BoxCollider2D>().enabled = true;
-        copy.GetComponent<BoxCollider2D>().size = copy.transform.GetChild(1).GetComponentInChildren<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
-        copy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        if(changePlay){
-            copy.GetComponent<PlayScript>().SetcanDrag(true);
-            copy.GetComponent<PlayScript>().SetcanInspect(true);
-        }
-        
+        copy.GetComponent<CardState>().Location = Constants.Location.Field; 
     }
+        
 }
+

@@ -29,6 +29,7 @@ public static class Constants
         Hand = 2,
         Field = 4, 
         Grave = 8,
-        Removed = 16
+        Removed = 16,
+        Inspected = 32
     }
 }

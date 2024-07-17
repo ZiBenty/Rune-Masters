@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaneController : MonoBehaviour, IInspect
 {
     [Header("Inspect")]
-    private bool _canInspect;
+    private bool _canInspect = true;
 
     public void SetcanInspect(bool b){
         _canInspect = b;

@@ -11,21 +11,19 @@ public class CardInspectionBox : MonoBehaviour
     public void ShowInfo(GameObject card){
         HideInfo();
         GameObject copy = Instantiate(card);
-        copy.GetComponentInChildren<CardInfo>().LoadInfo(card.GetComponentInChildren<CardInfo>().BaseInfo);
-        Destroy(copy.transform.GetChild(1).transform.GetChild(0).gameObject); // removes visual from copy object
+        copy.GetComponent<CardInfo>().LoadInfo(card.GetComponent<CardInfo>().BaseInfo);
+        if (copy.transform.childCount != 0)
+            Destroy(copy.transform.GetChild(0).gameObject); // removes visual from copy object
         copy.transform.SetParent(transform, false);
 
         var visual = Instantiate(CardVisualFull);
-        visual.transform.SetParent(copy.transform.GetChild(1).transform, false);
+        visual.transform.SetParent(copy.transform, false);
         visual.TryGetComponent<CardDisplay>(out var display);
         display.LoadCard();
 
         //display.transform.localPosition = Vector2.zero;
         display.transform.localScale = new Vector3(7.4f, 7.4f, 7.4f);
-        //TODO: remove drag and inspect possibility
-        copy.GetComponent<PlayScript>().SetcanDrag(true);
-        copy.GetComponent<PlayScript>().SetcanInspect(true);
-        copy.GetComponent<BoxCollider2D>().enabled = false;
+        copy.GetComponent<CardState>().Location = Constants.Location.Inspected;
     }
 
     public void HideInfo(){

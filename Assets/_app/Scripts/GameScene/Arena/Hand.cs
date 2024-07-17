@@ -49,17 +49,13 @@ public class Hand : MonoBehaviour
             container.transform.SetParent(transform, false);
 
             //instantiate object and places it in the new CardContainer
-            GameObject cv = Instantiate(visualPrefab, card.transform.GetChild(1).transform);
+            GameObject cv = Instantiate(visualPrefab, card.transform);
             cv.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
             cv.GetComponent<CardDisplay>().LoadCard();
 
             card.transform.SetParent(container.transform, false);
-            card.GetComponent<PlayScript>().SetcanDrag(true);
-            card.GetComponent<PlayScript>().SetcanInspect(true);
-            //enables colliders and size it to the visual size
-            card.GetComponent<BoxCollider2D>().enabled = true;
-            card.GetComponent<BoxCollider2D>().size = card.transform.GetChild(1).GetComponentInChildren<RectTransform>().sizeDelta*card.transform.GetChild(1).transform.GetChild(0).GetComponent<RectTransform>().localScale;
             handVisual.Add(card);
+            card.GetComponent<CardState>().Location = Constants.Location.Hand;
         }else{
             for(int i = 0; i < transform.childCount; i++){
                 if(transform.GetChild(i).childCount == 0)

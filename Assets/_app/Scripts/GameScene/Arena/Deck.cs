@@ -45,11 +45,9 @@ public class Deck : MonoBehaviour
                 for(int i = 0; i < int.Parse(words[1]); i++){
                     Card c = CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0]));
                     GameObject card = Instantiate(_cardPrefab, transform);
-                    card.GetComponentInChildren<CardInfo>().LoadInfo(c);
-                    card.GetComponentInChildren<CardState>().SetPlayer(Owner);
-                    card.GetComponentInChildren<CardState>().Location = Constants.Location.Deck;
-                    card.GetComponent<PlayScript>().SetcanDrag(false);
-                    card.GetComponent<PlayScript>().SetcanInspect(false);
+                    card.GetComponent<CardInfo>().LoadInfo(c);
+                    card.GetComponent<CardState>().SetPlayer(Owner);
+                    card.GetComponent<CardState>().Location = Constants.Location.Deck;
                     DeckList.Add(card);
                 }
             }

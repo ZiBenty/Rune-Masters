@@ -149,15 +149,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10648677}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: -1.3124202}
+  m_LocalScale: {x: 0.48112524, y: 0.48112524, z: 0.48112524}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1833912832}
+  m_Father: {fileID: 2088668010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6100, y: -7073}
+  m_AnchoredPosition: {x: -1057.9326, y: -401.5044}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10648679
@@ -479,6 +479,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &72331726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,6 +1006,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &349046858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,6 +1388,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &511242127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,6 +1570,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &524703082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,6 +1752,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 1
   Owner: {fileID: 1629344810}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &527477697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2219,6 +2224,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 1629344810}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &634891532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,6 +2473,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 2088668009}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &726649684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,16 +2672,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754092876}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.3124202}
+  m_LocalScale: {x: 0.48112524, y: 0.48112524, z: 0.48112524}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1833912832}
+  m_Father: {fileID: 2088668010}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5737, y: -4643}
+  m_AnchoredPosition: {x: 365.8379, y: -109.22119}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754092878
@@ -3632,6 +3639,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 1
   Owner: {fileID: 2088668009}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &943139515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3774,15 +3782,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015907092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: -1.3124202}
+  m_LocalScale: {x: 0.36084393, y: 0.36084393, z: 0.36084393}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1833912832}
+  m_Father: {fileID: 1629344811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6100, y: 7042}
+  m_AnchoredPosition: {x: -1057.9326, y: 1296.2671}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015907095
@@ -3970,6 +3978,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1035699775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4151,6 +4160,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1059309898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4591,6 +4601,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1169457036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4906,6 +4917,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1184628383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5087,6 +5099,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 1629344810}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1236667030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5454,6 +5467,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 2088668009}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1280502329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5742,6 +5756,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1327986380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5923,6 +5938,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 1629344810}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1360081219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6229,6 +6245,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1496672906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6410,6 +6427,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 2088668009}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1499260399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6812,6 +6830,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1547845285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7066,16 +7085,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606800442}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.3124202}
+  m_LocalScale: {x: 0.48112524, y: 0.48112524, z: 0.48112524}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1833912832}
+  m_Father: {fileID: 1629344811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5747, y: 4646}
+  m_AnchoredPosition: {x: -1015.47363, y: 1008.07275}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606800444
@@ -7174,12 +7193,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629344809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 324.21655, y: -449.24557, z: 1.3124204}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2695.4858, y: -3734.9575, z: 10.911258}
+  m_LocalScale: {x: 8.313844, y: 8.313844, z: 8.313844}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
+  m_Children:
+  - {fileID: 1606800443}
+  - {fileID: 1015907093}
+  m_Father: {fileID: 1833912832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694294964
 GameObject:
@@ -7324,6 +7345,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1694294970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7881,6 +7903,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1742963810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8014,6 +8037,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 2088668009}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1781550497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8129,12 +8153,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 195162077}
-  - {fileID: 754092877}
-  - {fileID: 1606800443}
-  - {fileID: 1015907093}
-  - {fileID: 10648678}
   - {fileID: 831348869}
   - {fileID: 1250062490}
+  - {fileID: 2088668010}
+  - {fileID: 1629344811}
   m_Father: {fileID: 1566936516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8285,6 +8307,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1896000780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8515,6 +8538,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 0}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &1927287255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8674,12 +8698,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088668008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 324.21655, y: -449.24557, z: 1.3124204}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2695.4858, y: -3734.9575, z: 10.911258}
+  m_LocalScale: {x: 8.313844, y: 8.313844, z: 8.313844}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
+  m_Children:
+  - {fileID: 754092877}
+  - {fileID: 10648678}
+  m_Father: {fileID: 1833912832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089099718
 GameObject:
@@ -8824,6 +8850,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
   isCrystalSlot: 0
   Owner: {fileID: 1629344810}
+  ContainerSize: {x: 50, y: 60}
 --- !u!114 &2089099724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8871,8 +8898,6 @@ SceneRoots:
   - {fileID: 1319814724}
   - {fileID: 1566936516}
   - {fileID: 698863386}
-  - {fileID: 2088668010}
-  - {fileID: 1629344811}
   - {fileID: 2040711118}
   - {fileID: 1707674270}
   - {fileID: 1915690914}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Constants;
 
 //handles how the card responds to direct player input
 public class PlayScript : MonoBehaviour, IDrag, IInspect
@@ -21,6 +22,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     void Awake(){
         SetcanDrag(true);
         SetisDragging(false);
+        transform.GetComponent<CardState>().OnLocationChange += LocationChangeHandler;
     }
 
     void Start(){
@@ -151,5 +153,35 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand ||
         transform.GetComponentInChildren<CardState>().Location == Constants.Location.Field)
             Destroy(transform.parent.gameObject);
+    }
+
+    void LocationChangeHandler(Location loc){
+        switch (loc){
+            case Location.Deck:
+                SetcanDrag(false);
+                SetcanInspect(false);
+                break;
+            case Location.Hand:
+                SetcanDrag(true);
+                SetcanInspect(true);
+                transform.GetComponent<BoxCollider2D>().enabled = true;
+                transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*transform.GetChild(0).GetComponent<RectTransform>().localScale;
+                break;
+            case Location.Field:
+                if (transform.GetComponent<CardInfo>().TempInfo.Id !=0)
+                    SetcanDrag(true);
+                else
+                    SetcanDrag(false);
+                SetcanInspect(true);
+                transform.GetComponent<BoxCollider2D>().enabled = true;
+                transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
+                transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                break;
+            case Location.Inspected:
+                SetcanDrag(false);
+                SetcanInspect(false);
+                GetComponent<BoxCollider2D>().enabled = false;
+                break;
+        }
     }
 }

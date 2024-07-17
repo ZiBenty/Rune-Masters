@@ -145,8 +145,8 @@ public class CardDisplay : MonoBehaviour
 
 
     //saves new Card reference and invokes Change methods
-    public void LoadCard (){
-        Card c = transform.parent.parent.GetComponentInChildren<CardInfo>().TempInfo;
+    public void LoadCard(){
+        Card c = transform.parent.GetComponent<CardInfo>().TempInfo;
 
         ChangeName(c.Name);
         ChangeRune(RuneImage, c.CardRune);
