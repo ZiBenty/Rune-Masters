@@ -29,10 +29,10 @@ public class Deck : MonoBehaviour
 
     void Update()
     {
-        if (DeckList.Count == 0)
+        /*if (DeckList.Count == 0)
         {
             _visual.enabled = false;
-        }
+        }*/
     }
 
     public void LoadDecklist(string name){

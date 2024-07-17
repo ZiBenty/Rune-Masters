@@ -28,7 +28,7 @@ public static class Constants
         Deck = 1,
         Hand = 2,
         Field = 4, 
-        Grave = 8,
+        Discard = 8,
         Removed = 16,
         Inspected = 32
     }

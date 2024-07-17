@@ -119,11 +119,4 @@ public class TurnSystem : MonoBehaviour
         }
         isDrawPhase = true;
     }
-
-    public void onDraw(){
-        if(isPlayerTurn)
-            StartCoroutine(_gm.Draw(_gm.player, 1));
-        else
-            StartCoroutine(_gm.Draw(_gm.enemy, 1));
-    }
 }
