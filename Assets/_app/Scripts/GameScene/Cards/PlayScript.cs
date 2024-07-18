@@ -134,7 +134,10 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     public void onStartInspect()
     {
         isInspected = true;
-        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+        if(TargetHandler.Instance.TargetMode){
+            TargetHandler.Instance.AddTarget(transform.gameObject);
+        }
+        if (transform.GetComponentInChildren<CardState>().Location == Location.Hand)
             Highlight(new Vector3(0, 100, 0));
         GameObject box = GameObject.Find("CardInspectionBox");
         box?.GetComponent<CardInspectionBox>().ShowInfo(transform.gameObject);
@@ -143,7 +146,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     public void onStopInspect()
     {
         isInspected = false;
-        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand)
+        if (transform.GetComponentInChildren<CardState>().Location == Location.Hand)
             Highlight(new Vector3(0, 0, 0));
         GameObject box = GameObject.Find("CardInspectionBox");
         box?.GetComponent<CardInspectionBox>().HideInfo();
@@ -176,6 +179,11 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 transform.GetComponent<BoxCollider2D>().enabled = true;
                 transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
                 transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                break;
+            case Location.Discard:
+                SetcanDrag(false);
+                SetcanInspect(false);
+                transform.GetComponent<BoxCollider2D>().enabled = false;
                 break;
             case Location.Inspected:
                 SetcanDrag(false);

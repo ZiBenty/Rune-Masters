@@ -14,6 +14,7 @@ public class DiscardZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _visual = GetComponent<Image>();
         if(transform.name == "PlayerDiscardZone")
             Owner = GameManager.Instance.player;
         else
@@ -45,8 +46,11 @@ public class DiscardZone : MonoBehaviour
         copy.transform.SetAsFirstSibling();
         
         GameObject cv = Instantiate(visualPrefab, copy.transform);
-        cv.transform.localScale = new Vector3(0.16f, 0.16f);
+        cv.transform.localScale = new Vector3(0.20f, 0.20f);
         cv.GetComponent<CardDisplay>().LoadCard();
+        copy.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
+        copy.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+        copy.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
 
         copy.GetComponent<CardState>().Location = Constants.Location.Discard; 
     }
