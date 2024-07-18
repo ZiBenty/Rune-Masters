@@ -11,6 +11,7 @@ public class Deck : MonoBehaviour
     private GameObject _cardPrefab;
     private Image _visual;
     public List<GameObject> DeckList;
+    private int _oldDeckCount;
     public Player Owner;
 
     // Start is called before the first frame update
@@ -29,10 +30,21 @@ public class Deck : MonoBehaviour
 
     void Update()
     {
-        /*if (DeckList.Count == 0)
-        {
+        if (DeckList.Count == 0)
             _visual.enabled = false;
-        }*/
+        if (_oldDeckCount == 0 && DeckList.Count > 0)
+            _visual.enabled = true;
+        if (_oldDeckCount != DeckList.Count)
+            _oldDeckCount = DeckList.Count;
+    }
+
+    public void AddCard(GameObject card){
+        GameObject copy = Instantiate(card, transform);
+        copy.GetComponent<CardInfo>().LoadInfo(card.GetComponent<CardInfo>().BaseInfo);
+        if (copy.transform.childCount != 0)
+            Destroy(copy.transform.GetChild(0).gameObject); // removes visual from copy object
+        copy.GetComponent<CardState>().Location = Constants.Location.Deck;
+        DeckList.Add(copy);
     }
 
     public void LoadDecklist(string name){
@@ -52,6 +64,7 @@ public class Deck : MonoBehaviour
                 }
             }
         }while(line !=null);
+        _oldDeckCount = DeckList.Count;
     }
 
     public void Shuffle(){

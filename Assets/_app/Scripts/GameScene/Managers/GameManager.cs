@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     
     public IEnumerator MoveLocation(GameObject card, Location destination){
         Player p = card.GetComponent<CardState>().Controller;
+        Deck deck;
+        Hand hand;
         switch(destination){
             case Location.Discard:
                 DiscardZone discardZone = p.discardScript;
@@ -53,15 +55,21 @@ public class GameManager : MonoBehaviour
                     discardZone.AddCard(card);
                     Destroy(parent);
                 }else if(card.GetComponent<CardState>().Location == Location.Hand){
-                    Hand hand = p.handScript;
+                    GameObject parent = card.transform.parent.gameObject;
                     discardZone.AddCard(card);
+                    Destroy(parent);
                 }else if(card.GetComponent<CardState>().Location == Location.Deck){
-                    Deck deck = p.deckScript;
+                    deck = p.deckScript;
                     int deckIndex = deck.DeckList.IndexOf(card);
                     discardZone.AddCard(card);
                     deck.DeckList.RemoveAt(deckIndex);
                 }
-                
+                break;
+            case Location.Deck:
+                deck = p.deckScript;
+                if(card.GetComponent<CardState>().Location == Location.Discard){
+                    deck.AddCard(card);
+                }
                 break;
         }
         yield return null;
