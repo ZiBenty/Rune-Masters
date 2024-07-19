@@ -12,7 +12,6 @@ public class Hand : MonoBehaviour
     public GameObject visualPrefab;
     private HorizontalLayoutGroup _horizLayoutGroup;
     //public List<Card> hand;
-    public List<GameObject> handVisual;
     private int _lastHandSize = 0;
     [SerializeField]
     private float DefaultSpacing = 129, OffsetSpacing = 20;
@@ -23,14 +22,13 @@ public class Hand : MonoBehaviour
     {
         _horizLayoutGroup = transform.GetComponent<HorizontalLayoutGroup>();
         //hand = new List<Card>();
-        handVisual = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //_lastHandSize = hand.Count;
-        if (_lastHandSize != handVisual.Count){
+        if (_lastHandSize != transform.childCount){
             ArrangeHand();
         }
     }
@@ -54,7 +52,6 @@ public class Hand : MonoBehaviour
             cv.GetComponent<CardDisplay>().LoadCard();
 
             card.transform.SetParent(container.transform, false);
-            handVisual.Add(card);
             card.GetComponent<CardState>().Location = Constants.Location.Hand;
         }else{
             for(int i = 0; i < transform.childCount; i++){
@@ -63,20 +60,20 @@ public class Hand : MonoBehaviour
                     break;
             }
         }
-        if (handVisual.Count > 7 && handVisual.Count > _lastHandSize){
-            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing - OffsetSpacing*(handVisual.Count-_lastHandSize);
-        }else if (handVisual.Count > 7 && handVisual.Count < 15){
-            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing + OffsetSpacing*(_lastHandSize-handVisual.Count);
+        if (transform.childCount > 7 && transform.childCount > _lastHandSize){
+            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing - OffsetSpacing*(transform.childCount-_lastHandSize);
+        }else if (transform.childCount > 7 && transform.childCount < 15){
+            _horizLayoutGroup.spacing = _horizLayoutGroup.spacing + OffsetSpacing*(_lastHandSize-transform.childCount);
         }
         else{
             _horizLayoutGroup.spacing = DefaultSpacing;
         }
-        _lastHandSize = handVisual.Count;
+        _lastHandSize = transform.childCount;
     }
 
     public void setDraggable(bool draggable){
-        for(int i = 0; i < handVisual.Count; i++){
-                handVisual[i].GetComponent<PlayScript>().SetcanDrag(draggable);
+        for(int i = 0; i < transform.childCount; i++){
+                transform.GetChild(i).GetChild(0).GetComponent<PlayScript>().SetcanDrag(draggable);
             }
     }
 }

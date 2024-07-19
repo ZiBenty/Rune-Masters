@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static Constants;
 
 public class ArenaCardSlot : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class ArenaCardSlot : MonoBehaviour
     public bool isCrystalSlot = false;
     public Player Owner;
     public Vector2 ContainerSize = new Vector2(50, 60);
+
+    private bool _cardIsPresent = false;
+    private Rune _lastCardRune;
 
 
     // Start is called before the first frame update
@@ -38,6 +42,13 @@ public class ArenaCardSlot : MonoBehaviour
         _outline.enabled = false;
     }
 
+    void Update(){
+        //when card is removed from slot
+        if(_cardIsPresent && transform.childCount == 0){
+            transform.parent.GetChild(1).GetComponent<TempRunes>().RemoveTempRune(_lastCardRune);
+        }
+    }
+
     public void PlaceCard(GameObject card, bool cardWasMoved = true){
         //creates CardContainer object
         GameObject container = new GameObject("CardContainer");
@@ -59,16 +70,17 @@ public class ArenaCardSlot : MonoBehaviour
             Destroy(copy.transform.GetChild(0).gameObject); // removes visual from copy object
         copy.transform.SetParent(container.transform, false);
         
-
         //instantiate object and places it in the new CardContainer
         GameObject cv = Instantiate(visualPrefab, copy.transform);
         cv.transform.localScale = new Vector3(0.16f, 0.16f);
         container.transform.localPosition = Vector3.back;
         cv.GetComponent<CardDisplay>().LoadCard();
 
-        copy.GetComponent<CardState>().Location = Constants.Location.Field;
+        copy.GetComponent<CardState>().Location = Location.Field;
+        _cardIsPresent = true;
+        _lastCardRune = copy.GetComponent<CardInfo>().TempInfo.CardRune;
         //creates a tempRune in this slot
-        transform.parent.GetChild(1).GetComponent<TempRunes>().CreateTempRune(copy.GetComponent<CardInfo>().TempInfo.CardRune);
+        transform.parent.GetChild(1).GetComponent<TempRunes>().CreateTempRune(copy.GetComponent<CardInfo>().TempInfo.CardRune, copy.GetComponent<CardState>().Controller);
     }
         
 }

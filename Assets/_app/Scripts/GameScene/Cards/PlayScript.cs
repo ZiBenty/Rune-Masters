@@ -100,6 +100,8 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         //azione differente a seconda di dove finisce
         if(isCardSlot){
             if (cardSlot != null){
+                //start casting procedure
+                
                 cardSlot?.PlaceCard(transform.gameObject);
                 Destroy(gameObject);
             }

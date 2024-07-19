@@ -21,6 +21,8 @@ public class TempRunes : MonoBehaviour
 
     public List<GameObject> TempRunesVisualList;
 
+    public Player Owner = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,16 +64,19 @@ public class TempRunes : MonoBehaviour
         if(transform.parent.GetChild(0).childCount != 0){ //check if CardSlot has a card in it
             GameObject card = transform.parent.GetChild(0).GetChild(0).GetChild(0).gameObject; //Slot.CardSlot.CardContainer.Card
             Rune cardRune = card.GetComponent<CardInfo>().TempInfo.CardRune;
+            Player p = card.GetComponent<CardState>().Controller;
             if(!TempRunesList.Contains(cardRune)){
                 TempRunesList.Add(cardRune);
+                Owner = p;
                 createTempRuneVisual(cardRune);
             }
         }
     }
 
-    public void CreateTempRune(Rune rune){
+    public void CreateTempRune(Rune rune, Player p){
         if(!TempRunesList.Contains(rune)){
             TempRunesList.Add(rune);
+            Owner = p;
             createTempRuneVisual(rune);
         }
     }
@@ -82,6 +87,7 @@ public class TempRunes : MonoBehaviour
             TempRunesList.RemoveAt(index);
             Destroy(TempRunesVisualList[index]);
             TempRunesVisualList.RemoveAt(index);
+            Owner = null;
         }
     }
 

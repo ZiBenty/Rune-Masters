@@ -58,7 +58,7 @@ public class TurnSystem : MonoBehaviour
             StartCoroutine(_gm.Draw(_gm.enemy, 5)); 
             _initialSetup = false;
         }
-        if(startGame && _gm.enemy.handScript.handVisual.Count == 5){
+        if(startGame && _gm.enemy.handScript.transform.childCount == 5){
             _gm.enemy.handScript.setDraggable(false);
             startGame = false;
             isDrawPhase = true;
