@@ -66,7 +66,9 @@ public class ArenaCardSlot : MonoBehaviour
         container.transform.localPosition = Vector3.back;
         cv.GetComponent<CardDisplay>().LoadCard();
 
-        copy.GetComponent<CardState>().Location = Constants.Location.Field; 
+        copy.GetComponent<CardState>().Location = Constants.Location.Field;
+        //creates a tempRune in this slot
+        transform.parent.GetChild(1).GetComponent<TempRunes>().CreateTempRune(copy.GetComponent<CardInfo>().TempInfo.CardRune);
     }
         
 }

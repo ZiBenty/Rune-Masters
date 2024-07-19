@@ -23,6 +23,10 @@ public class TurnSystem : MonoBehaviour
     public bool isCombatPhase = false;
     public bool isEndPhase = false;
 
+    //delegates methods for handling moving phases events
+    public delegate void OnStartMainPhaseDelegate();
+    public event OnStartMainPhaseDelegate OnStartMainPhase;
+
     void Awake(){
         if (Instance == null){
             Instance = this;
@@ -88,6 +92,7 @@ public class TurnSystem : MonoBehaviour
         if(isDrawPhase){
             isDrawPhase = false;
             isMovePhase = true;
+            OnStartMainPhase();
         }
         else if(isMovePhase){
             isMovePhase = false;
