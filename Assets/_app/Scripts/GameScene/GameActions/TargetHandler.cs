@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Constants;
 
 public class TargetHandler : MonoBehaviour
@@ -9,9 +10,13 @@ public class TargetHandler : MonoBehaviour
     public List<GameObject> Targets;
     public bool TargetMode = false;
     private int NumOfTargets;
+    public bool ConfirmMode = false;
 
     public delegate bool OnAddTargetDelegate(GameObject target);
     public event OnAddTargetDelegate OnAddTarget;
+
+    [SerializeField]
+    private GameObject ConfirmYes, ConfirmNo;
     
 
     void Awake()
@@ -28,14 +33,24 @@ public class TargetHandler : MonoBehaviour
         Targets = new List<GameObject>();
     }
 
-    public void StartTargetMode(int num){
+    public void StartTargetMode(int num, bool confirm){
         TargetMode = true;
         NumOfTargets = num;
         Targets = new List<GameObject>();
+        if(confirm){
+            ConfirmMode = confirm;
+            ConfirmYes.SetActive(true);
+            ConfirmNo.SetActive(true);
+        }
     }
 
     public void EndTargetMode(){
         TargetMode = false;
+        if(ConfirmMode){
+            ConfirmMode = false;
+            ConfirmYes.SetActive(false);
+            ConfirmNo.SetActive(false);
+        }
     }
 
     public void AddTarget(GameObject target){
@@ -44,10 +59,21 @@ public class TargetHandler : MonoBehaviour
         }
     }
 
+    public void OnConfirmYes(){
+        EndTargetMode();
+    }
+
+    public void OnConfirmNo(){
+        Targets.Clear();
+        EndTargetMode();
+    }
+
     void Update(){
-        if (TargetMode && Targets.Count == NumOfTargets){
-            EndTargetMode();
+        if (!ConfirmMode){
+            if (TargetMode && Targets.Count == NumOfTargets)
+                EndTargetMode();
         }
     }
 
 }
+

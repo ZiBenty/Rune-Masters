@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public static class Constants
 {
+    public static Color PlayerColor = new Color(17f, 195f, 0f, 255f);
+    public static Color EnemyColor = new Color(195f, 33f, 0f, 255f);
+
     public enum Rune 
     {
         None = 0,

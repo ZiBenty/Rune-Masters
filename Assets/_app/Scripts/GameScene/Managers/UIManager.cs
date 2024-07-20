@@ -22,4 +22,10 @@ public class UIManager : MonoBehaviour
         HintBox.GetComponent<Image>().enabled = enabled;
         HintBox.transform.GetComponentInChildren<TMP_Text>().text = text;
     }
+
+    public IEnumerator HintForSeconds(string text = "", float seconds = 0){
+        ChangeHintBox(true, text);
+        yield return new WaitForSeconds(seconds);
+        ChangeHintBox(false, text);
+    }
 }

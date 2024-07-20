@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Constants;
 
-public class ArenaCardSlot : MonoBehaviour
+public class ArenaCardSlot : MonoBehaviour, IInspect
 {
-    private Outline _outline;
+    public Outline _outline;
     public GameObject cardPrefab;
     public GameObject visualPrefab;
     public bool isCrystalSlot = false;
@@ -16,6 +16,9 @@ public class ArenaCardSlot : MonoBehaviour
 
     private bool _cardIsPresent = false;
     private Rune _lastCardRune;
+
+    private bool _canInspect = true;
+    public bool isInspected = false;
 
 
     // Start is called before the first frame update
@@ -82,6 +85,28 @@ public class ArenaCardSlot : MonoBehaviour
         //creates a tempRune in this slot
         transform.parent.GetChild(1).GetComponent<TempRunes>().CreateTempRune(copy.GetComponent<CardInfo>().TempInfo.CardRune, copy.GetComponent<CardState>().Controller);
     }
-        
+
+    public void SetcanInspect(bool b)
+    {
+        _canInspect = b;
+    }
+
+    public bool GetcanInspect()
+    {
+        return _canInspect;
+    }
+
+    public void onStartInspect()
+    {
+        isInspected = true;
+        if(TargetHandler.Instance.TargetMode){
+            TargetHandler.Instance.AddTarget(transform.gameObject);
+        }
+    }
+
+    public void onStopInspect()
+    {
+        isInspected = false;
+    }
 }
 

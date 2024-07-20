@@ -19,6 +19,8 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
 
     private TurnSystem _ts;
 
+    private ArenaCardSlot CardSlot = null;
+
     void Awake(){
         SetcanDrag(true);
         SetisDragging(false);
@@ -84,6 +86,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         Debug.Log("Releasing");
 
         bool isCardSlot = false;
+
         ArenaCardSlot cardSlot = null;
 
         //controllo luogo dove finisce
@@ -100,11 +103,9 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         //azione differente a seconda di dove finisce
         if(isCardSlot){ //finsice sul terreno
             if (cardSlot != null){
-                //start casting procedure
                 if(transform.GetComponent<CastComponent>().CanBeCasted()){
                     if(transform.GetComponent<CastComponent>().CastCard()){
-                        cardSlot?.PlaceCard(transform.gameObject);
-                        Destroy(gameObject);
+                        CardSlot = cardSlot; //saves cardSlot position to be saved later
                     }else{
                         ResetPosition();
                     }
@@ -121,12 +122,19 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         
     }
 
+    public void PlaceInSlot(){
+        if(CardSlot != null){
+            CardSlot?.PlaceCard(transform.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
     private void ResetPosition(){
         transform.localPosition = _defaultLocalPosition;
         transform.localScale = _defaultLocalScale;
         //change collider size
         BoxCollider2D col = GetComponent<BoxCollider2D>();
-        col.size = new Vector2(col.size.x*10, col.size.y*10);
+        col.size = new Vector2(col.size.x*10, col.size.y*10); //dragging reduces objects boxcolliders to prevent multiple collisions
     }
 
     public void Highlight(Vector3 target)

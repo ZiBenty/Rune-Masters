@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
    public void Target(Player player, int numTargets){
-        _th.StartTargetMode(numTargets);
+        _th.StartTargetMode(numTargets, false);
    }
 
     //functions made for testing (DELETE LATER)
