@@ -6,12 +6,23 @@ using static Constants;
 //Handles logic for casting card from your hand and determining costs
 public class CastComponent : MonoBehaviour
 {
-    public void canBeCasted(){
-        
-        
+    public List<Vector2> ValidCastingPatterns;
+
+    public bool CanBeCastedValue = false;
+
+    //returns true if tempRune on slot can be used for the rune in casting cost, false otherwise
+    private bool checkRune(List<Rune> runesOnSlot, Rune castingRune){
+        if (runesOnSlot.Count == 0)
+            return false;
+        foreach(Rune rune in runesOnSlot){
+            Rune check = castingRune & rune; //bitwise operation to check if rune is present
+            if (check == Rune.None) //does not match
+                return false;
+        }
+        return true;
     }
 
-    public List<List<Rune>> getCostMatrix(){
+    public List<List<Rune>> GetCostMatrix(){
         List<Rune> cost = transform.GetComponent<CardInfo>().TempInfo.DecodeCost();
         List<List<Rune>> cst = new List<List<Rune>>
         {
@@ -28,138 +39,86 @@ public class CastComponent : MonoBehaviour
         return cst;
     }
 
-    //Algorithms that finds patterns in matrixes
-    //Used for findings patterns of runes on the arena
-    //Needs to be checked afterwards
+    public bool CanBeCasted(){
+        ValidCastingPatterns = new List<Vector2>(); //resets the casting patterns
+        List<List<Rune>> cst = GetCostMatrix();
+        List<ArenaLine> arena = GameObject.Find("Arena").GetComponent<Arena>().Lines;
+        //checks by boxes of 3x2 and saves top-left position in ValidCastingPatterns
+        //Controller: Player
+        if (transform.GetComponent<CardState>().Controller.transform.gameObject == GameObject.Find("Player")){
+            for (int lineIndex = 0; lineIndex < arena.Count-1; lineIndex++){
+                for (int columnIndex = 0; columnIndex < 3; columnIndex++){
 
-    static long mod = 257; // The modular value
-    static long r = 256; // radix
-    static long dr = 1; // Highest power for row hashing
-    static long dc = 1; // Highest power for col hashing
- 
-    // func that return a power n under mod m in LogN
-    static long power(int a, int n, long m)
-    {
-        if (n == 0) {
-            return 1;
-        }
-        if (n == 1) {
-            return a % m;
-        }
-        long pow = power(a, n / 2, m);
-        if ((n & 1) != 0) {
-            return ((a % m) * (pow % m) * (pow % m)) % m;
-        }
-        else {
-            return ((pow % m) * (pow % m)) % m;
-        }
-    }
- 
-    // Checks if all values of pattern matches with the text
-    static bool check(List<List<Rune> > arn,
-                      List<List<Rune> > cst, long r, long c)
-    {
-        for (long i = 0; i < cst.Count; i++) {
-            for (long j = 0; j < cst[0].Count; j++) {
-                if (cst[(int)i][(int)j]
-                    != arn[(int)i + (int)r]
-                          [(int)j + (int)c])
-                    return false;
-            }
-        }
-        return true;
-    }
- 
-    // Finds the first hash of first n rows where n is no.
-    // of rows in pattern
-    static List<long> findHash(List<List<Rune> > mat,
-                               long row)
-    {
-        List<long> hash = new List<long>();
-        long col = mat[0].Count;
-        for (long i = 0; i < col; i++) {
-            long h = 0;
-            for (long j = 0; j < row; j++) {
-                h = ((h * r) % mod
-                     + (int) mat[(int)j][(int)i] % mod)
-                    % mod;
-            }
-            hash.Add(h);
-        }
-        return hash;
-    }
- 
-    // rolling hash function for columns
-    static void colRollingHash(List<List<Rune>> arn,
-                               List<long> t_hash, long row,
-                               long p_row)
-    {
-        for (long i = 0; i < t_hash.Count; i++) {
-            t_hash[(int)i]
-                = (t_hash[(int)i] % mod
-                   - (((int) arn[(int)row][(int)i] % mod)
-                      * (dr % mod))
-                         % mod)
-                  % mod;
-            t_hash[(int)i]
-                = ((t_hash[(int)i] % mod) * (r % mod))
-                  % mod;
-            t_hash[(int)i]
-                = (t_hash[(int)i] % mod
-                   + (int) arn[(int)row + (int)p_row][(int)i]
-                         % mod)
-                  % mod;
-        }
-    }
-
-    //returns list of coordinates. Cooordinates represent the top
-    private static List<Vector2> RabinKarp(List<List<Rune>> arn, List<List<Rune>> cst)
-    {
-        List<Vector2> results = new List<Vector2>();
-        long t_row = arn.Count;
-        long t_col = arn[0].Count;
-        long p_row = cst.Count;
-        long p_col = cst[0].Count;
-        dr = power((int)r, (int)p_row - 1, mod);
-        dc = power((int)r, (int)p_col - 1, mod);
- 
-        List<long> t_hash = findHash(
-            arn, p_row); // Column hash of p_row rows
-        List<long> p_hash = findHash(
-            cst, p_row); // Column hash of p_row rows
-        long p_val = 0; // Hash of entire pattern matrix
-        for (long i = 0; i < p_col; i++) {
-            p_val = (p_val * r + p_hash[(int)i]) % mod;
-        }
-        for (long i = 0; i <= (t_row - p_row); i++) {
-            long t_val = 0;
-            for (long j = 0; j < p_col; j++) {
-                t_val
-                    = ((t_val * r) + t_hash[(int)j]) % mod;
-            }
-            for (long j = 0; j <= (t_col - p_col); j++) {
-                if (p_val == t_val) {
-                    if (check(arn, cst, i, j)) {
-                        results.Add(new Vector2(i, j));
+                    int checkCost = 0; //if it reaches 6, then we found a casting pattern
+                    for (int costLineIndex = 0; costLineIndex < 2; costLineIndex++){
+                        int flip;
+                        if (costLineIndex == 0)//We need to check lineIndex+1, then lineIndex
+                            flip = 1;
+                        else
+                            flip = 0;
+                        for (int costColumnIndex = 0; costColumnIndex < 3; costColumnIndex++){
+                            if (cst[costLineIndex][costColumnIndex] == Rune.None){
+                                checkCost++;
+                                continue; //dont need to check
+                            }
+                            else{
+                                //check if TempRune are Owned by the same player as the card Controller
+                                if(arena[lineIndex+flip].transform.GetChild(columnIndex+costColumnIndex).GetChild(1).GetComponent<TempRunes>().Owner == transform.GetComponent<CardState>().Controller)
+                                    if(checkRune(arena[lineIndex+flip].transform.GetChild(columnIndex+costColumnIndex).GetChild(1).GetComponent<TempRunes>().TempRunesList, cst[costLineIndex][costColumnIndex]))
+                                        checkCost++;
+                            }
+                        }
                     }
+
+                    //if casting pattern was found, save topLeft corner
+                    if (checkCost == 6){
+                        Slot topLeft = arena[lineIndex+1].transform.GetChild(columnIndex).GetComponent<Slot>();
+                        ValidCastingPatterns.Add(topLeft.Coordinates);
+                        CanBeCastedValue = true; //we found a patter, so card can be casted
+                    }
+
                 }
-                // Calculating t_val for next set of columns
-                t_val = (t_val % mod
-                         - ((t_hash[(int)j] % mod)
-                            * (dc % mod))
-                               % mod
-                         + mod)
-                        % mod;
-                t_val = (t_val % mod * r % mod) % mod;
-                t_val = (t_val % mod + t_hash[(int)j] % mod)
-                        % mod;
             }
-            if (i < t_row - p_row) {
-                // Call this function for hashing from next
-                // row
-                colRollingHash(arn, t_hash, i, p_row);
+        } else{ //Controller: Enemy
+            for (int lineIndex = 4; lineIndex > 0; lineIndex--){
+                for (int columnIndex = 4; columnIndex > 1; columnIndex--){
+
+                    int checkCost = 0; //if it reaches 6, then we found a casting pattern
+                    for (int costLineIndex = 0; costLineIndex < 2; costLineIndex++){
+                        int flip;
+                        if (costLineIndex == 0)//We need to check lineIndex+1, then lineIndex
+                            flip = -1;
+                        else
+                            flip = 0;
+                        for (int costColumnIndex = 0; costColumnIndex < 3; costColumnIndex++){
+                            if (cst[costLineIndex][costColumnIndex] == Rune.None){
+                                checkCost++;
+                                continue; //dont need to check
+                            }
+                            else{
+                                //check if TempRune are Owned by the same player as the card Controller
+                                if(arena[lineIndex+flip].transform.GetChild(columnIndex-costColumnIndex).GetChild(1).GetComponent<TempRunes>().Owner == transform.GetComponent<CardState>().Controller)
+                                    if(checkRune(arena[lineIndex+flip].transform.GetChild(columnIndex-costColumnIndex).GetChild(1).GetComponent<TempRunes>().TempRunesList, cst[costLineIndex][costColumnIndex]))
+                                        checkCost++;
+                            }
+                        }
+                    }
+
+                    //if casting pattern was found, save topLeft corner
+                    if (checkCost == 6){
+                        Slot topLeft = arena[lineIndex-1].transform.GetChild(columnIndex).GetComponent<Slot>();
+                        ValidCastingPatterns.Add(topLeft.Coordinates);
+                        CanBeCastedValue = true; //we found a patter, so card can be casted
+                    }
+
+                }
             }
         }
-        return results;
+        return CanBeCastedValue;
+    }
+
+    //returns true if everything went smoothly, otherwise returns false
+    public bool CastCard(){
+        return false;
     }
 }

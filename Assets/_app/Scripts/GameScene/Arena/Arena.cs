@@ -23,17 +23,4 @@ public class Arena : MonoBehaviour
         };
     }
     
-    //TODO: complete correctly
-    public List<List<Rune>> getArenaMatrix(){
-        List<GameObject> l = new List<GameObject>();
-        foreach(ArenaLine line in Lines){
-            for(int i=0; i<line.transform.childCount; i++){
-                TempRunes tr = line.transform.GetChild(i).GetChild(1).GetComponent<TempRunes>();
-                if(tr.Owner != null && tr.Owner == transform.GetComponent<CardState>().Controller){
-                    l.Add(line.transform.GetChild(i).GetChild(1).gameObject);
-                }
-            }
-        }
-        return l;
-    }
 }

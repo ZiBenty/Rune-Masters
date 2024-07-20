@@ -98,23 +98,35 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
             }
         }
         //azione differente a seconda di dove finisce
-        if(isCardSlot){
+        if(isCardSlot){ //finsice sul terreno
             if (cardSlot != null){
                 //start casting procedure
-                
-                cardSlot?.PlaceCard(transform.gameObject);
-                Destroy(gameObject);
+                if(transform.GetComponent<CastComponent>().CanBeCasted()){
+                    if(transform.GetComponent<CastComponent>().CastCard()){
+                        cardSlot?.PlaceCard(transform.gameObject);
+                        Destroy(gameObject);
+                    }else{
+                        ResetPosition();
+                    }
+                        
+                }else{
+                    ResetPosition();
+                }
             }
         }
         else
         {
-            transform.localPosition = _defaultLocalPosition;
-            transform.localScale = _defaultLocalScale;
-            //change collider size
-            BoxCollider2D col = GetComponent<BoxCollider2D>();
-            col.size = new Vector2(col.size.x*10, col.size.y*10);
+            ResetPosition();
         }
         
+    }
+
+    private void ResetPosition(){
+        transform.localPosition = _defaultLocalPosition;
+        transform.localScale = _defaultLocalScale;
+        //change collider size
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        col.size = new Vector2(col.size.x*10, col.size.y*10);
     }
 
     public void Highlight(Vector3 target)
