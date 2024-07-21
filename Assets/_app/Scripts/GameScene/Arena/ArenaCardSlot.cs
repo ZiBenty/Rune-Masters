@@ -36,13 +36,15 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.transform.name.Contains("Card")){
-            if (other.transform.GetComponent<PlayScript>().GetisDragging())
+            if (other.transform.GetComponent<PlayScript>().GetisDragging() && !other.transform.GetComponent<PlayScript>().isMoving)
                 OutlineComp.enabled = true;
         } 
     }
 
     void OnTriggerExit2D(Collider2D other){
-        OutlineComp.enabled = false;
+        if (other.transform.name.Contains("Card"))
+            if (!other.transform.GetComponent<PlayScript>().isMoving)
+                OutlineComp.enabled = false;
     }
 
     void Update(){

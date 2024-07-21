@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static Constants; 
 
 public class Deck : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class Deck : MonoBehaviour
                     Card c = CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0]));
                     GameObject card = Instantiate(_cardPrefab, transform);
                     card.GetComponent<CardInfo>().LoadInfo(c);
+                    if (card.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature)
+                        card.AddComponent<MoveComponent>();
                     card.GetComponent<CardState>().SetPlayer(Owner);
                     card.GetComponent<CardState>().Location = Constants.Location.Deck;
                     DeckList.Add(card);

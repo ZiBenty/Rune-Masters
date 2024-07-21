@@ -18,8 +18,8 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     private float _lastMovement = 0;
 
     private TurnSystem _ts;
-
     private ArenaCardSlot CardSlot = null;
+    public bool isMoving = false;
 
     void Awake(){
         SetcanDrag(true);
@@ -70,6 +70,16 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         col.size = new Vector2(col.size.x/15, col.size.y/15);
 
         Debug.Log("Grabbing");
+        
+        if (transform.GetComponent<CardState>().Location == Location.Field){ //if it was dragged from field
+            if(transform.GetComponent<MoveComponent>().CanItBeMoved()){
+                transform.GetComponent<MoveComponent>().ColorAvailableSlots(true);
+                isMoving = true;
+                UIManager.Instance.ChangeHintBox(true, "You can move the creature in the outlined slots");
+            }else{
+                StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only move once per turn", 3f));
+            }
+        }
     }
 
     public void onDragging()
@@ -129,37 +139,46 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                         case CardType.Enchantment:
                             break;
                     }
+                    if(transform.GetComponent<CastComponent>().CanItBeCasted()){
+                        if(transform.GetComponent<CastComponent>().CastCard())
+                            CardSlot = cardSlot; //saves cardSlot position to be saved later
+                        else
+                            ResetPosition();
+                    }else{
+                        ResetPosition();
+                    }
+                }
+                else if (transform.GetComponent<CardState>().Location == Location.Field){ //if it was dragged from field
+                    cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
+                    if (transform.GetComponent<MoveComponent>().AvailableSlots.Contains(cardSlot.transform.parent.GetComponent<Slot>())){
+                        CardSlot = cardSlot;
+                        transform.GetComponent<MoveComponent>().SetCanBeMoved(false);
+                        transform.GetComponent<MoveComponent>().ColorAvailableSlots(false);
+                        UIManager.Instance.ChangeHintBox(false);
+                        PlaceInSlot();
+                    } else{
+                        transform.GetComponent<MoveComponent>().ColorAvailableSlots(false);
+                        UIManager.Instance.ChangeHintBox(false);
+                        ResetPosition();
+                    }
+                    isMoving = false;
                 }
             }
         }
-        //azione differente a seconda di dove finisce
-        if (cardSlot != null){ //finsice sul terreno
-            if(transform.GetComponent<CastComponent>().CanBeCasted()){
-                if(transform.GetComponent<CastComponent>().CastCard()){
-                    CardSlot = cardSlot; //saves cardSlot position to be saved later
-                }else{
-                    ResetPosition();
-                }
-                    
-            }else{
-                ResetPosition();
-            }
-        }
-        else
-        {
+
+        if (cardSlot == null){ //if nothing happened, reset card position
             ResetPosition();
         }
         
     }
 
     public void PlaceInSlot(){
-        if(CardSlot != null){
-            if(transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Enchantment){
+        if(transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Enchantment){
                 StartCoroutine(GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard));
-            }else{
+        }
+        else if(CardSlot != null){
                 CardSlot?.PlaceCard(transform.gameObject);
                 Destroy(gameObject);
-            }
         }
     }
 
@@ -227,7 +246,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*transform.GetChild(0).GetComponent<RectTransform>().localScale;
                 break;
             case Location.Field:
-                if (transform.GetComponent<CardInfo>().TempInfo.Id !=0)
+                if (transform.GetComponent<CardInfo>().TempInfo.Id !=0 && transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature)
                     SetcanDrag(true);
                 else
                     SetcanDrag(false);

@@ -9,7 +9,7 @@ public class CastComponent : MonoBehaviour
     public List<List<Rune>> CostMatrix;
     private List<ArenaLine> _arena;
     public List<List<Vector2>> ValidCastingPatterns; //list of lists of casting patterns
-    public bool CanBeCastedValue = false;
+    public bool CanBeCasted = false;
 
     List<Slot> ColoredSlots;
 
@@ -115,11 +115,11 @@ public class CastComponent : MonoBehaviour
                 }   
             }
             ValidCastingPatterns.Add(pattern);
-            CanBeCastedValue = true; //we found a patter, so card can be casted
+            CanBeCasted = true; //we found a patter, so card can be casted
         }
     }
 
-    public bool CanBeCasted(){
+    public bool CanItBeCasted(){
         ValidCastingPatterns = new List<List<Vector2>>(); //resets the casting patterns
         //checks by boxes of 3x2 and saves top-left position in ValidCastingPatterns
         string player;
@@ -131,7 +131,8 @@ public class CastComponent : MonoBehaviour
                     IterateCost(player, lineIndex, columnIndex);
                 }
             }
-        } else{ //Controller: Enemy
+        }//Controller: Enemy
+        else{
             player = "Enemy";
             //since Enemy sees the arena from the other side, we need to iterate the arena Slots in the opposite order
             for (int lineIndex = 4; lineIndex > 0; lineIndex--){
@@ -140,7 +141,7 @@ public class CastComponent : MonoBehaviour
                 }
             }
         }
-        return CanBeCastedValue;
+        return CanBeCasted;
     }
 
     private IEnumerator CastingProcedure(){
@@ -152,16 +153,31 @@ public class CastComponent : MonoBehaviour
         TargetHandler.Instance.StartTargetMode(1, true);
         _arena[0].transform.parent.GetComponent<Arena>().DeColorSlots();
         ShowTopLeftPatterns();
+        EnableInspectCardsOnPatterns(false);
         yield return new WaitUntil(() => !TargetHandler.Instance.TargetMode);
         TargetHandler.Instance.OnAddTarget -= CheckTargetSlots;
         _arena[0].transform.parent.GetComponent<Arena>().DeColorSlots();
         UIManager.Instance.ChangeHintBox(false);
+        EnableInspectCardsOnPatterns(true);
         //last check before deletion
         foreach(List<Vector2> pattern in ValidCastingPatterns){
-            if (pattern[0] == TargetHandler.Instance.Targets[0].transform.parent.GetComponent<Slot>().Coordinates){
-                SacrificeCardsAndRunes(pattern);
-                transform.GetComponent<PlayScript>().PlaceInSlot();
-                break;
+            if (TargetHandler.Instance.Targets.Count != 0){
+                if (pattern[0] == TargetHandler.Instance.Targets[0].transform.parent.GetComponent<Slot>().Coordinates){
+                    SacrificeCardsAndRunes(pattern);
+                    transform.GetComponent<PlayScript>().PlaceInSlot();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void EnableInspectCardsOnPatterns(bool b){
+        foreach(List<Vector2> pattern in ValidCastingPatterns){
+            foreach(Vector2 coord in pattern){
+                GameObject cardSlot = _arena[(int)coord.x].transform.GetChild((int)coord.y).transform.GetChild(0).gameObject;
+                if (cardSlot.transform.childCount != 0){
+                    cardSlot.transform.GetChild(0).GetChild(0).GetComponent<BoxCollider2D>().enabled=b;
+                }
             }
         }
     }
@@ -227,7 +243,8 @@ public class CastComponent : MonoBehaviour
             //sacrifice cards
             if(slot.transform.GetChild(0).childCount != 0){ //if a card is present to be sacrificed
                 GameObject card = slot.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
-                if(card.GetComponent<CardInfo>().TempInfo.Id != 0){ //crystal it's not sacrificed for summons
+                //crystal and cards not included in casting patterns are not sacrificed for summons
+                if(card.GetComponent<CardInfo>().TempInfo.Id != 0 && card.GetComponent<CardInfo>().TempInfo.CardRune == cost[costIndex]){ 
                     StartCoroutine(GameManager.Instance.MoveLocation(card, Location.Discard));
                 }
             }
@@ -237,7 +254,7 @@ public class CastComponent : MonoBehaviour
 
     //returns true if everything went smoothly, otherwise returns false
     public bool CastCard(){
-        if (!CanBeCastedValue) return false;
+        if (!CanBeCasted) return false;
         //start casting procedure
         StartCoroutine(CastingProcedure());
         return true;

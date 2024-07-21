@@ -60,7 +60,7 @@ public class TempRunes : MonoBehaviour
     }
 
     //Creates TempRune based on card in CardSlot
-    public void CreateTempRune(){
+    public void CreateTempRune(bool b){
         if(transform.parent.GetChild(0).childCount != 0){ //check if CardSlot has a card in it
             GameObject card = transform.parent.GetChild(0).GetChild(0).GetChild(0).gameObject; //Slot.CardSlot.CardContainer.Card
             Rune cardRune = card.GetComponent<CardInfo>().TempInfo.CardRune;
@@ -82,12 +82,16 @@ public class TempRunes : MonoBehaviour
     }
 
     public void RemoveTempRune(Rune rune){
-        if(TempRunesList.Contains(rune)){
-            int index = TempRunesList.IndexOf(rune);
-            TempRunesList.RemoveAt(index);
-            Destroy(TempRunesVisualList[index]);
-            TempRunesVisualList.RemoveAt(index);
-            Owner = null;
+        foreach(Rune placedRune in TempRunesList){
+            Rune check = placedRune & rune;
+            if (check != Rune.None){
+                int index = TempRunesList.IndexOf(placedRune);
+                TempRunesList.RemoveAt(index);
+                Destroy(TempRunesVisualList[index]);
+                TempRunesVisualList.RemoveAt(index);
+                Owner = null;
+                break;
+            }
         }
     }
 
