@@ -175,6 +175,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   DefaultSpacing: 450
   OffsetSpacing: 20
+  Owner: {fileID: 2088668009}
 --- !u!114 &10648682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,11 +627,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b
-      value: 0.7647059
+      value: 0.9490196
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.g
-      value: 0.5882353
+      value: 0.8745098
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.r
@@ -858,12 +859,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b
-      value: 0.7647059
+      value: 0.94716984
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.g
-      value: 0.58650845
+      value: 0.87088597
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.r
@@ -1012,6 +1017,14 @@ PrefabInstance:
       propertyPath: Coordinates.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -1158,6 +1171,14 @@ PrefabInstance:
     - target: {fileID: 479179478788808162, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Coordinates.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
@@ -1529,11 +1550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b
-      value: 0.7647059
+      value: 0.9490196
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.g
-      value: 0.5882353
+      value: 0.8745098
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.r
@@ -2387,6 +2408,18 @@ PrefabInstance:
       propertyPath: Coordinates.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -2680,7 +2713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
   DeckList: []
-  Owner: {fileID: 0}
+  Owner: {fileID: 2088668009}
 --- !u!114 &754092879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,7 +3532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
-  Owner: {fileID: 0}
+  Owner: {fileID: 1629344810}
 --- !u!114 &846688949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4094,6 +4127,7 @@ MonoBehaviour:
   visualPrefab: {fileID: 1021979311843353754, guid: 9d801e32727f2d846937ceb48c34b2ab, type: 3}
   DefaultSpacing: 450
   OffsetSpacing: 20
+  Owner: {fileID: 1629344810}
 --- !u!114 &1015907097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4131,6 +4165,14 @@ PrefabInstance:
     - target: {fileID: 479179478788808162, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Coordinates.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
@@ -4258,6 +4300,14 @@ PrefabInstance:
     - target: {fileID: 479179478788808162, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Coordinates.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
@@ -4624,6 +4674,14 @@ PrefabInstance:
       propertyPath: Coordinates.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -4784,6 +4842,14 @@ PrefabInstance:
       propertyPath: Coordinates.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -4933,11 +4999,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b
-      value: 0.7647059
+      value: 0.9490196
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.g
-      value: 0.5882353
+      value: 0.8745098
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.r
@@ -5857,7 +5923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -552.12, y: 226.8}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1505380609
@@ -6845,11 +6911,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b
-      value: 0.7647059
+      value: 0.9490196
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.g
-      value: 0.5882353
+      value: 0.8745098
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.r
@@ -7171,7 +7237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: 2333592705309704797, guid: 3d8aae7c85b66cd419f46795be6058cd, type: 3}
   DeckList: []
-  Owner: {fileID: 0}
+  Owner: {fileID: 1629344810}
 --- !u!114 &1606800445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7832,7 +7898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPrefab: {fileID: 1021979311843353754, guid: 58b597997fa2e11419b58fc35a243aec, type: 3}
-  Owner: {fileID: 0}
+  Owner: {fileID: 2088668009}
 --- !u!114 &1733733284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8638,6 +8704,14 @@ PrefabInstance:
       propertyPath: Coordinates.y
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -9243,6 +9317,14 @@ PrefabInstance:
       propertyPath: Coordinates.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 
@@ -9382,6 +9464,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 326544761}
     m_Modifications:
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.08717966
+      objectReference: {fileID: 0}
     - target: {fileID: 2758873544163107721, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Owner
       value: 

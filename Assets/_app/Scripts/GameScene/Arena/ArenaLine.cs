@@ -12,4 +12,13 @@ public class ArenaLine : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetChild(i).GetComponent<RectTransform>());
     }
 
+    public bool IsSlotInLine(GameObject slot){
+        for(int i = 0; i< transform.childCount; i++){
+            if(ReferenceEquals(transform.GetChild(i).gameObject, slot)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -33,10 +33,6 @@ public class DiscardZone : MonoBehaviour, IInspect
     // Start is called before the first frame update
     void Start()
     {
-        if(transform.name == "PlayerDiscardZone")
-            Owner = GameManager.Instance.player;
-        else
-            Owner = GameManager.Instance.enemy;
     }
 
     void Update()

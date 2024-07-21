@@ -22,5 +22,13 @@ public class Arena : MonoBehaviour
             Column4
         };
     }
+
+    public void DeColorSlots(){
+        foreach(ArenaLine line in Lines){
+            for(int i = 0; i < line.transform.childCount; i++){
+                line.transform.GetChild(i).GetChild(0).GetComponent<ArenaCardSlot>().OutlineComp.enabled = false;
+            }
+        }
+    }
     
 }

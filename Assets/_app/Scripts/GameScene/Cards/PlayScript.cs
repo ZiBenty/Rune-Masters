@@ -67,7 +67,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
 
         //change collider size
         BoxCollider2D col = GetComponent<BoxCollider2D>();
-        col.size = new Vector2(col.size.x/10, col.size.y/10);
+        col.size = new Vector2(col.size.x/15, col.size.y/15);
 
         Debug.Log("Grabbing");
     }
@@ -85,8 +85,6 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         _isDragging = false;
         Debug.Log("Releasing");
 
-        bool isCardSlot = false;
-
         ArenaCardSlot cardSlot = null;
 
         //controllo luogo dove finisce
@@ -94,25 +92,57 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
         foreach(RaycastHit2D hit in hits){
             if(hit.transform.name.Contains("CardSlot")){
-                if(hit.transform.childCount == 0){
-                    isCardSlot = true;
-                    cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
+                if (transform.GetComponent<CardState>().Location == Location.Hand){ //if it was dragged from hand
+                    //controllo evocazione per tipi
+                    ArenaLine summonLine;
+                    switch(transform.GetComponent<CardInfo>().TempInfo.CardType){
+                        case CardType.Creature:
+                            //only on summonLine
+                            summonLine = transform.GetComponent<CardState>().Controller.SummonLine.GetComponent<ArenaLine>();
+
+                            if(summonLine.IsSlotInLine(hit.transform.parent.gameObject)){
+                                if(hit.transform.childCount == 0) //if slot is free
+                                    cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
+                            }else{
+                                StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only be casted in Controller's Summon Line", 3f));
+                            }
+                            break;
+                        case CardType.Structure:
+                            //only on player lines and middle line
+                            summonLine = transform.GetComponent<CardState>().Controller.SummonLine.GetComponent<ArenaLine>();
+
+                            ArenaLine frontLine;
+                            if (transform.GetComponent<CardState>().Controller.transform.name == "Player")
+                                frontLine = GameObject.Find("Front Player Line").GetComponent<ArenaLine>();
+                            else
+                                frontLine = GameObject.Find("Front Enemy Line").GetComponent<ArenaLine>();
+
+                            ArenaLine middleLine = GameObject.Find("Middle Line").GetComponent<ArenaLine>();
+
+                            if(summonLine.IsSlotInLine(hit.transform.parent.gameObject) || frontLine.IsSlotInLine(hit.transform.parent.gameObject) || middleLine.IsSlotInLine(hit.transform.parent.gameObject)){
+                                if(hit.transform.childCount == 0) //if slot is free
+                                    cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
+                            }else{
+                                StartCoroutine(UIManager.Instance.HintForSeconds("Structures cannot be casted in the other player's Lines", 3f));
+                            }
+                            break;
+                        case CardType.Enchantment:
+                            break;
+                    }
                 }
             }
         }
         //azione differente a seconda di dove finisce
-        if(isCardSlot){ //finsice sul terreno
-            if (cardSlot != null){
-                if(transform.GetComponent<CastComponent>().CanBeCasted()){
-                    if(transform.GetComponent<CastComponent>().CastCard()){
-                        CardSlot = cardSlot; //saves cardSlot position to be saved later
-                    }else{
-                        ResetPosition();
-                    }
-                        
+        if (cardSlot != null){ //finsice sul terreno
+            if(transform.GetComponent<CastComponent>().CanBeCasted()){
+                if(transform.GetComponent<CastComponent>().CastCard()){
+                    CardSlot = cardSlot; //saves cardSlot position to be saved later
                 }else{
                     ResetPosition();
                 }
+                    
+            }else{
+                ResetPosition();
             }
         }
         else
@@ -124,8 +154,12 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
 
     public void PlaceInSlot(){
         if(CardSlot != null){
-            CardSlot?.PlaceCard(transform.gameObject);
-            Destroy(gameObject);
+            if(transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Enchantment){
+                StartCoroutine(GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard));
+            }else{
+                CardSlot?.PlaceCard(transform.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -134,7 +168,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         transform.localScale = _defaultLocalScale;
         //change collider size
         BoxCollider2D col = GetComponent<BoxCollider2D>();
-        col.size = new Vector2(col.size.x*10, col.size.y*10); //dragging reduces objects boxcolliders to prevent multiple collisions
+        col.size = new Vector2(col.size.x*15, col.size.y*15); //dragging reduces objects boxcolliders to prevent multiple collisions
     }
 
     public void Highlight(Vector3 target)
@@ -201,11 +235,15 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 transform.GetComponent<BoxCollider2D>().enabled = true;
                 transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
                 transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                if (transform.GetComponent<CardState>().Controller.transform.name == "Enemy")
+                    transform.eulerAngles = new Vector3(0, 0, 180);
                 break;
             case Location.Discard:
                 SetcanDrag(false);
                 SetcanInspect(false);
                 transform.GetComponent<BoxCollider2D>().enabled = false;
+                if (transform.GetComponent<CardState>().Controller.transform.name == "Enemy")
+                    transform.eulerAngles = new Vector3(0, 0, 180);
                 break;
             case Location.Inspected:
                 SetcanDrag(false);

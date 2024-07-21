@@ -54,10 +54,12 @@ public class GameManager : MonoBehaviour
                     GameObject parent = card.transform.parent.gameObject;
                     discardZone.AddCard(card);
                     Destroy(parent);
+                    Destroy(card);
                 }else if(card.GetComponent<CardState>().Location == Location.Hand){
                     GameObject parent = card.transform.parent.gameObject;
                     discardZone.AddCard(card);
                     Destroy(parent);
+                    Destroy(card);
                 }else if(card.GetComponent<CardState>().Location == Location.Deck){
                     deck = p.deckScript;
                     int deckIndex = deck.DeckList.IndexOf(card);

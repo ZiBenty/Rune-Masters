@@ -26,6 +26,6 @@ public class UIManager : MonoBehaviour
     public IEnumerator HintForSeconds(string text = "", float seconds = 0){
         ChangeHintBox(true, text);
         yield return new WaitForSeconds(seconds);
-        ChangeHintBox(false, text);
+        ChangeHintBox(false);
     }
 }

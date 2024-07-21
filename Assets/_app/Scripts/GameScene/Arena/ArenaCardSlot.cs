@@ -7,7 +7,7 @@ using static Constants;
 
 public class ArenaCardSlot : MonoBehaviour, IInspect
 {
-    public Outline _outline;
+    public Outline OutlineComp;
     public GameObject cardPrefab;
     public GameObject visualPrefab;
     public bool isCrystalSlot = false;
@@ -24,7 +24,7 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
     // Start is called before the first frame update
     void Start()
     {
-        _outline = GetComponent<Outline>();
+        OutlineComp = GetComponent<Outline>();
         if (isCrystalSlot){
             Card c = CardDatabase.Instance.cardService.GetCardFromId(0);
             GameObject card = Instantiate(cardPrefab);
@@ -37,12 +37,12 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
     void OnTriggerEnter2D(Collider2D other){
         if (other.transform.name.Contains("Card")){
             if (other.transform.GetComponent<PlayScript>().GetisDragging())
-                _outline.enabled = true;
+                OutlineComp.enabled = true;
         } 
     }
 
     void OnTriggerExit2D(Collider2D other){
-        _outline.enabled = false;
+        OutlineComp.enabled = false;
     }
 
     void Update(){

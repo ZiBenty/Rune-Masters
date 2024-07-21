@@ -23,6 +23,8 @@ public class CardInspectionBox : MonoBehaviour
 
         //display.transform.localPosition = Vector2.zero;
         display.transform.localScale = new Vector3(7.4f, 7.4f, 7.4f);
+        if (copy.transform.GetComponent<CardState>().Controller.transform.name == "Enemy")
+            copy.transform.eulerAngles = new Vector3(0, 0, 0);
         copy.GetComponent<CardState>().Location = Constants.Location.Inspected;
     }
 

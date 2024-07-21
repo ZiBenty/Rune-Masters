@@ -15,6 +15,7 @@ public class Hand : MonoBehaviour
     private int _lastHandSize = 0;
     [SerializeField]
     private float DefaultSpacing = 129, OffsetSpacing = 20;
+    public Player Owner;
 
 
     // Start is called before the first frame update

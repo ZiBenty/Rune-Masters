@@ -19,10 +19,6 @@ public class Deck : MonoBehaviour
     {
         _visual = GetComponent<Image>();
         DeckList = new List<GameObject>();
-        if(transform.name == "PlayerDeck")
-            Owner = GameManager.Instance.player;
-        else
-            Owner = GameManager.Instance.enemy;
         // TODO: implement import from decklist
         LoadDecklist("StarterFireAir");
         Shuffle();
