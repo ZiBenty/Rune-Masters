@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;
 
 public class MoveComponent : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class MoveComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TurnSystem.Instance.OnStartMainPhase += SetCanBeMoved;
+        TurnSystem.Instance.OnStartMainPhase += SetStartMainPhase;
+        TurnSystem.Instance.OnEndMainPhase += SetEndMainPhase;
         _arena = GameObject.Find("Arena").GetComponent<Arena>().Lines;
     }
 
@@ -42,7 +44,7 @@ public class MoveComponent : MonoBehaviour
                     AvailableSlots.Add(slot);
             }
             //check forward
-            if (ownCoord.y != 4){
+            if (ownCoord.x != 4){
                 Slot slot = _arena[(int)ownCoord.x+1].transform.GetChild((int)ownCoord.y).GetComponent<Slot>();
                 //checks if slot on their left is empty
                 if (slot.transform.GetChild(0).childCount == 0)
@@ -66,7 +68,7 @@ public class MoveComponent : MonoBehaviour
                     AvailableSlots.Add(slot);
             }
             //check forward
-            if (ownCoord.y != 0){
+            if (ownCoord.x != 0){
                 Slot slot = _arena[(int)ownCoord.x-1].transform.GetChild((int)ownCoord.y).GetComponent<Slot>();
                 //checks if slot on their left is empty
                 if (slot.transform.GetChild(0).childCount == 0)
@@ -85,7 +87,22 @@ public class MoveComponent : MonoBehaviour
         CanBeMoved = b;
     }
 
+    public void SetStartMainPhase(){
+        if ((transform.GetComponent<CardState>().Controller.transform.name == "Player" && TurnSystem.Instance.isPlayerTurn) ||
+        (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
+            if (transform.GetComponent<CardState>().Location == Location.Field)
+                SetCanBeMoved(true);
+    }
+
+    public void SetEndMainPhase(){
+        if ((transform.GetComponent<CardState>().Controller.transform.name == "Player" && TurnSystem.Instance.isPlayerTurn) ||
+        (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
+            if (transform.GetComponent<CardState>().Location == Location.Field)
+                SetCanBeMoved(false);
+    }
+
     void OnDestroy(){
-        TurnSystem.Instance.OnStartMainPhase -= SetCanBeMoved;
+        TurnSystem.Instance.OnStartMainPhase -= SetStartMainPhase;
+        TurnSystem.Instance.OnEndMainPhase -= SetEndMainPhase;
     }
 }

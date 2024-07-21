@@ -55,7 +55,13 @@ public class TargetHandler : MonoBehaviour
 
     public void AddTarget(GameObject target){
         if (OnAddTarget(target)){
-            Targets.Add(target);
+            if (ConfirmMode && Targets.Count == NumOfTargets){
+                Targets.RemoveAt(0); //removes oldest target
+                Targets.Add(target);
+                if (target.TryGetComponent<Outline>(out var outline))
+                    outline.enabled = true;
+            }else
+                Targets.Add(target);
         }
     }
 

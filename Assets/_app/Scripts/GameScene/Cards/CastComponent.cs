@@ -168,6 +168,7 @@ public class CastComponent : MonoBehaviour
                     break;
                 }
             }
+            transform.GetComponent<PlayScript>().ResetPosition();
         }
     }
 

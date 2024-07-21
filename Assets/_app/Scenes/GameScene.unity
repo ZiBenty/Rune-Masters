@@ -4995,7 +4995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479179478788808162, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: Coordinates.y
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 784727766512510228, guid: 59d63fe1604ca124d8beaa29b56a7638, type: 3}
       propertyPath: m_EffectColor.b

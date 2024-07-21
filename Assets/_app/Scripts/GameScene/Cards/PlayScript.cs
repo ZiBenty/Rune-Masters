@@ -20,6 +20,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     private TurnSystem _ts;
     private ArenaCardSlot CardSlot = null;
     public bool isMoving = false;
+    public bool isAttacking = false;
 
     void Awake(){
         SetcanDrag(true);
@@ -139,13 +140,15 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                         case CardType.Enchantment:
                             break;
                     }
-                    if(transform.GetComponent<CastComponent>().CanItBeCasted()){
-                        if(transform.GetComponent<CastComponent>().CastCard())
-                            CardSlot = cardSlot; //saves cardSlot position to be saved later
-                        else
+                    if(cardSlot != null){
+                        if(transform.GetComponent<CastComponent>().CanItBeCasted()){
+                            if(transform.GetComponent<CastComponent>().CastCard())
+                                CardSlot = cardSlot; //saves cardSlot position to be saved later
+                            else
+                                ResetPosition();
+                        }else{
                             ResetPosition();
-                    }else{
-                        ResetPosition();
+                        }
                     }
                 }
                 else if (transform.GetComponent<CardState>().Location == Location.Field){ //if it was dragged from field
@@ -182,7 +185,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
         }
     }
 
-    private void ResetPosition(){
+    public void ResetPosition(){
         transform.localPosition = _defaultLocalPosition;
         transform.localScale = _defaultLocalScale;
         //change collider size
@@ -203,14 +206,23 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, moveBy);
         else
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, -target, moveBy);
-
     }
 
     public void onStartInspect()
     {
         isInspected = true;
-        if(TargetHandler.Instance.TargetMode){
+        //targeted by an effect/game action
+        if (TargetHandler.Instance.TargetMode){
             TargetHandler.Instance.AddTarget(transform.gameObject);
+        }
+        //if in combat phase and combat procedure wasn't launched
+        if (TurnSystem.Instance.isCombatPhase && !isAttacking && !TargetHandler.Instance.TargetMode){
+            if (transform.TryGetComponent<AttackComponent>(out var atkComp)){
+                if (atkComp.CanItAttack()){
+                    isAttacking = true;
+                    atkComp.Attack();
+                }
+            }
         }
         if (transform.GetComponentInChildren<CardState>().Location == Location.Hand)
             Highlight(new Vector3(0, 100, 0));
@@ -238,16 +250,19 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
             case Location.Deck:
                 SetcanDrag(false);
                 SetcanInspect(false);
+                transform.GetComponent<CardInfo>().ResetInfo();
                 break;
             case Location.Hand:
                 SetcanDrag(true);
                 SetcanInspect(true);
                 transform.GetComponent<BoxCollider2D>().enabled = true;
                 transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*transform.GetChild(0).GetComponent<RectTransform>().localScale;
+                transform.GetComponent<CardInfo>().ResetInfo();
                 break;
             case Location.Field:
-                if (transform.GetComponent<CardInfo>().TempInfo.Id !=0 && transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature)
+                if (transform.GetComponent<CardInfo>().TempInfo.Id !=0 && transform.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature){
                     SetcanDrag(true);
+                }
                 else
                     SetcanDrag(false);
                 SetcanInspect(true);
@@ -263,6 +278,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 transform.GetComponent<BoxCollider2D>().enabled = false;
                 if (transform.GetComponent<CardState>().Controller.transform.name == "Enemy")
                     transform.eulerAngles = new Vector3(0, 0, 180);
+                transform.GetComponent<CardInfo>().ResetInfo();
                 break;
             case Location.Inspected:
                 SetcanDrag(false);

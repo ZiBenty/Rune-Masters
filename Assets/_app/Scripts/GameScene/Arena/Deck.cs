@@ -55,8 +55,14 @@ public class Deck : MonoBehaviour
                     Card c = CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0]));
                     GameObject card = Instantiate(_cardPrefab, transform);
                     card.GetComponent<CardInfo>().LoadInfo(c);
-                    if (card.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature)
+                    if (card.GetComponent<CardInfo>().TempInfo.CardType == CardType.Creature){
                         card.AddComponent<MoveComponent>();
+                        card.AddComponent<AttackComponent>();
+                        card.AddComponent<HealthComponent>();
+                    }else if (card.GetComponent<CardInfo>().TempInfo.CardType == CardType.Structure){
+                        card.AddComponent<HealthComponent>();
+                    }
+                        
                     card.GetComponent<CardState>().SetPlayer(Owner);
                     card.GetComponent<CardState>().Location = Constants.Location.Deck;
                     DeckList.Add(card);

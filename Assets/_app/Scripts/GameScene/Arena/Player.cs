@@ -24,6 +24,28 @@ public class Player : MonoBehaviour
         discardScript = DiscardZone.GetComponent<DiscardZone>();
         Crystal = SummonLine.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
         cardsOnField.Add(Crystal);
+        if (SummonLine.transform.name == "Summon Player Line"){
+            TurnSystem.Instance.OnStartPlayerTurn += StartOwnTurn;
+            TurnSystem.Instance.OnStartEnemyTurn += StartOpponentTurn;
+        }else{
+            TurnSystem.Instance.OnStartPlayerTurn += StartOpponentTurn;
+            TurnSystem.Instance.OnStartEnemyTurn += StartOwnTurn;
+        }
+    }
+
+    public void StartOwnTurn(){
+        SetCardsOnFieldDraggable(true);
+    }
+
+    public void StartOpponentTurn(){
+        SetCardsOnFieldDraggable(false);
+    }
+
+    private void SetCardsOnFieldDraggable(bool b){
+        foreach(var card in cardsOnField){
+            if(card.GetComponent<CardInfo>().TempInfo.Id != 0)
+                card.GetComponent<PlayScript>().SetcanDrag(b);
+        }
     }
 
     void Update()

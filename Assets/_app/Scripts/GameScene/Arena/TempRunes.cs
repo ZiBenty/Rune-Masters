@@ -60,7 +60,7 @@ public class TempRunes : MonoBehaviour
     }
 
     //Creates TempRune based on card in CardSlot
-    public void CreateTempRune(bool b){
+    public void CreateTempRune(){
         if(transform.parent.GetChild(0).childCount != 0){ //check if CardSlot has a card in it
             GameObject card = transform.parent.GetChild(0).GetChild(0).GetChild(0).gameObject; //Slot.CardSlot.CardContainer.Card
             Rune cardRune = card.GetComponent<CardInfo>().TempInfo.CardRune;

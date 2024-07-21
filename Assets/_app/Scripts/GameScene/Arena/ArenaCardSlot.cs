@@ -64,10 +64,13 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
         hzl.childControlHeight = true;
         hzl.childControlWidth = true;
 
+        bool added = false;
         GameObject copy;
         if(cardWasMoved){
             copy = Instantiate(card);
             copy.GetComponent<CardInfo>().LoadInfo(card.GetComponent<CardInfo>().BaseInfo);
+            copy.GetComponent<CardState>().Controller.cardsOnField.Add(copy);
+            added = true;
         }else{
             copy = card;
         }
@@ -80,8 +83,9 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
         cv.transform.localScale = new Vector3(0.16f, 0.16f);
         container.transform.localPosition = Vector3.back;
         cv.GetComponent<CardDisplay>().LoadCard();
-
         copy.GetComponent<CardState>().Location = Location.Field;
+        if(added)
+            card.GetComponent<CardState>().Controller.cardsOnField.Remove(card);
         _cardIsPresent = true;
         _lastCardRune = copy.GetComponent<CardInfo>().TempInfo.CardRune;
         //creates a tempRune in this slot
