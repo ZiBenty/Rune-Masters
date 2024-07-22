@@ -41,10 +41,17 @@ public class Player : MonoBehaviour
         SetCardsOnFieldDraggable(false);
     }
 
-    private void SetCardsOnFieldDraggable(bool b){
+    public void SetCardsOnFieldDraggable(bool b){
         foreach(var card in cardsOnField){
             if(card.GetComponent<CardInfo>().TempInfo.Id != 0)
                 card.GetComponent<PlayScript>().SetcanDrag(b);
+        }
+    }
+
+    public void SetCardsOnFieldInspectable(bool b){
+        foreach(var card in cardsOnField){
+            if(card.GetComponent<CardInfo>().TempInfo.Id != 0)
+                card.GetComponent<PlayScript>().SetcanInspect(b);
         }
     }
 

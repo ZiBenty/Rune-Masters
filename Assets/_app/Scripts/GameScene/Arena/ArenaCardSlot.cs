@@ -104,6 +104,7 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
 
     public void onStartInspect()
     {
+        if (!_canInspect) return;
         isInspected = true;
         if(TargetHandler.Instance.TargetMode){
             TargetHandler.Instance.AddTarget(transform.gameObject);
@@ -112,6 +113,7 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
 
     public void onStopInspect()
     {
+        if (!_canInspect) return;
         isInspected = false;
     }
 }

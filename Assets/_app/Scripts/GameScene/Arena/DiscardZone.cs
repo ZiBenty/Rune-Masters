@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DiscardZone : MonoBehaviour, IInspect
 {
@@ -10,6 +11,8 @@ public class DiscardZone : MonoBehaviour, IInspect
     private int _lastPileSize = 0;
     private GameObject lastAddedCard;
     public Player Owner;
+    [SerializeField]
+    private GameObject InspectDiscardZone;
 
     [Header("Inspect")]
     private bool _canInspect = true;
@@ -22,17 +25,69 @@ public class DiscardZone : MonoBehaviour, IInspect
     }
     public void onStartInspect()
     {
+        //se è aperto l'altro, prima chiudilo
+        if (InspectDiscardZone.activeSelf){
+            CloseInspectDiscardZone();
+        }
         
+        if (Owner.transform.name == "Player")
+            InspectDiscardZone.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Player's Discard Zone";
+        else
+            InspectDiscardZone.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Enemy's Discard Zone";
+        FillInspectDiscardZone();
+        InspectDiscardZone.SetActive(true);
+        GameObject.Find("Player").GetComponent<Player>().SetCardsOnFieldInspectable(false);
+        GameObject.Find("Enemy").GetComponent<Player>().SetCardsOnFieldInspectable(false);
+        Arena arena = GameObject.Find("Arena").GetComponent<Arena>();
+        arena.SetSlotsInspectable(false);
+        arena.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        arena.GetComponent<CanvasGroup>().interactable = false;
     }
 
     public void onStopInspect()
     {
-        
+
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public void CloseInspectDiscardZone(){
+        if (InspectDiscardZone.activeSelf){
+            DefillInspectDiscardZone();
+            InspectDiscardZone.SetActive(false);
+            GameObject.Find("Player").GetComponent<Player>().SetCardsOnFieldInspectable(true);
+            GameObject.Find("Enemy").GetComponent<Player>().SetCardsOnFieldInspectable(true);
+            Arena arena = GameObject.Find("Arena").GetComponent<Arena>();
+            arena.SetSlotsInspectable(true);
+            arena.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            arena.GetComponent<CanvasGroup>().interactable = true;
+        }
+    }
+
+    private void FillInspectDiscardZone(){
+        if (transform.GetChild(0).childCount != 0){
+            for(int i = 0; i < transform.GetChild(0).childCount; i++){
+                GameObject copy = Instantiate(transform.GetChild(0).GetChild(i).gameObject);
+                copy.GetComponent<CardInfo>().LoadInfo(transform.GetChild(0).GetChild(i).GetComponent<CardInfo>().BaseInfo);
+
+                GameObject container = new GameObject("CardContainer");
+                container.AddComponent<RectTransform>();
+                container.transform.SetParent(InspectDiscardZone.transform.GetChild(1), false);
+
+                copy.transform.SetParent(container.transform, false);
+                copy.GetComponent<PlayScript>().SetcanInspect(true);
+                Vector3 newScale = new Vector3(0.08f, 0.08f, 0.08f);
+                copy.transform.GetChild(0).transform.localScale = newScale;
+                copy.GetComponent<BoxCollider2D>().enabled = true;
+                copy.GetComponent<BoxCollider2D>().size = copy.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*newScale;
+                copy.transform.GetChild(0).gameObject.SetActive(true);
+                
+            }
+        }
+    }
+
+    private void DefillInspectDiscardZone(){
+        foreach(Transform child in InspectDiscardZone.transform.GetChild(1)){
+            Destroy(child.gameObject);
+        }
     }
 
     void Update()

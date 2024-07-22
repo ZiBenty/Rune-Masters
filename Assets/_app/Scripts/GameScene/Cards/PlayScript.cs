@@ -13,13 +13,16 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     private Vector3 _defaultLocalScale, _defaultLocalPosition;
 
     [Header("Inspect")]
+    [SerializeField]
     private bool _canInspect;
     public bool isInspected = false;
     private float _lastMovement = 0;
 
     private TurnSystem _ts;
     private ArenaCardSlot CardSlot = null;
+    [Header("Move")]
     public bool isMoving = false;
+    [Header("Attack")]
     public bool isAttacking = false;
 
     void Awake(){
@@ -77,11 +80,11 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 transform.GetComponent<MoveComponent>().ColorAvailableSlots(true);
                 isMoving = true;
                 UIManager.Instance.ChangeHintBox(true, "You can move the creature in the outlined slots");
-            }else{
+            }else{//TODO: rimane sempre acceso, solo questi
                 if (TurnSystem.Instance.isMovePhase)
-                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only move once per turn", 2.5f));
+                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only move once per turn", 1.5f));
                 else if (TurnSystem.Instance.isCombatPhase)
-                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures cannot move during Combat Phase", 2.5f));
+                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures cannot move during Combat Phase", 1.5f));
             }
         }
     }
@@ -165,6 +168,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                     } else{
                         transform.GetComponent<MoveComponent>().ColorAvailableSlots(false);
                         UIManager.Instance.ChangeHintBox(false);
+                        UIManager.Instance.ChangeWarningBox(false);
                         ResetPosition();
                     }
                     isMoving = false;
@@ -213,6 +217,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
 
     public void onStartInspect()
     {
+        if (!_canInspect) return;
         isInspected = true;
         //targeted by an effect/game action
         if (TargetHandler.Instance.TargetMode){
@@ -235,6 +240,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
 
     public void onStopInspect()
     {
+        if (!_canInspect) return;
         isInspected = false;
         if (transform.GetComponentInChildren<CardState>().Location == Location.Hand)
             Highlight(new Vector3(0, 0, 0));
@@ -274,7 +280,6 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 SetcanInspect(true);
                 transform.GetComponent<BoxCollider2D>().enabled = true;
                 transform.GetComponent<BoxCollider2D>().size = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*new Vector3(0.16f, 0.16f, 0.16f);
-                transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 if (transform.GetComponent<CardState>().Controller.transform.name == "Enemy")
                     transform.eulerAngles = new Vector3(0, 0, 180);
                 break;
