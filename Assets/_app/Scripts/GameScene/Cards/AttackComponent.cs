@@ -113,6 +113,8 @@ public class AttackComponent : MonoBehaviour
     public bool CheckAttackTarget(GameObject target){
         if(target.transform.parent.TryGetComponent<Slot>(out var slot)){
             if (SlotsAttackTargets.Contains(slot)){
+                string cName = slot.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<CardInfo>().TempInfo.Name;
+                UIManager.Instance.ChangeHintBox(true, cName + " was chosen as target");
                 return true;
             }
         }

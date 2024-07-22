@@ -25,6 +25,7 @@ public class HealthComponent : MonoBehaviour
     void Start()
     {
         OnHpChange += HealthChange;
+        m_Hp = transform.GetComponent<CardInfo>().TempInfo.Hp;
     }
 
     private void HealthChange(int hp){
@@ -41,6 +42,6 @@ public class HealthComponent : MonoBehaviour
     }
 
     public void DestroyCard(){
-        GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard);
+        StartCoroutine(GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard));
     }
 }

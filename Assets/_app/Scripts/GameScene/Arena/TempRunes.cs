@@ -27,7 +27,7 @@ public class TempRunes : MonoBehaviour
     void Start()
     {
         TempRunesList = new List<Rune>();
-        TurnSystem.Instance.OnStartMainPhase += CreateTempRune;
+        TurnSystem.Instance.OnStartMovePhase += CreateTempRune;
     }
 
     // Update is called once per frame
@@ -104,6 +104,6 @@ public class TempRunes : MonoBehaviour
     }
 
     void OnDestroy(){
-        TurnSystem.Instance.OnStartMainPhase -= CreateTempRune;
+        TurnSystem.Instance.OnStartMovePhase -= CreateTempRune;
     }
 }

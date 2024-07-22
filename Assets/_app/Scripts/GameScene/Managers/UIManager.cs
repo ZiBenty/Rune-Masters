@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance {get; private set;}
     public GameObject HintBox;
+    public GameObject WarningBox;
 
     void Awake(){
         if (Instance == null){
@@ -23,9 +24,14 @@ public class UIManager : MonoBehaviour
         HintBox.transform.GetComponentInChildren<TMP_Text>().text = text;
     }
 
+    public void ChangeWarningBox(bool enabled, string text = ""){
+        WarningBox.GetComponent<Image>().enabled = enabled;
+        WarningBox.transform.GetComponentInChildren<TMP_Text>().text = text;
+    }
+
     public IEnumerator HintForSeconds(string text = "", float seconds = 0){
-        ChangeHintBox(true, text);
+        ChangeWarningBox(true, text);
         yield return new WaitForSeconds(seconds);
-        ChangeHintBox(false);
+        ChangeWarningBox(false);
     }
 }

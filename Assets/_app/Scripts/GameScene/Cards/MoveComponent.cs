@@ -12,8 +12,8 @@ public class MoveComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TurnSystem.Instance.OnStartMainPhase += SetStartMainPhase;
-        TurnSystem.Instance.OnEndMainPhase += SetEndMainPhase;
+        TurnSystem.Instance.OnStartMovePhase += SetStartMovePhase;
+        TurnSystem.Instance.OnEndMovePhase += SetEndMovePhase;
         _arena = GameObject.Find("Arena").GetComponent<Arena>().Lines;
     }
 
@@ -87,14 +87,14 @@ public class MoveComponent : MonoBehaviour
         CanBeMoved = b;
     }
 
-    public void SetStartMainPhase(){
+    public void SetStartMovePhase(){
         if ((transform.GetComponent<CardState>().Controller.transform.name == "Player" && TurnSystem.Instance.isPlayerTurn) ||
         (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
             if (transform.GetComponent<CardState>().Location == Location.Field)
                 SetCanBeMoved(true);
     }
 
-    public void SetEndMainPhase(){
+    public void SetEndMovePhase(){
         if ((transform.GetComponent<CardState>().Controller.transform.name == "Player" && TurnSystem.Instance.isPlayerTurn) ||
         (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
             if (transform.GetComponent<CardState>().Location == Location.Field)
@@ -102,7 +102,7 @@ public class MoveComponent : MonoBehaviour
     }
 
     void OnDestroy(){
-        TurnSystem.Instance.OnStartMainPhase -= SetStartMainPhase;
-        TurnSystem.Instance.OnEndMainPhase -= SetEndMainPhase;
+        TurnSystem.Instance.OnStartMovePhase -= SetStartMovePhase;
+        TurnSystem.Instance.OnEndMovePhase -= SetEndMovePhase;
     }
 }

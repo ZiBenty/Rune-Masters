@@ -78,7 +78,10 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                 isMoving = true;
                 UIManager.Instance.ChangeHintBox(true, "You can move the creature in the outlined slots");
             }else{
-                StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only move once per turn", 3f));
+                if (TurnSystem.Instance.isMovePhase)
+                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only move once per turn", 2.5f));
+                else if (TurnSystem.Instance.isCombatPhase)
+                    StartCoroutine(UIManager.Instance.HintForSeconds("Creatures cannot move during Combat Phase", 2.5f));
             }
         }
     }
@@ -115,7 +118,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                                 if(hit.transform.childCount == 0) //if slot is free
                                     cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
                             }else{
-                                StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only be casted in Controller's Summon Line", 3f));
+                                StartCoroutine(UIManager.Instance.HintForSeconds("Creatures can only be casted in Controller's Summon Line", 2.5f));
                             }
                             break;
                         case CardType.Structure:
@@ -134,7 +137,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                                 if(hit.transform.childCount == 0) //if slot is free
                                     cardSlot = hit.transform.gameObject.GetComponent<ArenaCardSlot>();
                             }else{
-                                StartCoroutine(UIManager.Instance.HintForSeconds("Structures cannot be casted in the other player's Lines", 3f));
+                                StartCoroutine(UIManager.Instance.HintForSeconds("Structures cannot be casted in the other player's Lines", 2.5f));
                             }
                             break;
                         case CardType.Enchantment:
@@ -240,9 +243,12 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
     }
 
     void OnDestroy(){
-        if (transform.GetComponentInChildren<CardState>().Location == Constants.Location.Hand ||
-        transform.GetComponentInChildren<CardState>().Location == Constants.Location.Field)
+        if (transform.GetComponentInChildren<CardState>().Location == Location.Hand)
             Destroy(transform.parent.gameObject);
+        else if (transform.GetComponentInChildren<CardState>().Location == Location.Field){
+            transform.GetComponent<CardState>().Controller.cardsOnField.Remove(gameObject);
+            Destroy(transform.parent.gameObject);
+        }
     }
 
     void LocationChangeHandler(Location loc){

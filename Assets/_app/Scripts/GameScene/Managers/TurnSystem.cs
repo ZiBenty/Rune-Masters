@@ -33,11 +33,15 @@ public class TurnSystem : MonoBehaviour
     public delegate void OnStartEnemyTurnDelegate();
     public event OnStartEnemyTurnDelegate OnStartEnemyTurn;
 
-    //main phase
-    public delegate void OnStartMainPhaseDelegate();
-    public event OnStartMainPhaseDelegate OnStartMainPhase;
-    public delegate void OnEndMainPhaseDelegate();
-    public event OnEndMainPhaseDelegate OnEndMainPhase;
+    //draw phase
+    public delegate void OnStartDrawPhaseDelegate();
+    public event OnStartDrawPhaseDelegate OnStartDrawPhase;
+
+    //Move phase
+    public delegate void OnStartMovePhaseDelegate();
+    public event OnStartMovePhaseDelegate OnStartMovePhase;
+    public delegate void OnEndMovePhaseDelegate();
+    public event OnEndMovePhaseDelegate OnEndMovePhase;
 
     //combat phase
     public delegate void OnStartCombatPhaseDelegate();
@@ -88,6 +92,7 @@ public class TurnSystem : MonoBehaviour
 
         //Fase Pescata
         if (isDrawPhase){
+            OnStartDrawPhase();
             if(isPlayerTurn)
                 StartCoroutine(_gm.Draw(_gm.player, 1));
             else
@@ -113,10 +118,10 @@ public class TurnSystem : MonoBehaviour
         if(isDrawPhase){
             isDrawPhase = false;
             isMovePhase = true;
-            OnStartMainPhase();
+            OnStartMovePhase();
         }
         else if(isMovePhase){
-            OnEndMainPhase();
+            OnEndMovePhase();
             isMovePhase = false;
             isCombatPhase = true;
             OnStartCombatPhase();
@@ -125,7 +130,6 @@ public class TurnSystem : MonoBehaviour
             OnEndCombatPhase();
             isCombatPhase = false;
             isEndPhase = true;
-            OnStartEndPhase();
         }
         else if(isEndPhase){
             isEndPhase = false;
@@ -134,6 +138,11 @@ public class TurnSystem : MonoBehaviour
     }
 
     public void onEndTurn(){
+        if(isMovePhase)
+            OnEndMovePhase();
+        else if(isCombatPhase)
+            OnEndCombatPhase();
+        OnStartEndPhase();
         if(isPlayerTurn){
             isPlayerTurn = false;
             enemyTurn ++;
