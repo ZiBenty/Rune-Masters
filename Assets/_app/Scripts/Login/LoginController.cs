@@ -5,21 +5,39 @@ using Unity.Services.Authentication;
 using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class LoginController : MonoBehaviour
 {
-    public event Action<PlayerProfile> OnSignedIn;
-    public event Action<PlayerProfile> OnAvatarUpdate;
+    [SerializeField] private Button loginButton;
+    [SerializeField] private Button signUpButton;
+    [SerializeField] private TMP_InputField usernameInput;
+    [SerializeField] private TMP_InputField passwordInput;
+    [SerializeField] private TMP_Text errorMessageText;
 
-    private PlayerInfo playerInfo;
-
-    private PlayerProfile playerProfile;
-    public PlayerProfile PlayerProfile => playerProfile;
+    public bool isSignedIn;
 
     private async void Awake()
     {
         await UnityServices.InitializeAsync();
-        PlayerAccountService.Instance.SignedIn += SignedIn;
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+    }
+
+    public async void SignUp(){
+        string username = usernameInput.text;
+        string password = passwordInput.text;
+        await SignUpWithUsernamePasswordAsync(username, password);
+    }
+
+    public async void SignIn(){
+        string username = usernameInput.text;
+        string password = passwordInput.text;
+        await SignInWithUsernamePasswordAsync(username, password);
+    }
+
+    public async void SignOut(){
+        await signOutAccount();
     }
 
     async Task SignUpWithUsernamePasswordAsync(string username, string password)
@@ -31,73 +49,75 @@ public class LoginController : MonoBehaviour
         }
         catch (AuthenticationException ex)
         {
+            ShowErrorMessage(ex.Message);
             // Compare error code to AuthenticationErrorCodes
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
         catch (RequestFailedException ex)
         {
+            ShowErrorMessage(ex.Message);
             // Compare error code to CommonErrorCodes
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
     }
 
-    private async void SignedIn()
-    {
-        try
+    async Task SignInWithUsernamePasswordAsync(string username, string password){
+       try
         {
-            var accessToken = PlayerAccountService.Instance.AccessToken;
-            await SignInWithUnityAsync(accessToken);
-
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
-    }
-
-    public async Task InitSignIn()
-    {
-        await PlayerAccountService.Instance.StartSignInAsync();
-    }
-
-    private async Task SignInWithUnityAsync(string accessToken)
-    {
-        try
-        {
-            await AuthenticationService.Instance.SignInWithUnityAsync(accessToken);
-            Debug.Log("SignIn is successful.");
-
-            playerInfo = AuthenticationService.Instance.PlayerInfo;
-
-            var name = await AuthenticationService.Instance.GetPlayerNameAsync();
-
-            playerProfile.playerInfo = playerInfo;
-            playerProfile.Name = name;
-
-            OnSignedIn?.Invoke(playerProfile);
+            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            isSignedIn = true;
+            Debug.Log("Sign In successful.");
         }
         catch (AuthenticationException ex)
         {
+            ShowErrorMessage(ex.Message);
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
             Debug.LogException(ex);
         }
         catch (RequestFailedException ex)
         {
+            ShowErrorMessage(ex.Message);
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        } 
+    }
+
+    async Task signOutAccount(){
+        try
+        {
+            AuthenticationService.Instance.SignOut(true);
+            isSignedIn = false;
+            Debug.Log("Sign In successful.");
+        }
+        catch (AuthenticationException ex)
+        {
+            ShowErrorMessage(ex.Message);
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
             Debug.LogException(ex);
         }
+        catch (RequestFailedException ex)
+        {
+            ShowErrorMessage(ex.Message);
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        } 
+    }
+    
+    public void ShowErrorMessage(string message){
+        errorMessageText.text = message;
+        errorMessageText.gameObject.SetActive(true);
     }
 
-    private void OnDestroy()
-    {
-        PlayerAccountService.Instance.SignedIn -= SignedIn;
+    public void HideErrorMessage(){
+        errorMessageText.gameObject.SetActive(false);
     }
+
+    
 }
 
-
-[Serializable]
-public struct PlayerProfile
-{
-    public PlayerInfo playerInfo;
-    public string Name;
-}
