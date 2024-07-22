@@ -164,6 +164,7 @@ public class PlayScript : MonoBehaviour, IDrag, IInspect
                         transform.GetComponent<MoveComponent>().SetCanBeMoved(false);
                         transform.GetComponent<MoveComponent>().ColorAvailableSlots(false);
                         UIManager.Instance.ChangeHintBox(false);
+                        UIManager.Instance.ChangeWarningBox(false);
                         PlaceInSlot();
                     } else{
                         transform.GetComponent<MoveComponent>().ColorAvailableSlots(false);
