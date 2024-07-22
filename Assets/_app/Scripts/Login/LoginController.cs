@@ -46,6 +46,7 @@ public class LoginController : MonoBehaviour
         {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
             Debug.Log("SignUp is successful.");
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
         }
         catch (AuthenticationException ex)
         {
@@ -69,6 +70,8 @@ public class LoginController : MonoBehaviour
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
             isSignedIn = true;
             Debug.Log("Sign In successful.");
+            if (AuthenticationService.Instance.PlayerName == null)
+                await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
         }
         catch (AuthenticationException ex)
         {
