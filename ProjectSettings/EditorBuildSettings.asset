@@ -8,5 +8,17 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/_app/Scenes/LoginScene.unity
+    guid: 8988ff24a5853c549aca598ed2749434
+  - enabled: 1
+    path: Assets/_app/Scenes/MainMenu.unity
+    guid: 6bf20e0bde8a33248972d6228d0e7c66
+  - enabled: 1
+    path: Assets/_app/Scenes/DeckSelection.unity
+    guid: 9928f227d3a446947b6bf3fd419979fe
+  - enabled: 1
+    path: Assets/_app/Scenes/GameScene.unity
+    guid: 39d4a8e1b9faba4498e8697959f7965a
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: abb954db5b988054ba8c9c545cc047e4, type: 2}
