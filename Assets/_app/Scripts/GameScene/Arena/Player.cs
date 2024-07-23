@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public GameObject GetCrystal(){
+        return Crystal;
+    }
+
     public void StartOwnTurn(){
         SetCardsOnFieldDraggable(true);
     }

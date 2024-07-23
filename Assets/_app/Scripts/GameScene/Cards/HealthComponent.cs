@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static Constants;
 
 public class HealthComponent : MonoBehaviour
@@ -18,8 +19,15 @@ public class HealthComponent : MonoBehaviour
                 OnHpChange(m_Hp);
         }
     }
+
+    public MyGameObjectEvent OnDestruction;
     public delegate void OnHpChangeDelegate(int hp);
     public event OnHpChangeDelegate OnHpChange;
+
+    void Awake(){
+        if (OnDestruction == null)
+            OnDestruction = new MyGameObjectEvent();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +38,8 @@ public class HealthComponent : MonoBehaviour
 
     private void HealthChange(int hp){
         transform.GetComponent<CardInfo>().TempInfo.Hp = hp;
-        transform.GetChild(0).GetComponent<CardDisplay>().LoadCard();
+        if (transform.childCount != 0)
+            transform.GetChild(0).GetComponent<CardDisplay>().LoadCard();
     }
 
     // Update is called once per frame
@@ -42,6 +51,8 @@ public class HealthComponent : MonoBehaviour
     }
 
     public void DestroyCard(){
+        OnDestruction.Invoke(gameObject);
+        OnHpChange -= HealthChange;
         StartCoroutine(GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard));
     }
 }

@@ -30,6 +30,7 @@ public class ArenaCardSlot : MonoBehaviour, IInspect
             GameObject card = Instantiate(cardPrefab);
             card.GetComponent<CardInfo>().LoadInfo(c);
             card.GetComponent<CardState>().SetPlayer(Owner);
+            card.AddComponent<HealthComponent>();
             PlaceCard(card, false);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class TouchManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class TouchManager : MonoBehaviour
     private void Awake(){
         if (Instance == null){
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         } else if (Instance != this){
             Destroy(gameObject);
         }
@@ -27,6 +28,10 @@ public class TouchManager : MonoBehaviour
                 LastTouch = Touchscreen.current.primaryTouch;
         }catch{}
         
+    }
+
+    public void onBackButton(){
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

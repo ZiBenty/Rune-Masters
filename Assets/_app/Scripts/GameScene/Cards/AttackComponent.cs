@@ -24,6 +24,7 @@ public class AttackComponent : MonoBehaviour
     public List<Slot> SlotsAttackTargets;
     private List<ArenaLine> _arena;
     public bool CanAttack = true;
+    public bool HasAttacked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class AttackComponent : MonoBehaviour
     }
 
     public bool CanItAttack(){
-        if (!CanAttack) return false;
+        if (!CanAttack || HasAttacked) return false;
         FindAttackTargets();
         if (SlotsAttackTargets.Count == 0)
             CanAttack = false;
@@ -105,7 +106,9 @@ public class AttackComponent : MonoBehaviour
             if (SlotsAttackTargets.Contains(TargetHandler.Instance.Targets[0].transform.parent.GetComponent<Slot>())){
                 GameObject card = TargetHandler.Instance.Targets[0].transform.GetChild(0).GetChild(0).gameObject;
                 card.transform.GetComponent<HealthComponent>().Hp -= Atk;
+                transform.GetComponent<PlayScript>().isAttacking = false;
                 CanAttack = false; //one attack per turn
+                HasAttacked = true;
             }
         }
     }
@@ -143,6 +146,7 @@ public class AttackComponent : MonoBehaviour
         (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
             if (transform.GetComponent<CardState>().Location == Location.Field)
                 SetCanAttack(true);
+                HasAttacked = false;
     }
 
     public void SetEndCombatPhase(){
@@ -150,6 +154,7 @@ public class AttackComponent : MonoBehaviour
         (transform.GetComponent<CardState>().Controller.transform.name == "Enemy" && !TurnSystem.Instance.isPlayerTurn))
             if (transform.GetComponent<CardState>().Location == Location.Field)
                 SetCanAttack(false);
+                HasAttacked = false;
     }
 
     void OnDestroy(){

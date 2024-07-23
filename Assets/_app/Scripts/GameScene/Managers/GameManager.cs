@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using static Constants;
+
+[System.Serializable]
+public class MyGameObjectEvent: UnityEvent<GameObject>{}
 
 public class GameManager : MonoBehaviour
 {
@@ -14,10 +19,12 @@ public class GameManager : MonoBehaviour
     private TargetHandler _th;
     private UIManager _uiM;
 
+    [SerializeField] GameObject VictoryPanel;
+
     void Awake(){
         if (Instance == null){
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         } else if (Instance != this){
             Destroy(gameObject);
         }
@@ -27,10 +34,28 @@ public class GameManager : MonoBehaviour
         _ts = TurnSystem.Instance;
         _uiM = UIManager.Instance;
         _th = TargetHandler.Instance;
+        //can only be called once since crystals remain on field
+        SubscribeToCrystals();
     }
 
-    void Update(){
+    public void SubscribeToCrystals(){
+        foreach(HealthComponent cardHp in FindObjectsOfType<HealthComponent>()){
+            if(cardHp.gameObject.GetComponent<CardInfo>().TempInfo.Id == 0)
+                cardHp.OnDestruction.AddListener(OnCrystalDestruction);
+        }
         
+    }
+
+    public void OnCrystalDestruction(GameObject crystal){
+        //enemy lost
+        if(crystal.GetComponent<CardState>().Owner.transform.name == "Enemy"){
+            VictoryPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = "Player Won";
+            VictoryPanel.SetActive(true);
+        }//player lost
+        else{
+            VictoryPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = "Enemy Won";
+            VictoryPanel.SetActive(true);
+        }
     }
 
     // Game Actions, general actions like Draw, Destroy, Remove, Discard, ecc
@@ -50,7 +75,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator MoveLocation(GameObject card, Location destination){
         Player p = card.GetComponent<CardState>().Controller;
         Deck deck;
-        Hand hand;
+        //Hand hand;
         switch(destination){
             case Location.Discard:
                 DiscardZone discardZone = p.discardScript;
