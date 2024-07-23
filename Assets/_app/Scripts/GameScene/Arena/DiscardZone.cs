@@ -76,6 +76,8 @@ public class DiscardZone : MonoBehaviour, IInspect
                 copy.GetComponent<PlayScript>().SetcanInspect(true);
                 Vector3 newScale = new Vector3(0.08f, 0.08f, 0.08f);
                 copy.transform.GetChild(0).transform.localScale = newScale;
+                if (Owner.transform.name == "Enemy")
+                    copy.transform.eulerAngles = new Vector3(0, 0, 0);
                 copy.GetComponent<BoxCollider2D>().enabled = true;
                 copy.GetComponent<BoxCollider2D>().size = copy.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta*newScale;
                 copy.transform.GetChild(0).gameObject.SetActive(true);

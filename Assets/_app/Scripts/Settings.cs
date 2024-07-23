@@ -9,6 +9,8 @@ public class Settings : MonoBehaviour
 
     public string decksPath = "";
 
+    public bool Ready = false;
+
     void Awake(){
         if (Instance == null){
             Instance = this;
@@ -19,37 +21,48 @@ public class Settings : MonoBehaviour
     }
 
     void Start(){
-
-        if (!Directory.Exists(Application.persistentDataPath))
-            File.Create(Application.persistentDataPath);
         
         #if UNITY_EDITOR
-            decksPath = @"Assets/StreamingAssets/Decks/";
+            decksPath = @"Assets/StreamingAssets/decks";
         #else
-        // check if file exists in Application.persistentDataPath
-        var filepath = string.Format("{0}/{1}", Application.persistentDataPath, "Decks/");
+        if (!Directory.Exists(Application.persistentDataPath))
+            File.Create(Application.persistentDataPath);
+        // check if directory exists in Application.persistentDataPath
+        var filepath = string.Format("{0}/{1}", Application.persistentDataPath, "decks");
 
         if (!Directory.Exists(filepath))
         {
-            string path = Path.Combine(Application.persistentDataPath, "Decks");
+            //create directory
+            string path = Path.Combine(Application.persistentDataPath, "decks");
             Directory.CreateDirectory(path);
             
             #if UNITY_ANDROID 
-            var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/" + "Decks/");  // this is the path to your StreamingAssets in android
+            //saves both starter decks
+            var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck");  // this is the path to your StreamingAssets in android
             while (!loadDecks.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
             // then save to Application.persistentDataPath
-            
+            File.WriteAllBytes(filepath, loadDecks.bytes);
+
+            var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterWaterEarth.dck");  // this is the path to your StreamingAssets in android
+            while (!loadDecks.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
+            // then save to Application.persistentDataPath
             File.WriteAllBytes(filepath, loadDecks.bytes);
 
             #elif UNITY_IOS
-                 var loadDecks = Application.dataPath + "/Raw/" + "Decks/";  // this is the path to your StreamingAssets in iOS
-                // then save to Application.persistentDataPath
-                File.Copy(loadDecks, filepath);
+            //saves both starter decks
+            var loadDecks = Application.dataPath + "/Raw/decks/StarterFireAir.dck";  // this is the path to your StreamingAssets in iOS
+            // then save to Application.persistentDataPath
+            File.Copy(loadDecks, filepath);
+
+            var loadDecks = Application.dataPath + "/Raw/decks/StarterWaterEarth.dck";  // this is the path to your StreamingAssets in iOS
+            // then save to Application.persistentDataPath
+            File.Copy(loadDecks, filepath);
             #endif
         }
 
-        var decksPath = filepath;
+        decksPath = filepath;
         #endif
+        Ready = true;
     }
-
+    
 }

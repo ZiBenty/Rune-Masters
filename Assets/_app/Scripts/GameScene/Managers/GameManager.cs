@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         _th = TargetHandler.Instance;
     }
 
+    void Update(){
+        
+    }
+
     // Game Actions, general actions like Draw, Destroy, Remove, Discard, ecc
     public IEnumerator Draw(Player player, int count){
         Deck deck = player.deckScript;

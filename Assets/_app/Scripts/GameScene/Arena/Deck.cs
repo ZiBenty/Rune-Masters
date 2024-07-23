@@ -20,8 +20,18 @@ public class Deck : MonoBehaviour
     {
         _visual = GetComponent<Image>();
         DeckList = new List<GameObject>();
-        // TODO: implement import from decklist
-        LoadDecklist("StarterFireAir");
+        if (DeckSelection.Instance != null){
+            if (Owner.gameObject.name == "Player")
+                LoadDecklist(DeckSelection.Instance.PlayerDeckChoice);
+            else
+                LoadDecklist(DeckSelection.Instance.EnemyDeckChoice);
+        }else{
+            if (Owner.gameObject.name == "Player")
+                LoadDecklist("StarterFireAir");
+            else
+                LoadDecklist("StarterWaterEarth");
+        }
+        
         Shuffle();
     }
 
@@ -45,7 +55,11 @@ public class Deck : MonoBehaviour
     }
 
     public void LoadDecklist(string name){
-        StreamReader reader = new StreamReader("Assets/Resources/Decks/"+ name +".dck", true);
+        StreamReader reader;
+        if (Settings.Instance != null)
+            reader = new StreamReader(Settings.Instance.decksPath + "/" + name +".dck", true);
+        else
+            reader = new StreamReader(@"Assets/StreamingAssets/decks" + "/" + name +".dck", true);
         string line;
         do{
             line = reader.ReadLine();
