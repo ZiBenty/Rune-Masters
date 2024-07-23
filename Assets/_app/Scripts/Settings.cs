@@ -36,13 +36,17 @@ public class Settings : MonoBehaviour
             string path = Path.Combine(Application.persistentDataPath, "decks");
             Directory.CreateDirectory(path);
 
+            var realPath = "";
+            string oriPath;
+            byte[] deck;
+
             #if UNITY_ANDROID
 
-            string oriPath = Path.Combine("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
+            oriPath = Path.Combine("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
             UnityWebRequest reader = UnityWebRequest.Get(oriPath);
             reader.SendWebRequest();
             while (!reader.isDone) { }
-            var realPath = filepath + "/StarterFireAir.dck"; //save the file with this name
+            realPath = filepath + "/StarterFireAir.dck"; //save the file with this name
             File.WriteAllBytes(realPath, reader.downloadHandler.data);
             Debug.Log("StarterFireAir.dck saved in decks folder");
 
@@ -57,16 +61,16 @@ public class Settings : MonoBehaviour
             
             #elif UNITY_IOS
             
-            var realPath = Application.persistentDataPath + "/decks/";
-            string oriPath = Path.Combine(Application.streamingAssetsPath + "/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
-            byte[] deck = File.ReadAllBytes(oriPath);
+            realPath = Application.persistentDataPath + "/decks/";
+            oriPath = Path.Combine(Application.streamingAssetsPath + "/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
+            deck = File.ReadAllBytes(oriPath);
             File.WriteAllBytes(realPath + "StarterFireAir.dck", deck); //save the file with this name
             //File.WriteAllBytes(realPath + "puestaapunto.xlsx", xlsxFile); //alternative of above line, working
             Debug.Log("StarterFireAir.dck saved in decks folder");
 
             realPath = Application.persistentDataPath + "/decks/";
             oriPath = Path.Combine(Application.streamingAssetsPath + "/decks/StarterWaterEarth.dck"); //returns a DirectoryInfo object
-            byte[] deck = File.ReadAllBytes(oriPath);
+            deck = File.ReadAllBytes(oriPath);
             File.WriteAllBytes(realPath + "StarterWaterEarth.dck", deck); //save the file with this name
             //File.WriteAllBytes(realPath + "puestaapunto.xlsx", xlsxFile); //alternative of above line, working
             Debug.Log("StarterWaterEarth.dck saved in decks folder");
