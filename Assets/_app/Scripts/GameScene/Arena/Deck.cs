@@ -50,12 +50,12 @@ public class Deck : MonoBehaviour
         copy.GetComponent<CardInfo>().LoadInfo(card.GetComponent<CardInfo>().BaseInfo);
         if (copy.transform.childCount != 0)
             Destroy(copy.transform.GetChild(0).gameObject); // removes visual from copy object
-        copy.GetComponent<CardState>().Location = Constants.Location.Deck;
+        copy.GetComponent<CardState>().Location = Location.Deck;
         DeckList.Add(copy);
     }
 
     public void LoadDecklist(string name){
-        StreamReader reader;
+        /*StreamReader reader;
         if (Settings.Instance != null)
             reader = new StreamReader(Settings.Instance.decksPath + "/" + name +".dck", true);
         else
@@ -63,7 +63,15 @@ public class Deck : MonoBehaviour
         string line;
         do{
             line = reader.ReadLine();
-            if(line != null){
+            if(line != null){*/
+        string deck;
+        if (name == "StarterFireAir")
+            deck = FireAir;
+        else
+            deck = WaterEarth;
+        
+        foreach(string line in deck.Split('\n')){
+            
                 string[] words = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 for(int i = 0; i < int.Parse(words[1]); i++){
                     Card c = CardDatabase.Instance.cardService.GetCardFromId(int.Parse(words[0]));
@@ -81,8 +89,9 @@ public class Deck : MonoBehaviour
                     card.GetComponent<CardState>().Location = Constants.Location.Deck;
                     DeckList.Add(card);
                 }
-            }
-        }while(line !=null);
+        }
+            /*}
+        }while(line !=null);*/
         _oldDeckCount = DeckList.Count;
     }
 

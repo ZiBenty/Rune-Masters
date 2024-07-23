@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Inspect : MonoBehaviour
 {
     [SerializeField]
     private InputAction Tap;
-    private Camera _mainCamera;
     public GameObject inspected;
 
-    private void Awake(){
-        _mainCamera = Camera.main;
-    }
 
     private void OnEnable(){
+        if(SceneManager.GetActiveScene().name != "GameScene") return;
         Tap.Enable();
         Tap.performed += OnTap;
     }
@@ -25,7 +23,8 @@ public class Inspect : MonoBehaviour
     }
 
     private void OnTap(InputAction.CallbackContext context){
-        Ray ray = _mainCamera.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
+        if(!transform.gameObject.activeSelf) return;
+        Ray ray = Camera.main.ScreenPointToRay(Touchscreen.current.primaryTouch.position.ReadValue());
         //3d colliders
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit)){

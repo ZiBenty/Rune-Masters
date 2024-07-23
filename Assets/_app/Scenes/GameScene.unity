@@ -336,6 +336,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67357586}
   m_CullTransparentMesh: 1
+--- !u!1 &145804233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145804234}
+  - component: {fileID: 145804235}
+  m_Layer: 0
+  m_Name: InstanceGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145804234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145804233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1175.1337, y: 553.37225, z: -6.5324492}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &145804235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145804233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b605f8212801cf48b6517364a8d5a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &195162076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,7 +2874,6 @@ MonoBehaviour:
   isPlayerTurn: 0
   playerTurn: 0
   enemyTurn: 0
-  _turnText: {fileID: 532638565}
   isDrawPhase: 0
   isMovePhase: 0
   isCombatPhase: 0
@@ -2864,7 +2907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2088668009}
   enemy: {fileID: 1629344810}
-  VictoryPanel: {fileID: 1423844653}
 --- !u!114 &698863388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2880,8 +2922,6 @@ MonoBehaviour:
   Targets: []
   TargetMode: 0
   ConfirmMode: 0
-  ConfirmYes: {fileID: 1606405044}
-  ConfirmNo: {fileID: 1622829668}
 --- !u!1001 &737289581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6350,6 +6390,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HintBox: {fileID: 2030666949}
   WarningBox: {fileID: 2032596705}
+  ConfirmYes: {fileID: 1606405044}
+  ConfirmNo: {fileID: 1622829668}
+  VictoryPanel: {fileID: 1423844653}
+  TurnText: {fileID: 532638565}
+  MovePhase: {fileID: 834542528}
+  EndTurn: {fileID: 1505380609}
 --- !u!1 &1319814720
 GameObject:
   m_ObjectHideFlags: 0
@@ -11139,3 +11185,4 @@ SceneRoots:
   - {fileID: 1707674270}
   - {fileID: 1915690914}
   - {fileID: 1297336937}
+  - {fileID: 145804234}

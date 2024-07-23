@@ -10,8 +10,6 @@ public class TurnSystem : MonoBehaviour
     public bool isPlayerTurn;
     public int playerTurn;
     public int enemyTurn;
-    [SerializeField]
-    private TMP_Text _turnText;
     private GameManager _gm;
 
     private bool _initialSetup; //used to launch initial couroutines
@@ -65,11 +63,15 @@ public class TurnSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnEnable();
+    }
+
+    public void OnEnable(){
         _gm = GameManager.Instance;
         isPlayerTurn = true;
         playerTurn = 1;
         enemyTurn = 0;
-        _turnText.text = "Player's Turn 1";
+        UIManager.Instance.UpdateTurnText("Player's Turn 1");
         startGame = true;
         _initialSetup = true;
     }
@@ -146,14 +148,14 @@ public class TurnSystem : MonoBehaviour
         if(isPlayerTurn){
             isPlayerTurn = false;
             enemyTurn ++;
-            _turnText.text = "Enemy's Turn " + enemyTurn.ToString();
+            UIManager.Instance.UpdateTurnText("Enemy's Turn " + enemyTurn.ToString());
             _gm.player.handScript.setDraggable(false);
             _gm.enemy.handScript.setDraggable(true);
             OnStartEnemyTurn();
         }else{
             isPlayerTurn = true;
             playerTurn ++;
-            _turnText.text = "Player's Turn " + playerTurn.ToString();
+            UIManager.Instance.UpdateTurnText("Player's Turn " + playerTurn.ToString());
             _gm.enemy.handScript.setDraggable(false);
             _gm.player.handScript.setDraggable(true);
             OnStartPlayerTurn();

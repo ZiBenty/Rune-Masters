@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.VisualScripting;
@@ -29,20 +30,21 @@ public class UserController : MonoBehaviour
         userPanel.SetActive(!loginPanel);
     }
 
-    public void SignIn(){
-        UpdateNameText(AuthenticationService.Instance.PlayerName);
+    public async void SignIn(){
         UserButton.gameObject.SetActive(true);
         AuthButton.gameObject.SetActive(false);
+        await UpdateNameText(AuthenticationService.Instance.PlayerName);
     }
 
     public void SignOut(){
-        UpdateNameText("");
         UserButton.gameObject.SetActive(false);
         AuthButton.gameObject.SetActive(true);
+        UpdateNameText("");
     }
 
-    public void UpdateNameText(string name){
+    public Task UpdateNameText(string name){
         usernameText.text = name;
+        return Task.CompletedTask;
     }
 
     void OnDestroy(){

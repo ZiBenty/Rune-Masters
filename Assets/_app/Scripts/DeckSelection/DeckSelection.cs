@@ -19,15 +19,4 @@ public class DeckSelection : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void onBackButton(){
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void onPlayGame(){
-        DropDownHelper ddh = GameObject.Find("Dropdown Helper").GetComponent<DropDownHelper>();
-        PlayerDeckChoice = ddh.PlayerDeck.captionText.text.Replace(" ", "");
-        EnemyDeckChoice = ddh.EnemyDeck.captionText.text.Replace(" ", "");
-        SceneManager.LoadScene("GameScene");
-    }
 }

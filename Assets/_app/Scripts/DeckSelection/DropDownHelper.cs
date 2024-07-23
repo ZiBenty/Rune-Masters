@@ -11,7 +11,7 @@ public class DropDownHelper : MonoBehaviour
     public TMP_Dropdown PlayerDeck;
     public TMP_Dropdown EnemyDeck;
 
-    private bool done = false;
+    //private bool done = false;
 
     private void StartSettings(){
         if (Settings.Instance == null){
@@ -23,12 +23,27 @@ public class DropDownHelper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartSettings();
+        //StartSettings();
+
+        PlayerDeck.ClearOptions();
+        EnemyDeck.ClearOptions();
         
+        List<TMP_Dropdown.OptionData> decks = new List<TMP_Dropdown.OptionData>();
+        for(int i = 0; i < 2; i++){
+            string deckName;
+            if (i==0)
+                deckName ="StarterFireAir";
+            else
+                deckName ="StarterWaterEarth";
+            var deckOption = new TMP_Dropdown.OptionData(deckName);
+            decks.Add(deckOption);
+        }
+        PlayerDeck.AddOptions(decks);
+        EnemyDeck.AddOptions(decks);
     }
 
     void Update(){
-        if (Settings.Instance.Ready && !done){
+        /*if (Settings.Instance.Ready && !done){
             PlayerDeck.ClearOptions();
             EnemyDeck.ClearOptions();
 
@@ -48,7 +63,7 @@ public class DropDownHelper : MonoBehaviour
             PlayerDeck.AddOptions(decks);
             EnemyDeck.AddOptions(decks);
             done = !done;
-        }
+        }*/
     }
 
 }

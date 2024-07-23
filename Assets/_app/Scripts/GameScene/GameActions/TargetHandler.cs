@@ -15,10 +15,6 @@ public class TargetHandler : MonoBehaviour
     public delegate bool OnAddTargetDelegate(GameObject target);
     public event OnAddTargetDelegate OnAddTarget;
 
-    [SerializeField]
-    private GameObject ConfirmYes, ConfirmNo;
-    
-
     void Awake()
     {
         if (Instance == null){
@@ -30,6 +26,10 @@ public class TargetHandler : MonoBehaviour
     }
 
     void Start(){
+        OnEnable();
+    }
+
+    public void OnEnable(){
         Targets = new List<GameObject>();
     }
 
@@ -39,8 +39,7 @@ public class TargetHandler : MonoBehaviour
         Targets = new List<GameObject>();
         if(confirm){
             ConfirmMode = confirm;
-            ConfirmYes.SetActive(true);
-            ConfirmNo.SetActive(true);
+            UIManager.Instance.SetActiveConfirmButtons(true);
         }
     }
 
@@ -48,8 +47,7 @@ public class TargetHandler : MonoBehaviour
         TargetMode = false;
         if(ConfirmMode){
             ConfirmMode = false;
-            ConfirmYes.SetActive(false);
-            ConfirmNo.SetActive(false);
+            UIManager.Instance.SetActiveConfirmButtons(false);
         }
     }
 

@@ -17,9 +17,6 @@ public class GameManager : MonoBehaviour
     public Player enemy;
     private TurnSystem _ts;
     private TargetHandler _th;
-    private UIManager _uiM;
-
-    [SerializeField] GameObject VictoryPanel;
 
     void Awake(){
         if (Instance == null){
@@ -31,8 +28,13 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
+        OnEnable();
+    }
+
+    public void OnEnable(){
+        player = GameObject.Find("Player").GetComponent<Player>();
+        enemy = GameObject.Find("Enemy").GetComponent<Player>();
         _ts = TurnSystem.Instance;
-        _uiM = UIManager.Instance;
         _th = TargetHandler.Instance;
         //can only be called once since crystals remain on field
         SubscribeToCrystals();
@@ -49,12 +51,10 @@ public class GameManager : MonoBehaviour
     public void OnCrystalDestruction(GameObject crystal){
         //enemy lost
         if(crystal.GetComponent<CardState>().Owner.transform.name == "Enemy"){
-            VictoryPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = "Player Won";
-            VictoryPanel.SetActive(true);
+            UIManager.Instance.VictoryPanelActivate("Player Won");
         }//player lost
         else{
-            VictoryPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = "Enemy Won";
-            VictoryPanel.SetActive(true);
+            UIManager.Instance.VictoryPanelActivate("Enemy Won");
         }
     }
 
@@ -119,12 +119,12 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator DestroyTarget(Player player, int numTargets, string hintText){
-        _uiM.ChangeHintBox(true, hintText);
+        UIManager.Instance.ChangeHintBox(true, hintText);
         _th.OnAddTarget += CheckOnDestroy;
         Target(player, numTargets);
         yield return new WaitUntil(() => !_th.TargetMode);
         _th.OnAddTarget -= CheckOnDestroy;
-        _uiM.ChangeHintBox(false);
+        UIManager.Instance.ChangeHintBox(false);
         StartCoroutine(MoveLocation(_th.Targets[0], Location.Discard));
     }
 
