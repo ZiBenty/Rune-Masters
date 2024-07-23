@@ -35,7 +35,7 @@ public class Settings : MonoBehaviour
             //create directory
             string path = Path.Combine(Application.persistentDataPath, "decks");
             Directory.CreateDirectory(path);
-            
+
             #if UNITY_ANDROID 
             //saves both starter decks
             var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck");  // this is the path to your StreamingAssets in android
@@ -43,7 +43,7 @@ public class Settings : MonoBehaviour
             // then save to Application.persistentDataPath
             File.WriteAllBytes(filepath, loadDecks.bytes);
 
-            var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterWaterEarth.dck");  // this is the path to your StreamingAssets in android
+            loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterWaterEarth.dck");  // this is the path to your StreamingAssets in android
             while (!loadDecks.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
             // then save to Application.persistentDataPath
             File.WriteAllBytes(filepath, loadDecks.bytes);
@@ -54,7 +54,7 @@ public class Settings : MonoBehaviour
             // then save to Application.persistentDataPath
             File.Copy(loadDecks, filepath);
 
-            var loadDecks = Application.dataPath + "/Raw/decks/StarterWaterEarth.dck";  // this is the path to your StreamingAssets in iOS
+            loadDecks = Application.dataPath + "/Raw/decks/StarterWaterEarth.dck";  // this is the path to your StreamingAssets in iOS
             // then save to Application.persistentDataPath
             File.Copy(loadDecks, filepath);
             #endif
