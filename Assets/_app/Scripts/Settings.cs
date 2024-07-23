@@ -21,11 +21,11 @@ public class Settings : MonoBehaviour
     }
 
     void Start(){
-        GetDecksPath();
+        //GetDecksPath();
         Ready = true;
     }
 
-    private void GetDecksPath(){
+    /*private void GetDecksPath(){
         #if UNITY_EDITOR
             decksPath = @"Assets/StreamingAssets/decks";
         #else
@@ -84,6 +84,6 @@ public class Settings : MonoBehaviour
 
         decksPath = filepath;
         #endif
-    }
+    }*/
     
 }
