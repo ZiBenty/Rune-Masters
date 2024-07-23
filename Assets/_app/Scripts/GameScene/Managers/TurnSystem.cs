@@ -71,7 +71,6 @@ public class TurnSystem : MonoBehaviour
         isPlayerTurn = true;
         playerTurn = 1;
         enemyTurn = 0;
-        UIManager.Instance.UpdateTurnText("Player's Turn 1");
         startGame = true;
         _initialSetup = true;
     }
@@ -81,6 +80,7 @@ public class TurnSystem : MonoBehaviour
     {
         
         if(_initialSetup && startGame){
+            UIManager.Instance.UpdateTurnText("Player's Turn 1");
             StartCoroutine(_gm.Draw(_gm.player, 5));
             StartCoroutine(_gm.Draw(_gm.enemy, 5)); 
             _initialSetup = false;

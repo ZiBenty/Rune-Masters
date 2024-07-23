@@ -1,37 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InstanceGameManager : MonoBehaviour
 {
 
     void Awake()
     {
-        GameObject touchManger = GameObject.Find("TouchManager");
-        touchManger.GetComponent<DragDrop>().enabled = true;
-        touchManger.GetComponent<Inspect>().enabled = true;
-        touchManger.GetComponent<TouchManager>().enabled = true;
-        touchManger.SetActive(true);
-        GameObject gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<TargetHandler>().enabled = true;
-        gameManager.GetComponent<TurnSystem>().enabled = true;
-        gameManager.GetComponent<GameManager>().enabled = true;
-        gameManager.SetActive(true);
-        gameManager.GetComponent<GameManager>().OnEnable();
-        gameManager.GetComponent<TurnSystem>().OnEnable();
+        SceneManager.activeSceneChanged += SetupScene;
+        
     }
 
-    void OnDestroy(){
-        GameObject touchManger = GameObject.Find("TouchManager");
-        touchManger.GetComponent<DragDrop>().enabled = false;
-        touchManger.GetComponent<Inspect>().enabled = false;
-        touchManger.GetComponent<TouchManager>().enabled = false;
-        touchManger.SetActive(false);
+    private void SetupScene(Scene current, Scene next){
+        bool set;
+        if (next.name == "GameScene")
+            set = true;
+        else if (next.name == "MainMenu")
+            set = false;
+        else
+            return;
         GameObject gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<TargetHandler>().enabled = false;
-        gameManager.GetComponent<TurnSystem>().enabled = false;
-        gameManager.GetComponent<GameManager>().enabled = false;
-        gameManager.SetActive(false);
+        gameManager.SetActive(set);
+        if (next.name == "GameScene"){
+            gameManager.GetComponent<GameManager>().OnEnable();
+            gameManager.GetComponent<TurnSystem>().OnEnable();
+        }
+        
     }
+
 
 }

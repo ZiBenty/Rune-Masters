@@ -54,5 +54,6 @@ public class HealthComponent : MonoBehaviour
         OnDestruction.Invoke(gameObject);
         OnHpChange -= HealthChange;
         StartCoroutine(GameManager.Instance.MoveLocation(transform.gameObject, Location.Discard));
+        OnDestruction.RemoveAllListeners();
     }
 }
