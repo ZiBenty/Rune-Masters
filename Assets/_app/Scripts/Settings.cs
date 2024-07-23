@@ -37,35 +37,39 @@ public class Settings : MonoBehaviour
             Directory.CreateDirectory(path);
 
             #if UNITY_ANDROID
-            try{
-                //saves both starter decks
-                var loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck");  // this is the path to your StreamingAssets in android
-                while (!loadDecks.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
-                // then save to Application.persistentDataPath
-                File.WriteAllBytes(filepath, loadDecks.bytes);
 
-                loadDecks = new WWW("jar:file://" + Application.dataPath + "!/assets/decks/StarterWaterEarth.dck");  // this is the path to your StreamingAssets in android
-                while (!loadDecks.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
-                // then save to Application.persistentDataPath
-                File.WriteAllBytes(filepath, loadDecks.bytes);
-            } catch (Exception ex){
-                Debug.LogException(ex);
-            }
+            string oriPath = Path.Combine("jar:file://" + Application.dataPath + "!/assets/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
+            UnityWebRequest reader = UnityWebRequest.Get(oriPath);
+            reader.SendWebRequest();
+            while (!reader.isDone) { }
+            realPath = filepath + "/StarterFireAir.dck"; //save the file with this name
+            File.WriteAllBytes(realPath, reader.downloadHandler.data);
+            Debug.Log("StarterFireAir.dck saved in decks folder");
+
+            string oriPath = Path.Combine("jar:file://" + Application.dataPath + "!/assets/decks/StarterWaterEarth.dck"); //returns a DirectoryInfo object
+            UnityWebRequest reader = UnityWebRequest.Get(oriPath);
+            reader.SendWebRequest();
+            while (!reader.isDone) { }
+            realPath = filepath + "/StarterWaterEarth.dck"; //save the file with this name
+            File.WriteAllBytes(realPath, reader.downloadHandler.data);
+            Debug.Log("StarterWaterEarth.dck saved in decks folder");
+                
             
-
             #elif UNITY_IOS
-            try{
-               //saves both starter decks
-                var loadDecks = Application.dataPath + "/Raw/decks/StarterFireAir.dck";  // this is the path to your StreamingAssets in iOS
-                // then save to Application.persistentDataPath
-                File.Copy(loadDecks, filepath);
+            
+            realPath = Application.persistentDataPath + "/decks/";
+            string oriPath = Path.Combine(Application.streamingAssetsPath + "/decks/StarterFireAir.dck"); //returns a DirectoryInfo object
+            byte[] deck = File.ReadAllBytes(oriPath);
+            File.WriteAllBytes(realPath + "StarterFireAir.dck", deck); //save the file with this name
+            //File.WriteAllBytes(realPath + "puestaapunto.xlsx", xlsxFile); //alternative of above line, working
+            Debug.Log("StarterFireAir.dck saved in decks folder");
 
-                loadDecks = Application.dataPath + "/Raw/decks/StarterWaterEarth.dck";  // this is the path to your StreamingAssets in iOS
-                // then save to Application.persistentDataPath
-                File.Copy(loadDecks, filepath);
-            } catch (Exception ex){
-                Debug.LogException(ex);
-            }
+            realPath = Application.persistentDataPath + "/decks/";
+            string oriPath = Path.Combine(Application.streamingAssetsPath + "/decks/StarterWaterEarth.dck"); //returns a DirectoryInfo object
+            byte[] deck = File.ReadAllBytes(oriPath);
+            File.WriteAllBytes(realPath + "StarterWaterEarth.dck", deck); //save the file with this name
+            //File.WriteAllBytes(realPath + "puestaapunto.xlsx", xlsxFile); //alternative of above line, working
+            Debug.Log("StarterWaterEarth.dck saved in decks folder");
             
             #endif
         }
